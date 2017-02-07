@@ -33,10 +33,23 @@ using namespace std;
 // { 0 , { 3 , 7 } };
 //
 
+
 int main(int argc, char **argv) {
 	ifstream dotfile;
 	//dotfile.open("graph.dot");
 	string line;
+	AdjacencyMatrix test(5);
+	test.add_edge(1, 2);
+	test.add_edge(1, 4);
+	test.add_edge(1, 5);
+	test.add_edge(2, 3);
+	test.add_edge(2, 5);
+	test.add_edge(3, 1);
+	test.add_edge(5, 2);
+	test.add_edge(4, 3);
+	//test.add_edge(-1, -1);
+	test.display();
+
 	if (dotfile.is_open())
 	{
 	if (dotfile.is_open())
