@@ -1,0 +1,15 @@
+64 nodes
+128 (?) weights
+Try catch if found
+
+//
+64 nodi
+Il doppio di pesi
+Ogni nodo ha un numero indefinito di link che va da 1 a *
+Ogni link ha un peso
+Potrebbe essere utile ... ogni nodo un vettore? Eccessivo?
+Una linked list?
+[NODO] numero [X][Y]
+- VICINO, peso
+- VICINO, peso
+-....
