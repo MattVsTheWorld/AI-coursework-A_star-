@@ -113,6 +113,9 @@ int main(int argc, char **argv) {
 	pairTest.first = 3;
 	pairTest.second = 5;
 	vertex *testVert2 = new vertex(1, pairTest);
+	pairTest.first = 6;
+	pairTest.second = 9;
+	vertex *testVert3 = new vertex(2, pairTest);
 	testVert2->displayVertexInfo();
 	//testVert->addEdge(edge(verte))
 	edge *testEdge = new edge(testVert1, testVert2, 10);
@@ -124,7 +127,9 @@ int main(int argc, char **argv) {
 	testEdge->getEndPoints()[1]->displayVertexInfo();
 	cout << "Alright now for some edge list\n";
 	testVert1->addEdge(testEdge);
-	testVert1->displayEdgeList();
+	testVert1->displayEdgeList(); // returns data address
+	cout << endl << testEdge << endl;
+	edge *testeEdge2
 	// +++
 	return 0;
 }

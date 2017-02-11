@@ -69,10 +69,11 @@ public:
 	}
 
 	void displayEdgeList() {
+		cout << "List contains:\n";
 		for (std::list<edge *>::iterator listIterator = this->edgeList->begin(); 
 				listIterator != this->edgeList->end(); 
 				++listIterator)
-			cout << " " << *listIterator;
+			cout << *listIterator << " - ";
 		//listIterator.
 		//this->edgeList->
 	}
