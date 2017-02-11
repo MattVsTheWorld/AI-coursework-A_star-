@@ -93,5 +93,11 @@ int main(int argc, char **argv) {
 	if (!dotfile.is_open())
 		cout << "File not open.\n";
 
+	// +++
+	/*std::pair<int, int> pairTest;
+	pairTest.first = 1;
+	vertex *TEST = new vertex(0, pairTest);*/
+
+	// +++
 	return 0;
 }

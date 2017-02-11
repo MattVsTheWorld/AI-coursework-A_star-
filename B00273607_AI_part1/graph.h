@@ -44,24 +44,55 @@ class edge;
 
 class vertex {
 private:
-	int vertexNo;
+	int vertexIndex;
 	std::pair <int, int> vertexCoords;
-	std::list<edge> edgeList; // std::forward_list  ?
+	std::list<edge> *edgeList; // std::forward_list  ?
 protected:
 public:
+	vertex(int index, std::pair<int,int> coords) {
+		this->vertexIndex = index;
+		this->vertexCoords = coords;
+		edgeList = new std::list<edge>;
+//		cout << this->vertexCoords.first << " - " << this->vertexIndex;
+	}
 };
 
 class edge {
 private:
-	vertex *adj[2];
+	vertex *adjacent[2];
 	int weight;
 protected:
 public:
+	edge(vertex A, vertex B) {
+		adjacent[0] = &A;
+		adjacent[1] = &B;
+	}
 };
 
 
-
 class AdjacencyList {
+private:
+	int vertexNo;
+	int edgeNo;
+	std::vector<vertex> *vertices;
+protected:
+public:
+	AdjacencyList() {
+
+	}
+	// returns
+	bool addVertex(vertex v) {
+		return false;
+	}
+	// returns
+	bool addEdge(edge e) {
+		return false;
+	}
+	bool areAdjacent(vertex v, vertex w) {
+		return false;
+	}
+
+	// if vertices <= 1 don't
 
 };
 
