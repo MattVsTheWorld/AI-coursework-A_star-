@@ -39,14 +39,14 @@ int main(int argc, char **argv) {
 	//dotfile.open("graph.dot");
 	string line;
 	AdjacencyMatrix test(5);
-	test.add_edge(1, 2);
-	test.add_edge(1, 4);
-	test.add_edge(1, 5);
-	test.add_edge(2, 3);
-	test.add_edge(2, 5);
-	test.add_edge(3, 1);
-	test.add_edge(5, 2);
-	test.add_edge(4, 3);
+	test.add_edge(1, 2, 2);
+	test.add_edge(1, 4, 9);
+	test.add_edge(1, 5, 2);
+	test.add_edge(2, 3, 6);
+	test.add_edge(2, 5, 4);
+	test.add_edge(3, 1, 2);
+	test.add_edge(5, 2, 3);
+	test.add_edge(4, 3, 2);
 	//test.add_edge(-1, -1);
 	test.display();
 

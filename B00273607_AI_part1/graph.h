@@ -39,37 +39,53 @@ class AdjacencyMatrix
 	// http://mathworld.wolfram.com/AdjacencyMatrix.html
 private:
 	int n;
-	int **adj;
+	std::pair <int, int> **adj;
+//	int **adj;
 	bool *visited;
+//	int weight;
 public:
-	AdjacencyMatrix(int n){
+	//AdjacencyMatrix(int n){
+	//	this->n = n;
+	//	visited = new bool[n];
+	//	adj = new int*[n];
+	//	for (int i = 0; i < n; i++){
+	//		adj[i] = new int[n];
+	//		for (int j = 0; j < n; j++)
+	//			adj[i][j] = 0;
+	//	}
+	//}
+	AdjacencyMatrix(int n) {
 		this->n = n;
 		visited = new bool[n];
-		adj = new int*[n];
-		for (int i = 0; i < n; i++){
-			adj[i] = new int[n];
-			for (int j = 0; j < n; j++)
-				adj[i][j] = 0;
+		adj = new std::pair<int, int>*[n];
+		for (int i = 0; i < n; i++) {
+			adj[i] = new std::pair<int, int>[n];
+			for (int j = 0; j < n; j++) {
+				adj[i][j].first = 0;
+
+			}
 		}
 	}
 	/*
+	/*
 	* Adding Edge to Graph
 	*/
-	void add_edge(int origin, int destin){
+	void add_edge(int origin, int destin, int weight){
 		if (origin > n || destin > n || origin < 0 || destin < 0)
 			cout << "Invalid edge!\n";
-		else
-			adj[origin - 1][destin - 1] = 1; // INSTEAD OF THIS I MAKE PAIR :thinking:
+		else {
+			adj[origin - 1][destin - 1].first = 1; // INSTEAD OF THIS I MAKE PAIR :thinking:
+			adj[origin - 1][destin - 1].second = weight;
+		}
 	}
 	/*
 	* Print the graph
 	*/
-	void display()
-	{
+	void display(){
 		int i, j;
 		for (i = 0;i < n;i++){
 			for (j = 0; j < n; j++)
-				cout << adj[i][j] << "  ";
+				cout << adj[i][j].first << "[w:" << adj[i][j].second << "]  " ;
 			cout << endl;
 		}
 	}
