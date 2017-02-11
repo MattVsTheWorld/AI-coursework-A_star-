@@ -4,7 +4,7 @@
 #include <vector>
 #include <iostream>
 using namespace std;
-//template <typename vertex>
+// template <typename vertex>
 // rather use integers
 
 //class graph {
@@ -60,6 +60,10 @@ public:
 		cout << "Index: [" << this->vertexIndex << "] ";
 		cout << "Coords: [" << this->vertexCoords.first << "," << this->vertexCoords.second << "]\n";
 	}
+
+	int getIndex() {
+		return this->vertexIndex;
+	}
 	void addEdge(edge *e) {
 	//	edgeList->push_back(&e);
 	}
@@ -67,21 +71,24 @@ public:
 
 class edge {
 private:
-	vertex **adjacent[2];
-	int weight;
+	vertex *adjacent[2];
+	int		weight;
 protected:
 public:
 	edge(vertex *A, vertex *B, int w) {
-		adjacent[0] = &A;
-		adjacent[1] = &B;
+		adjacent[0] = A; // assign pointers to vertex
+		adjacent[1] = B; 
 		weight = w;
 	}
 	void displayEdgeInfo() {
-	// no workerino pane vino
-	//	cout << this->adjacent[0] << endl;
+	// WORKS NOW!!!
+		cout << "\nEdge with weight:\n" << this->weight << endl;
+		cout << "Edge connects vertex [" << this->adjacent[0]->getIndex() << "]\n";
+		this->adjacent[0]->displayVertexInfo();
+		cout << "And vertex [" << this->adjacent[1]->getIndex() << "]\n";
+		this->adjacent[1]->displayVertexInfo();
 	}
 };
-
 
 class AdjacencyList {
 private:
@@ -104,9 +111,7 @@ public:
 	bool areAdjacent(vertex v, vertex w) {
 		return false;
 	}
-
 	// if vertices <= 1 don't
-
 };
 
 #endif

@@ -71,9 +71,10 @@ int main(int argc, char **argv) {
 	*/
 	//std::vector<std::pair<int, std::vector<std::pair<int, int>>> edges;
 
-	typedef std::pair<int, int> intPair;
-	typedef std::pair<int, intPair> originDestinationPair;
-	std::vector<std::vector<originDestinationPair>> vectorGraph;
+	//typedef std::pair<int, int> intPair;
+	//typedef std::pair<int, intPair> originDestinationPair;
+	//std::vector<std::vector<originDestinationPair>> vectorGraph;
+
 	// Have I gone too far
 
 	ifstream dotfile;
@@ -115,8 +116,8 @@ int main(int argc, char **argv) {
 	testVert2->displayVertexInfo();
 	//testVert->addEdge(edge(verte))
 	edge *testEdge = new edge(testVert1, testVert2, 10);
-	//cout << testVert2 << endl;
-	//testEdge->displayEdgeInfo();
+	//cout << testVert1 << endl;
+	testEdge->displayEdgeInfo();
 	// +++
 	return 0;
 }
