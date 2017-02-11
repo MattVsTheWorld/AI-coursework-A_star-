@@ -150,12 +150,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AdjacencyMatrix.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="graph.dot" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AdjacencyMatrix.h" />
     <ClInclude Include="graph.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

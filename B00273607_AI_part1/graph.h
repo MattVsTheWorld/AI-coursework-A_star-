@@ -4,20 +4,20 @@
 #include <vector>
 #include <iostream>
 using namespace std;
-template <typename vertex>
+//template <typename vertex>
 // rather use integers
 
-class graph {
-protected:
-	void addEdge(int, int) = 0;
-	int countNodes() const = 0;
-	//given a vertex return list of vertex's adjacent to it
-	virtual std::list<vertex> adjacent(int) = 0;
-	std::vector<vertex> nodeList;
-private:
-	int numNodes;
-
-};
+//class graph {
+//protected:
+//	virtual void addEdge(int, int) = 0;
+//	virtual int countNodes() const = 0;
+//	//given a vertex return list of vertex's adjacent to it
+//	virtual std::list<vertex> adjacent(int) = 0;
+//	std::vector<vertex> nodeList;
+//private:
+//	int numNodes;
+//
+//};
 
 // https://en.wikipedia.org/wiki/DOT_(graph_description_language)
 // http://stackoverflow.com/questions/28313901/how-to-parse-a-dot-file-in-python
@@ -34,75 +34,35 @@ private:
 // http://www.sanfoundry.com/cpp-program-implement-adjacency-matrix/
 // http://stackoverflow.com/questions/2893129/what-does-mean-in-c
 
-class AdjacencyMatrix
-{
-	// http://www.sanfoundry.com/cpp-program-implement-adjacency-matrix/
-	// http://mathworld.wolfram.com/AdjacencyMatrix.html
-private:
-	int n;
-	//http://www.eskimo.com/~scs/cclass/int/sx8.html
-	std::pair <int, int> **adj;
-//	int **adj;
-	bool *visited;
-public:
-	//AdjacencyMatrix(int n){
-	//	this->n = n;
-	//	visited = new bool[n];
-	//	adj = new int*[n];
-	//	for (int i = 0; i < n; i++){
-	//		adj[i] = new int[n];
-	//		for (int j = 0; j < n; j++)
-	//			adj[i][j] = 0;
-	//	}
-	//}
-	AdjacencyMatrix(int n) {
-		this->n = n;
-		visited = new bool[n];
-		adj = new std::pair<int, int>*[n];
-		for (int i = 0; i < n; i++) {
-			adj[i] = new std::pair<int, int>[n];
-			for (int j = 0; j < n; j++) {
-				adj[i][j].first = 0;
+/* The object oriented incidence list structure suggested by Goodrich and Tamassia has special classes of vertex objects and edge objects. 
+ * Each vertex object has an instance variable pointing to a collection object that lists the neighboring edge objects. 
+ * In turn, each edge object points to the two vertex objects at its endpoints. 
+ * This version of the adjacency list uses more memory than the version in which adjacent vertices are listed directly, 
+ * but the existence of explicit edge objects allows it extra flexibility in storing additional information about edges.*/
 
-			}
-		}
-	}
-	/*
-	/*
-	* Adding Edge to Graph
-	*/
-	void add_edge(int origin, int destin, int weight){
-		if (origin > n || destin > n || origin < 0 || destin < 0)
-			cout << "Invalid edge!\n";
-		else if (adj[origin - 1][destin - 1].first == 1)
-			cout << "edge [" << origin << " to " << destin << "] already exists (This is an undirected graph)\n";
-		else {
-			adj[origin - 1][destin - 1].first = 1; // INSTEAD OF THIS I MAKE PAIR :thinking:
-			adj[destin - 1][origin - 1].first = 1;
-			adj[origin - 1][destin - 1].second = weight;
-			adj[destin - 1][origin - 1].second = weight;
-		}
-	}
-	/*
-	* Print the graph
-	*/
-	void display(){
-		int i, j;
-		for (i = 0;i < n;i++){
-			for (j = 0; j < n; j++)
-				cout <<"[" << i+1 << "<->" << j+1 <<"]" << adj[i][j].first << "[w:" << adj[i][j].second << "]  " ;
-			cout << endl;
-		}
-	}
-	void displayOnlyEdges() {
-		int i, j;
-		for (int i = 0; i < n; i++) {
-			for (j = 0; j < n; j++) {
-				if (adj[i][j].first != 0)
-				cout << "[" << i + 1 << "<->" << j + 1 << "]" << adj[i][j].first << "[w:" << adj[i][j].second << "]  ";
-			}
-			cout << endl;
-		}
-	}
+class edge;
+
+class vertex {
+private:
+	int vertexNo;
+	std::pair <int, int> vertexCoords;
+	std::list<edge> edgeList; // std::forward_list  ?
+protected:
+public:
 };
+
+class edge {
+private:
+	vertex *adj[2];
+	int weight;
+protected:
+public:
+};
+
+
+
+class AdjacencyList {
+
+};
+
 #endif

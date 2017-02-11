@@ -11,6 +11,7 @@
 #include <string>
 #include <vector>
 #include "graph.h"
+#include "AdjacencyMatrix.h"
 
 using namespace std;
 //
@@ -35,9 +36,7 @@ using namespace std;
 
 
 int main(int argc, char **argv) {
-	ifstream dotfile;
-	//dotfile.open("graph.dot");
-	string line;
+
 	AdjacencyMatrix edgeMatrix(5);
 	edgeMatrix.add_edge(1, 2, 
 		2);
@@ -66,13 +65,21 @@ int main(int argc, char **argv) {
 	* make edge ""matrix""
 	* 2d vector?
 	* pair ? <int edgeNo, std::vector<std::pair<destination,weight>>
+	* SPARSE GRAPH
+	* https://en.wikipedia.org/wiki/Adjacency_list
+	* Goodrich and tamassia adjacency list
 	*/
 	//std::vector<std::pair<int, std::vector<std::pair<int, int>>> edges;
+
 	typedef std::pair<int, int> intPair;
 	typedef std::pair<int, intPair> originDestinationPair;
-	//std::vector<originDestinationPair> amazing;
 	std::vector<std::vector<originDestinationPair>> vectorGraph;
 	// Have I gone too far
+
+	ifstream dotfile;
+	//dotfile.open("graph.dot");
+	string line;
+
 	if (dotfile.is_open())
 	{
 	if (dotfile.is_open())
