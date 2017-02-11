@@ -38,26 +38,41 @@ int main(int argc, char **argv) {
 	ifstream dotfile;
 	//dotfile.open("graph.dot");
 	string line;
-	AdjacencyMatrix test(5);
-	test.add_edge(1, 2, 
+	AdjacencyMatrix edgeMatrix(5);
+	edgeMatrix.add_edge(1, 2, 
 		2);
-	test.add_edge(1, 4, 
+	edgeMatrix.add_edge(1, 4, 
 		9);
-	test.add_edge(1, 5, 
+	edgeMatrix.add_edge(1, 5, 
 		2);
-	test.add_edge(2, 3, 
+	edgeMatrix.add_edge(2, 3, 
 		6);
-	test.add_edge(2, 5, 
+	edgeMatrix.add_edge(2, 5, 
 		4);
-	test.add_edge(3, 1, 
+	edgeMatrix.add_edge(3, 1, 
 		2);
-	test.add_edge(5, 2,
+	edgeMatrix.add_edge(5, 2,
 		3);
-	test.add_edge(4, 3, 
+	edgeMatrix.add_edge(4, 3, 
 		2);
-	//test.add_edge(-1, -1);
-	test.display();
+	//edgeMatrix.add_edge(-1, -1);
+	edgeMatrix.display();
+	cout << "\n\n";
+	edgeMatrix.displayOnlyEdges();
 
+	// idea 1
+	/*
+	* Instead of making empty matrix
+	* make edge ""matrix""
+	* 2d vector?
+	* pair ? <int edgeNo, std::vector<std::pair<destination,weight>>
+	*/
+	//std::vector<std::pair<int, std::vector<std::pair<int, int>>> edges;
+	typedef std::pair<int, int> intPair;
+	typedef std::pair<int, intPair> originDestinationPair;
+	//std::vector<originDestinationPair> amazing;
+	std::vector<std::vector<originDestinationPair>> vectorGraph;
+	// Have I gone too far
 	if (dotfile.is_open())
 	{
 	if (dotfile.is_open())
@@ -70,7 +85,6 @@ int main(int argc, char **argv) {
 	}
 	if (!dotfile.is_open())
 		cout << "File not open.\n";
-
 
 	return 0;
 }

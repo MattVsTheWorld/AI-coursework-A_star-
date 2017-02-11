@@ -36,13 +36,14 @@ private:
 
 class AdjacencyMatrix
 {
+	// http://www.sanfoundry.com/cpp-program-implement-adjacency-matrix/
 	// http://mathworld.wolfram.com/AdjacencyMatrix.html
 private:
 	int n;
+	//http://www.eskimo.com/~scs/cclass/int/sx8.html
 	std::pair <int, int> **adj;
 //	int **adj;
 	bool *visited;
-//	int weight;
 public:
 	//AdjacencyMatrix(int n){
 	//	this->n = n;
@@ -89,7 +90,17 @@ public:
 		int i, j;
 		for (i = 0;i < n;i++){
 			for (j = 0; j < n; j++)
-				cout << adj[i][j].first << "[w:" << adj[i][j].second << "]  " ;
+				cout <<"[" << i+1 << "<->" << j+1 <<"]" << adj[i][j].first << "[w:" << adj[i][j].second << "]  " ;
+			cout << endl;
+		}
+	}
+	void displayOnlyEdges() {
+		int i, j;
+		for (int i = 0; i < n; i++) {
+			for (j = 0; j < n; j++) {
+				if (adj[i][j].first != 0)
+				cout << "[" << i + 1 << "<->" << j + 1 << "]" << adj[i][j].first << "[w:" << adj[i][j].second << "]  ";
+			}
 			cout << endl;
 		}
 	}
