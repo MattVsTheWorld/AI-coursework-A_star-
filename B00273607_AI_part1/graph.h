@@ -40,14 +40,13 @@ using namespace std;
  * This version of the adjacency list uses more memory than the version in which adjacent vertices are listed directly, 
  * but the existence of explicit edge objects allows it extra flexibility in storing additional information about edges.*/
 
-class edge;
+class edge; // ""prototype""
 
 class vertex {
 private:
 	int vertexIndex; // unnecessary, but supports change to name of vertex
 	std::pair <int, int> vertexCoords;
-	//std::vector<edge> *edgeList;
-	std::list<edge> *edgeList; // std::forward_list  ?
+	std::list<edge *> *edgeList; // std::forward_list  ?
 protected:
 public:
 	vertex(int index, std::pair<int,int> coords) {
@@ -65,7 +64,7 @@ public:
 		return this->vertexIndex;
 	}
 	void addEdge(edge *e) {
-	//	edgeList->push_back(&e);
+		edgeList->push_back(e);
 	}
 };
 
@@ -90,6 +89,7 @@ public:
 	}
 };
 
+// I NEED DELETOS
 class AdjacencyList {
 private:
 	int vertexNo;
