@@ -60,8 +60,8 @@ public:
 		cout << "Index: [" << this->vertexIndex << "] ";
 		cout << "Coords: [" << this->vertexCoords.first << "," << this->vertexCoords.second << "]\n";
 	}
-	void addEdge(edge e) {
-		edgeList->push_back(e);
+	void addEdge(edge *e) {
+	//	edgeList->push_back(&e);
 	}
 };
 
@@ -77,7 +77,8 @@ public:
 		weight = w;
 	}
 	void displayEdgeInfo() {
-		cout << this->adjacent[0];
+	// no workerino pane vino
+	//	cout << this->adjacent[0] << endl;
 	}
 };
 

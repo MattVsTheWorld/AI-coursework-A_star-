@@ -107,10 +107,16 @@ int main(int argc, char **argv) {
 	std::pair<int, int> pairTest;
 	pairTest.first = 2;
 	pairTest.second = 4;
-	vertex *testVert = new vertex(0, pairTest);
-	testVert->displayVertexInfo();
+	vertex *testVert1 = new vertex(0, pairTest);
+	testVert1->displayVertexInfo();
+	pairTest.first = 3;
+	pairTest.second = 5;
+	vertex *testVert2 = new vertex(1, pairTest);
+	testVert2->displayVertexInfo();
 	//testVert->addEdge(edge(verte))
-	edge *testEdge = new edge(testVert, testVert, 10);
+	edge *testEdge = new edge(testVert1, testVert2, 10);
+	//cout << testVert2 << endl;
+	//testEdge->displayEdgeInfo();
 	// +++
 	return 0;
 }
