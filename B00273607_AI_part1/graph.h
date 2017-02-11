@@ -73,9 +73,13 @@ public:
 	void add_edge(int origin, int destin, int weight){
 		if (origin > n || destin > n || origin < 0 || destin < 0)
 			cout << "Invalid edge!\n";
+		else if (adj[origin - 1][destin - 1].first == 1)
+			cout << "edge [" << origin << " to " << destin << "] already exists (This is an undirected graph)\n";
 		else {
 			adj[origin - 1][destin - 1].first = 1; // INSTEAD OF THIS I MAKE PAIR :thinking:
+			adj[destin - 1][origin - 1].first = 1;
 			adj[origin - 1][destin - 1].second = weight;
+			adj[destin - 1][origin - 1].second = weight;
 		}
 	}
 	/*
