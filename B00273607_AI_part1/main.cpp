@@ -97,7 +97,20 @@ int main(int argc, char **argv) {
 	/*std::pair<int, int> pairTest;
 	pairTest.first = 1;
 	vertex *TEST = new vertex(0, pairTest);*/
+	//std::list<int> intList;
+	//intList.push_back(1);
+	//intList.push_back(2);
+	//intList.push_back(3);
 
+	//for (int n : intList)
+	//	cout << n << " ";
+	std::pair<int, int> pairTest;
+	pairTest.first = 2;
+	pairTest.second = 4;
+	vertex *testVert = new vertex(0, pairTest);
+	testVert->displayVertexInfo();
+	//testVert->addEdge(edge(verte))
+	edge *testEdge = new edge(testVert, testVert, 10);
 	// +++
 	return 0;
 }

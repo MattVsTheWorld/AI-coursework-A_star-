@@ -44,28 +44,40 @@ class edge;
 
 class vertex {
 private:
-	int vertexIndex;
+	int vertexIndex; // unnecessary, but supports change to name of vertex
 	std::pair <int, int> vertexCoords;
+	//std::vector<edge> *edgeList;
 	std::list<edge> *edgeList; // std::forward_list  ?
 protected:
 public:
 	vertex(int index, std::pair<int,int> coords) {
 		this->vertexIndex = index;
 		this->vertexCoords = coords;
-		edgeList = new std::list<edge>;
+		//edgeList = new std::list<edge>;
 //		cout << this->vertexCoords.first << " - " << this->vertexIndex;
+	}
+	void displayVertexInfo() {
+		cout << "Index: [" << this->vertexIndex << "] ";
+		cout << "Coords: [" << this->vertexCoords.first << "," << this->vertexCoords.second << "]\n";
+	}
+	void addEdge(edge e) {
+		edgeList->push_back(e);
 	}
 };
 
 class edge {
 private:
-	vertex *adjacent[2];
+	vertex **adjacent[2];
 	int weight;
 protected:
 public:
-	edge(vertex A, vertex B) {
+	edge(vertex *A, vertex *B, int w) {
 		adjacent[0] = &A;
 		adjacent[1] = &B;
+		weight = w;
+	}
+	void displayEdgeInfo() {
+		cout << this->adjacent[0];
 	}
 };
 
