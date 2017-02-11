@@ -52,7 +52,7 @@ public:
 	vertex(int index, std::pair<int,int> coords) {
 		this->vertexIndex = index;
 		this->vertexCoords = coords;
-		//edgeList = new std::list<edge>;
+		edgeList = new std::list<edge *>; // :thinking:
 //		cout << this->vertexCoords.first << " - " << this->vertexIndex;
 	}
 	void displayVertexInfo() {
@@ -64,7 +64,17 @@ public:
 		return this->vertexIndex;
 	}
 	void addEdge(edge *e) {
-		edgeList->push_back(e);
+	//	if (e->)
+		this->edgeList->push_back(e);
+	}
+
+	void displayEdgeList() {
+		for (std::list<edge *>::iterator listIterator = this->edgeList->begin(); 
+				listIterator != this->edgeList->end(); 
+				++listIterator)
+			cout << " " << *listIterator;
+		//listIterator.
+		//this->edgeList->
 	}
 };
 
@@ -79,6 +89,17 @@ public:
 		adjacent[1] = B; 
 		weight = w;
 	}
+	// JESUS CHRIST IT'S A POINTER TO POINTER
+	// NO WAIT IT'S NOT
+	// WHAT IS IT
+	vertex** getEndPoints() {
+		return this->adjacent;
+	}
+
+	int getWeight() {
+		return this->weight;
+	}
+
 	void displayEdgeInfo() {
 	// WORKS NOW!!!
 		cout << "\nEdge with weight:\n" << this->weight << endl;

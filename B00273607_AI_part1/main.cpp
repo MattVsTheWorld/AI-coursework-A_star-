@@ -118,6 +118,13 @@ int main(int argc, char **argv) {
 	edge *testEdge = new edge(testVert1, testVert2, 10);
 	//cout << testVert1 << endl;
 	testEdge->displayEdgeInfo();
+	//testVert1->addEdge(testEdge);
+	cout << "Checking if end points function works\n";
+	testEdge->getEndPoints()[0]->displayVertexInfo();
+	testEdge->getEndPoints()[1]->displayVertexInfo();
+	cout << "Alright now for some edge list\n";
+	testVert1->addEdge(testEdge);
+	testVert1->displayEdgeList();
 	// +++
 	return 0;
 }
