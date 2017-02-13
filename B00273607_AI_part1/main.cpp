@@ -34,30 +34,33 @@ using namespace std;
 // { 0 , { 3 , 7 } };
 //
 
+#define VERTICES_BEGIN 2
+#define VERTICES_END 67
+#define EDGES_END 194
 
 int main(int argc, char **argv) {
 
-	AdjacencyMatrix edgeMatrix(5);
-	edgeMatrix.add_edge(1, 2, 
-		2);
-	edgeMatrix.add_edge(1, 4, 
-		9);
-	edgeMatrix.add_edge(1, 5, 
-		2);
-	edgeMatrix.add_edge(2, 3, 
-		6);
-	edgeMatrix.add_edge(2, 5, 
-		4);
-	edgeMatrix.add_edge(3, 1, 
-		2);
-	edgeMatrix.add_edge(5, 2,
-		3);
-	edgeMatrix.add_edge(4, 3, 
-		2);
-	//edgeMatrix.add_edge(-1, -1);
-	edgeMatrix.display();
-	cout << "\n\n";
-	edgeMatrix.displayOnlyEdges();
+	//AdjacencyMatrix edgeMatrix(5);
+	//edgeMatrix.add_edge(1, 2, 
+	//	2);
+	//edgeMatrix.add_edge(1, 4, 
+	//	9);
+	//edgeMatrix.add_edge(1, 5, 
+	//	2);
+	//edgeMatrix.add_edge(2, 3, 
+	//	6);
+	//edgeMatrix.add_edge(2, 5, 
+	//	4);
+	//edgeMatrix.add_edge(3, 1, 
+	//	2);
+	//edgeMatrix.add_edge(5, 2,
+	//	3);
+	//edgeMatrix.add_edge(4, 3, 
+	//	2);
+	////edgeMatrix.add_edge(-1, -1);
+	//edgeMatrix.display();
+	//cout << "\n\n";
+	//edgeMatrix.displayOnlyEdges();
 
 	// idea 1
 	/*
@@ -74,38 +77,63 @@ int main(int argc, char **argv) {
 	//typedef std::pair<int, int> intPair;
 	//typedef std::pair<int, intPair> originDestinationPair;
 	//std::vector<std::vector<originDestinationPair>> vectorGraph;
-
 	// Have I gone too far
 
-	ifstream dotfile;
-	//dotfile.open("graph.dot");
-	string line;
+	AdjacencyList *adjList = new AdjacencyList();
 
-	if (dotfile.is_open())
-	{
+	ifstream dotfile;
+	dotfile.open("graph.dot");
+	string line;
+	int lineNo = 0;
+	if (dotfile.is_open()) {
 	if (dotfile.is_open())
 		cout << "File opened.\n";
 		while (getline(dotfile, line))
 		{
-			cout << line << "\n";
+			lineNo++;
+			if (lineNo > VERTICES_BEGIN && lineNo < VERTICES_END) {
+				string index;
+				string temp;
+				string position_x;
+				string position_y;
+				getline(dotfile, index, '[');
+				getline(dotfile, temp, '"');
+				getline(dotfile, temp, '"');
+				getline(dotfile, temp, '"');
+				getline(dotfile, position_x, ',');
+				getline(dotfile, position_y, '"');
+		//		cout << index << " - " << position_x << "," << position_y << endl;
+
+				pair<int, int> coordinates;
+				coordinates.first = stoi(position_x);
+				coordinates.second = stoi(position_y);
+				vertex *newVertex = new vertex(stoi(index), coordinates);
+				adjList->addVertex(newVertex) ? cout<<"Added vertex\n" : cout << "Unable to add vertex\n";
+			}
+			else if (lineNo >= VERTICES_END && lineNo < EDGES_END) {
+				string path;
+				string temp;
+				string weight;
+				getline(dotfile, path, '[');
+				getline(dotfile, temp, '"');
+				getline(dotfile, temp, '"');
+				getline(dotfile, temp, '"');
+				getline(dotfile, weight, '"');
+				cout << path << " || " << weight << endl;
+			}
+			//cout << line << "\n";
+			
 		}
+	
 		dotfile.close();
 	}
-	if (!dotfile.is_open())
+	else if (!dotfile.is_open())
 		cout << "File not open.\n";
 
-	// +++
-	/*std::pair<int, int> pairTest;
-	pairTest.first = 1;
-	vertex *TEST = new vertex(0, pairTest);*/
-	//std::list<int> intList;
-	//intList.push_back(1);
-	//intList.push_back(2);
-	//intList.push_back(3);
+//	adjList->displayVertices();
 
-	//for (int n : intList)
-	//	cout << n << " ";
-	std::pair<int, int> pairTest;
+	// +++ VIP
+	/*std::pair<int, int> pairTest;
 	pairTest.first = 2;
 	pairTest.second = 4;
 	vertex *testVert1 = new vertex(0, pairTest);
@@ -116,25 +144,9 @@ int main(int argc, char **argv) {
 	pairTest.first = 6;
 	pairTest.second = 9;
 	vertex *testVert3 = new vertex(2, pairTest);
-	//testVert2->displayVertexInfo();
-	////testVert->addEdge(edge(verte))
 	edge *testEdge1 = new edge(testVert1, testVert2, 10);
-	////cout << testVert1 << endl;
-	//testEdge->displayEdgeInfo();
-	////testVert1->addEdge(testEdge);
-	//cout << "Checking if end points function works\n" ;
-	//testEdge->getEndPoints()[0]->displayVertexInfo();
-	//testEdge->getEndPoints()[1]->displayVertexInfo();
-	//cout << "Alright now for some edge list\n";
-	//testVert1->addEdge(testEdge);
-	//
-	////cout << endl << testEdge << endl;
 	edge *testEdge2 = new edge(testVert1, testVert3, 15);
 	edge *testEdge3 = new edge(testVert2, testVert3, 12);
-	//testVert1->addEdge(testEdge2);
-	//testVert1->addEdge(testEdge);
-	////edge *testEdge3 = new edge()
-	//testVert1->displayEdgeList();
 	cout << "\n//// NOW FOR THE LIST ///\n";
 	AdjacencyList *adjTest = new AdjacencyList();
 	adjTest->addVertex(testVert1);
@@ -144,7 +156,8 @@ int main(int argc, char **argv) {
 	adjTest->addVertex(testVert3);
 	adjTest->addEdge(testEdge2);
 	adjTest->addEdge(testEdge3);
-	adjTest->displayVertices();
+	adjTest->displayVertices();*/
+
 
 //	adjTest->addEdge(testEdge);
 	

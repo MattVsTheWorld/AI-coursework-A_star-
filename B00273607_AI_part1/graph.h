@@ -83,23 +83,22 @@ public:
 		vertexNo = 0;
 		edgeNo = 0;
 	}
-	// returns
 	bool addVertex(vertex *v) {
 		// add a vertex to vector
 		// we will assume vertices don't take the same position
+		if (v->getIndex() > this->vertexNo)
+			return false;
 		vertices->push_back(v);
 		vertexNo++;
-		cout << "Vertex added\n";
+		//cout << "Vertex added\n";
 		return true;
-
-	//	return false;
 	}
 //	 returns
 	bool addEdge(edge *e) {
 		if (e->getEndPoints()[0]->getIndex() >= this->vertexNo
 			|| e->getEndPoints()[1]->getIndex() >= this->vertexNo)
 		{
-			cout << "Edge connects unexisting vertices\n";
+			cout << "Edge connects unexisting vertices\n"; // put these in main program
 			return false;
 		}
 		// Assumes you won't try to enter the same edge twice
@@ -118,21 +117,10 @@ public:
 				vectorIterator++;
 		}
 		return true;
-		/*for (std::vector<vertex *>::iterator vectorIterator = this->vertices->begin();
-		vectorIterator != this->vertices->end();
-			++vectorIterator) {*/
-		/*	((vertex*)*vectorIterator)->getIndex();
-			e->getEndPoints()[0]->getIndex();
-			e->getEndPoints()[1]->getIndex();*/
-		/*}*/
-		//	((vertex*)&vertices[i])->getIndex(); //???
-		// go to vertices
-		// add edge to both
-		// check if either of end points is vertex, otherwise false
-	//	return false;
 	}
-	bool areAdjacent(vertex v, vertex w) {
+	bool areAdjacent(vertex *v, vertex *w) {
 		// if one of edges contains both vertices
+		// needed?
 		return false;
 	}
 	void displayVertices() {
