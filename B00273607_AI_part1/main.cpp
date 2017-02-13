@@ -118,7 +118,7 @@ int main(int argc, char **argv) {
 	vertex *testVert3 = new vertex(2, pairTest);
 	//testVert2->displayVertexInfo();
 	////testVert->addEdge(edge(verte))
-	edge *testEdge = new edge(testVert1, testVert2, 10);
+	edge *testEdge1 = new edge(testVert1, testVert2, 10);
 	////cout << testVert1 << endl;
 	//testEdge->displayEdgeInfo();
 	////testVert1->addEdge(testEdge);
@@ -129,7 +129,8 @@ int main(int argc, char **argv) {
 	//testVert1->addEdge(testEdge);
 	//
 	////cout << endl << testEdge << endl;
-	edge *testEdge2 = new edge(testVert2, testVert1, 15);
+	edge *testEdge2 = new edge(testVert1, testVert3, 15);
+	edge *testEdge3 = new edge(testVert2, testVert3, 12);
 	//testVert1->addEdge(testEdge2);
 	//testVert1->addEdge(testEdge);
 	////edge *testEdge3 = new edge()
@@ -138,7 +139,11 @@ int main(int argc, char **argv) {
 	AdjacencyList *adjTest = new AdjacencyList();
 	adjTest->addVertex(testVert1);
 	adjTest->addVertex(testVert2);
-//	adjTest->addEdge(testEdge);
+	adjTest->addEdge(testEdge1);
+	adjTest->addEdge(testEdge3);
+	adjTest->addVertex(testVert3);
+	adjTest->addEdge(testEdge2);
+	adjTest->addEdge(testEdge3);
 	adjTest->displayVertices();
 
 //	adjTest->addEdge(testEdge);

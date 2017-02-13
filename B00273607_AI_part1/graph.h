@@ -96,37 +96,28 @@ public:
 	}
 //	 returns
 	bool addEdge(edge *e) {
-		// Assumes you won't try to enter the same edge twice
-		std::vector<vertex *>::iterator vectorIterator = this->vertices->begin();
-		vertex* endPointA = new vertex();
-		vertex* endPointB = new vertex();
-		int endPointsFound = 0;
-		while (vectorIterator != this->vertices->end() || endPointsFound == 2){
-			if (((vertex*)*vectorIterator)->getIndex() == e->getEndPoints()[0]->getIndex())
-			{
-				endPointA = ((vertex*)*vectorIterator);
-				endPointsFound++;
-			}
-			else if (((vertex*)*vectorIterator)->getIndex() == e->getEndPoints()[1]->getIndex())
-			{
-				endPointB = ((vertex*)*vectorIterator);
-				endPointsFound++;
-			}
-			else
-				vectorIterator++;
-		}
-		if (endPointsFound < 2) {
-			delete endPointA;
-			delete endPointA;
+		if (e->getEndPoints()[0]->getIndex() >= this->vertexNo
+			|| e->getEndPoints()[1]->getIndex() >= this->vertexNo)
+		{
+			cout << "Edge connects unexisting vertices\n";
 			return false;
 		}
-		else {
-			endPointA->addEdge(e);
-			endPointB->addEdge(e);
-			delete endPointA;
-			delete endPointA;
-			return true;
+		// Assumes you won't try to enter the same edge twice
+		std::vector<vertex *>::iterator vectorIterator = this->vertices->begin();
+		int endPointsFound = 0;
+		while (vectorIterator != this->vertices->end() || endPointsFound < 2){
+			if (((vertex*)*vectorIterator)->getIndex() == e->getEndPoints()[0]->getIndex()){
+			//	endPointA = ((vertex*)*vectorIterator);
+				((vertex*)*vectorIterator)->addEdge(e);
+				endPointsFound++;
+			}
+			else if (((vertex*)*vectorIterator)->getIndex() == e->getEndPoints()[1]->getIndex()){
+				((vertex*)*vectorIterator)->addEdge(e);
+				endPointsFound++;
+			}
+				vectorIterator++;
 		}
+		return true;
 		/*for (std::vector<vertex *>::iterator vectorIterator = this->vertices->begin();
 		vectorIterator != this->vertices->end();
 			++vectorIterator) {*/
@@ -152,6 +143,7 @@ public:
 			((vertex*)*vectorIterator)->displayVertexInfo();
 			cout << "|| Edge list ||\n";
 			((vertex*)*vectorIterator)->displayEdgeList();
+			cout << endl;
 		}
 	}
 //	 if vertices <= 1 don't
