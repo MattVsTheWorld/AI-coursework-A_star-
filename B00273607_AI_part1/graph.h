@@ -103,7 +103,7 @@ public:
 		{
 			cout << "Edge connects unexisting vertices\n"; // put these in main program
 			throw OUTOFBOUNDS;
-			return false; // ? 
+			//return false; // ? 
 		}
 		// Assumes you won't try to enter the same edge twice
 		std::vector<vertex *>::iterator vectorIterator = this->vertices->begin();

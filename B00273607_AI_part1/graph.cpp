@@ -61,7 +61,7 @@ bool vertex::addEdge(edge *e) {
 		if (((edge*)*listIterator) == e) {
 			//cout << "Edge already in current vertex list\n";
 			throw EDGEREDEFINITION;
-			return false; // ?
+			//return false; // ?
 		}
 	}
 	this->edgeList->push_back(e);

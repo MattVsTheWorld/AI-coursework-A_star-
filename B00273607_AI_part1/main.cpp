@@ -149,7 +149,7 @@ int main(int argc, char **argv) {
 	else if (!dotfile.is_open())
 		cout << "File not open.\n";
 
-	adjList->displayVertices();
+//	adjList->displayVertices();
 
 	// +++ VIP
 	//std::pair<int, int> pairTest;
@@ -199,10 +199,11 @@ int main(int argc, char **argv) {
 	//cout << "\n//// CATCHING SOME ERRORS ///\n";
 	//try {
 	//	((vertex*)adjTest->getVertex(0))->displayVertexInfo();
+	////	((vertex*)adjTest->getVertex(6))->displayVertexInfo();
 	//}
 	//catch (int e)
 	//{
-	//	cout << "Out of bounds exception occured. Exception n: " << e << '\n';
+	//	cout << "Out of bounds exception occured. Exception Nr: " << e << '\n';
 	//}
 	//try {
 	//	((vertex*)adjTest->getVertex(4))->displayVertexInfo();
