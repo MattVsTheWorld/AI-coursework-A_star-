@@ -122,16 +122,21 @@ int main(int argc, char **argv) {
 				getline(dotfile, temp, '"');
 				getline(dotfile, temp, '"');
 				getline(dotfile, weight, '"');
-			//	cout << stoi(path_beginning) << "<>" << stoi(path_end) << " || " << stoi(weight) << endl;
+				//cout << stoi(path_beginning) << "<>" << stoi(path_end) << " || " << stoi(weight) << endl;
 				//edge *testEdge1 = new edge(testVert1, testVert2, 10);
 				//adjList->addEdge()
 
 				try {
-					((vertex*)adjList->getVertex(4))->displayVertexInfo();
+					edge *newEdge = new edge(((vertex*)adjList->getVertex(stoi(path_beginning))), 
+						(vertex*)adjList->getVertex(stoi(path_end)), 
+						stoi(weight));
+					adjList->addEdge(newEdge);
+				/*	((vertex*)adjList->getVertex(stoi(path_beginning)));
+					((vertex*)adjList->getVertex(stoi(path_end)));*/
 				}
 				catch (int e)
 				{
-					cout << "Out of bounds exception occured. Exception Nr: " << e << '\n';
+					cout << "Exception occured. Exception Nr: " << e << '\n';
 				}
 			}
 			//cout << line << "\n";
@@ -144,7 +149,7 @@ int main(int argc, char **argv) {
 	else if (!dotfile.is_open())
 		cout << "File not open.\n";
 
-//	adjList->displayVertices();
+	adjList->displayVertices();
 
 	// +++ VIP
 	//std::pair<int, int> pairTest;

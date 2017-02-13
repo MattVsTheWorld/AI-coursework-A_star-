@@ -43,6 +43,7 @@ using namespace std;
 class vertex;
 
 #define OUTOFBOUNDS 1
+#define EDGEREDEFINITION 2
 
 class edge {
 private:

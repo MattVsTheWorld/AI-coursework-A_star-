@@ -59,12 +59,13 @@ bool vertex::addEdge(edge *e) {
 		++listIterator) {
 		
 		if (((edge*)*listIterator) == e) {
-			cout << "Edge already in current vertex list\n";
-			return false;
+			//cout << "Edge already in current vertex list\n";
+			throw EDGEREDEFINITION;
+			return false; // ?
 		}
 	}
 	this->edgeList->push_back(e);
-	cout << "Edge added\n";
+	//cout << "Edge added\n";
 	return true;
 }
 
