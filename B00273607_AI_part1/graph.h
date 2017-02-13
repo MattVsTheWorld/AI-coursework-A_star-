@@ -42,6 +42,8 @@ using namespace std;
 //
 class vertex;
 
+#define OUTOFBOUNDS 1
+
 class edge {
 private:
 	vertex *adjacent[2];
@@ -99,7 +101,8 @@ public:
 			|| e->getEndPoints()[1]->getIndex() >= this->vertexNo)
 		{
 			cout << "Edge connects unexisting vertices\n"; // put these in main program
-			return false;
+			throw OUTOFBOUNDS;
+			return false; // ? 
 		}
 		// Assumes you won't try to enter the same edge twice
 		std::vector<vertex *>::iterator vectorIterator = this->vertices->begin();
@@ -122,6 +125,18 @@ public:
 		// if one of edges contains both vertices
 		// needed?
 		return false;
+	}
+
+	vertex* getVertex(int index) {
+		if (index >= this->vertexNo)
+			throw OUTOFBOUNDS;
+		std::vector<vertex *>::iterator vectorIterator = this->vertices->begin();
+		while (vectorIterator != this->vertices->end()) {
+			if (((vertex*)*vectorIterator)->getIndex() == index)
+				return ((vertex*)*vectorIterator);
+			else 
+				vectorIterator++;
+		}
 	}
 	void displayVertices() {
 		for (std::vector<vertex *>::iterator vectorIterator = this->vertices->begin();
