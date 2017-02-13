@@ -61,7 +61,7 @@ public:
 class vertex {
 private:
 	int vertexIndex; // unnecessary, but supports change to name of vertex
-	std::pair <int, int> vertexCoords; // unused, useful? waste of space?
+	std::pair <int, int> vertexCoords;
 	std::list<edge *> *edgeList; // std::forward_list instead? Is difference Noticeable?
 protected:
 public:
