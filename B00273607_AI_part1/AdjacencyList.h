@@ -1,9 +1,10 @@
-#ifndef GRAPH
-#define GRAPH
+#ifndef ADJACENCYLIST
+#define ADJACENCYLIST
 #include <list>
 #include <vector>
 #include <iostream>
 using namespace std;
+
 //// template <typename vertex>
 //// rather use integers
 //
@@ -40,10 +41,10 @@ using namespace std;
 // * This version of the adjacency list uses more memory than the version in which adjacent vertices are listed directly, 
 // * but the existence of explicit edge objects allows it extra flexibility in storing additional information about edges.*/
 //
-class vertex;
+class vertex; // class declaration
 
-#define OUTOFBOUNDS 1
-#define EDGEREDEFINITION 2
+#define OUTOFBOUNDS	  1 // Attempt to access index out of bounds (unexisting vertex; edge connecting one or two unexsting vertex; etc.)	
+#define EDGEDUPLICATE 2 // Attempt to add duplicate edge to vertex edge list
 
 class edge {
 private:
@@ -60,12 +61,11 @@ public:
 class vertex {
 private:
 	int vertexIndex; // unnecessary, but supports change to name of vertex
-	std::pair <int, int> vertexCoords;
-	std::list<edge *> *edgeList; // std::forward_list  ?
+	std::pair <int, int> vertexCoords; // unused, useful? waste of space?
+	std::list<edge *> *edgeList; // std::forward_list instead? Is difference Noticeable?
 protected:
 public:
 	vertex(int index, std::pair<int, int> coords);
-	vertex();
 	void displayVertexInfo();
 	int getIndex();
 	bool addEdge(edge *e);
@@ -80,77 +80,12 @@ private:
 	std::vector<vertex *> *vertices;
 protected:
 public:
-	AdjacencyList() {
-		// initialize collection
-		vertices = new std::vector<vertex *>;
-		vertexNo = 0;
-		edgeNo = 0;
-	}
-	bool addVertex(vertex *v) {
-		// add a vertex to vector
-		// we will assume vertices don't take the same position
-		if (v->getIndex() > this->vertexNo)
-			return false;
-		vertices->push_back(v);
-		vertexNo++;
-		//cout << "Vertex added\n";
-		return true;
-	}
-//	 returns
-	bool addEdge(edge *e) {
-		if (e->getEndPoints()[0]->getIndex() >= this->vertexNo
-			|| e->getEndPoints()[1]->getIndex() >= this->vertexNo)
-		{
-			cout << "Edge connects unexisting vertices\n"; // put these in main program
-			throw OUTOFBOUNDS;
-			//return false; // ? 
-		}
-		// Assumes you won't try to enter the same edge twice
-		std::vector<vertex *>::iterator vectorIterator = this->vertices->begin();
-		int endPointsFound = 0;
-		while (vectorIterator != this->vertices->end() || endPointsFound < 2){
-			if (((vertex*)*vectorIterator)->getIndex() == e->getEndPoints()[0]->getIndex()){
-			//	endPointA = ((vertex*)*vectorIterator);
-				((vertex*)*vectorIterator)->addEdge(e);
-				endPointsFound++;
-			}
-			else if (((vertex*)*vectorIterator)->getIndex() == e->getEndPoints()[1]->getIndex()){
-				((vertex*)*vectorIterator)->addEdge(e);
-				endPointsFound++;
-			}
-				vectorIterator++;
-		}
-		return true;
-	}
-	bool areAdjacent(vertex *v, vertex *w) {
-		// if one of edges contains both vertices
-		// needed?
-		return false;
-	}
-
-	vertex* getVertex(int index) {
-		if (index >= this->vertexNo)
-			throw OUTOFBOUNDS;
-		std::vector<vertex *>::iterator vectorIterator = this->vertices->begin();
-		while (vectorIterator != this->vertices->end()) {
-			if (((vertex*)*vectorIterator)->getIndex() == index)
-				return ((vertex*)*vectorIterator);
-			else 
-				vectorIterator++;
-		}
-	}
-	void displayVertices() {
-		for (std::vector<vertex *>::iterator vectorIterator = this->vertices->begin();
-			vectorIterator != this->vertices->end();
-			++vectorIterator) {
-			cout << "|| Vertex info ||\n";
-			((vertex*)*vectorIterator)->displayVertexInfo();
-			cout << "|| Edge list ||\n";
-			((vertex*)*vectorIterator)->displayEdgeList();
-			cout << endl;
-		}
-	}
-//	 if vertices <= 1 don't
+	AdjacencyList();
+	bool addVertex(vertex *v);
+	bool addEdge(edge *e);
+//	bool areAdjacent(vertex *v, vertex *w);
+	vertex* getVertex(int index);
+	void displayVertices();
 };
 
 #endif

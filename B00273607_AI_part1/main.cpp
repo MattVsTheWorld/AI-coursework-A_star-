@@ -10,7 +10,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
-#include "graph.h"
+#include "AdjacencyList.h"
 #include "AdjacencyMatrix.h"
 
 using namespace std;
@@ -34,6 +34,7 @@ using namespace std;
 // { 0 , { 3 , 7 } };
 //
 
+// rudimental parser, but works
 #define VERTICES_BEGIN 2
 #define VERTICES_END 67
 #define EDGES_END 194
@@ -72,12 +73,6 @@ int main(int argc, char **argv) {
 	* https://en.wikipedia.org/wiki/Adjacency_list
 	* Goodrich and tamassia adjacency list
 	*/
-	//std::vector<std::pair<int, std::vector<std::pair<int, int>>> edges;
-
-	//typedef std::pair<int, int> intPair;
-	//typedef std::pair<int, intPair> originDestinationPair;
-	//std::vector<std::vector<originDestinationPair>> vectorGraph;
-	// Have I gone too far
 
 	AdjacencyList *adjList = new AdjacencyList();
 
@@ -108,7 +103,13 @@ int main(int argc, char **argv) {
 				coordinates.first = stoi(position_x);
 				coordinates.second = stoi(position_y);
 				vertex *newVertex = new vertex(stoi(index), coordinates);
-				adjList->addVertex(newVertex);// ? cout << "Added vertex\n" : cout << "Unable to add vertex\n";
+				try {
+					adjList->addVertex(newVertex);// ? cout << "Added vertex\n" : cout << "Unable to add vertex\n";
+				}
+				catch (int e)
+				{
+					cout << "Exception occured. Exception Nr:" << e << '.\n';
+				}
 			}
 			else if (lineNo >= VERTICES_END && lineNo < EDGES_END) {
 				string path_beginning;
@@ -136,7 +137,7 @@ int main(int argc, char **argv) {
 				}
 				catch (int e)
 				{
-					cout << "Exception occured. Exception Nr: " << e << '\n';
+					cout << "Exception occured. Exception Nr:" << e << '.\n';
 				}
 			}
 			//cout << line << "\n";
@@ -176,6 +177,12 @@ int main(int argc, char **argv) {
 	//catch (int e) {
 	//	cout << "Out of bounds exception occured. Exception n: " << e << '\n';
 	//}	
+	//try {
+	//	adjTest->addEdge(testEdge1);
+	//}
+	//catch (int e) {
+	//	cout << "Out of bounds exception occured. Exception n: " << e << '\n';
+	//}
 	//try {
 	//adjTest->addEdge(testEdge3);
 	//}

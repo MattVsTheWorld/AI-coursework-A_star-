@@ -24,8 +24,8 @@
     <ClCompile Include="AdjacencyMatrix.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="graph.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="AdjacencyList.cpp">
+      <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -34,10 +34,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="graph.h">
+    <ClInclude Include="AdjacencyMatrix.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AdjacencyMatrix.h">
+    <ClInclude Include="A_star.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AdjacencyList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
