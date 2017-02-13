@@ -40,7 +40,7 @@ public:
 	}
 
 	double heuristic(pair<int, int> coord_A, pair<int, int> coord_B) {
-		return (coord_A.first - coord_B.first) + (coord_A.second - coord_B.second);
+		return abs(coord_A.first - coord_B.first) + abs(coord_A.second - coord_B.second);
 	}
 
 };
