@@ -116,20 +116,33 @@ int main(int argc, char **argv) {
 	pairTest.first = 6;
 	pairTest.second = 9;
 	vertex *testVert3 = new vertex(2, pairTest);
-	testVert2->displayVertexInfo();
-	//testVert->addEdge(edge(verte))
+	//testVert2->displayVertexInfo();
+	////testVert->addEdge(edge(verte))
 	edge *testEdge = new edge(testVert1, testVert2, 10);
-	//cout << testVert1 << endl;
-	testEdge->displayEdgeInfo();
+	////cout << testVert1 << endl;
+	//testEdge->displayEdgeInfo();
+	////testVert1->addEdge(testEdge);
+	//cout << "Checking if end points function works\n" ;
+	//testEdge->getEndPoints()[0]->displayVertexInfo();
+	//testEdge->getEndPoints()[1]->displayVertexInfo();
+	//cout << "Alright now for some edge list\n";
 	//testVert1->addEdge(testEdge);
-	cout << "Checking if end points function works\n";
-	testEdge->getEndPoints()[0]->displayVertexInfo();
-	testEdge->getEndPoints()[1]->displayVertexInfo();
-	cout << "Alright now for some edge list\n";
-	testVert1->addEdge(testEdge);
-	testVert1->displayEdgeList(); // returns data address
-	cout << endl << testEdge << endl;
-	edge *testeEdge2
+	//
+	////cout << endl << testEdge << endl;
+	edge *testEdge2 = new edge(testVert2, testVert1, 15);
+	//testVert1->addEdge(testEdge2);
+	//testVert1->addEdge(testEdge);
+	////edge *testEdge3 = new edge()
+	//testVert1->displayEdgeList();
+	cout << "\n//// NOW FOR THE LIST ///\n";
+	AdjacencyList *adjTest = new AdjacencyList();
+	adjTest->addVertex(testVert1);
+	adjTest->addVertex(testVert2);
+//	adjTest->addEdge(testEdge);
+	adjTest->displayVertices();
+
+//	adjTest->addEdge(testEdge);
+	
 	// +++
 	return 0;
 }
