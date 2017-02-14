@@ -57,7 +57,6 @@ using namespace std;
 
 /*
 Attempt of human translation of that pseudocode
-I HAVEN'T SLEPT ENOUGH FOR THIS
 Aight so we have a frontier = unexplored nodes
 ///frontier is a priority Queue;
 - Add start to frontier, priority 0
@@ -68,7 +67,21 @@ Aight so we have a frontier = unexplored nodes
 
 - while the frontier (explorable nodes) not empty
 	{
-	current = frontier.get() (Which I immagine gets the higher priority node in the queue)
+	current = frontier.get() (Which I immagine gets the higher priority node (lower value, closer to end) in the queue)
+	if current == goal,
+		end found; break
+
+		for - loop neighbours of current
+		{
+			new_cost = cost_so_far[current] + weight to get to next (== this neighbor)
+			if [next] (neighbour) is not in cost_so_far (first neighbor, cost_so_far[next] =~ null) or new_cost < cost_so_far[next] (meaning the cost to this neighbor is less = more efficent)
+			{
+				cost_so_far[next] = new_cost (replace)
+				priority = new_cost + heuristic (goal, next (current neighbor)
+				frontier.put(next (current neighbor, priority);
+				came_from[next] = current (parent of neighbor)
+			}
+		}
 
 	}
 
