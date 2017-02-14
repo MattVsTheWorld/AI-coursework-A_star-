@@ -112,7 +112,7 @@ bool AdjacencyList::addVertex(vertex *v) {
 	if (v->getIndex() > this->vertexNo)
 		throw OUTOFBOUNDS;
 	vertices->push_back(v);
-	vertexNo++;
+	this->vertexNo++;
 	//cout << "Vertex added\n";
 	return true;
 }
@@ -140,6 +140,7 @@ bool AdjacencyList::addEdge(edge *e) {
 		}
 		vectorIterator++;
 	}
+	this->edgeNo++;
 	return true;
 }
 

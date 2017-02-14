@@ -53,14 +53,33 @@ using namespace std;
 //				priority = new_cost + heuristic(goal, next)
 //				frontier.put(next, priority)
 //				came_from[next] = current
-#include <unordered_set>
+//#include <unordered_set>
+
+/*
+Attempt of human translation of that pseudocode
+I HAVEN'T SLEPT ENOUGH FOR THIS
+Aight so we have a frontier = unexplored nodes
+///frontier is a priority Queue;
+- Add start to frontier, priority 0
+- we came from {} (nowhere, it's start)
+- cost so far {} (0, it's start)
+- came_from[start] = none; (set to just started)
+- cost_so_far[start] = 0 (set cost to 0)
+
+- while the frontier (explorable nodes) not empty
+	{
+	current = frontier.get() (Which I immagine gets the higher priority node in the queue)
+
+	}
+
+*/
 /// *** 2 ***
 /// -----------
 class A_star {
 private:
-	unordered_set<vertex*> visited;
-	queue <vertex*> frontier;
-	queue <vertex*> closed;
+	//unordered_set<vertex*> visited;
+	//queue <vertex*> frontier;
+	//queue <vertex*> closed;
 	AdjacencyList* adjList;
 protected:
 public:
@@ -69,24 +88,24 @@ public:
 		adjList = _adjList; // assigning pointers... right? right? :thinking:
 	}
 
-	void breadthFirst(vertex* start) {
-		frontier.push(start);
-		visited.insert(start);
+	//void breadthFirst(vertex* start) {
+	//	frontier.push(start);
+	//	visited.insert(start);
 
-		while (!frontier.empty()) {
-			auto current = frontier.front();
-			frontier.pop();
+	//	while (!frontier.empty()) {
+	//		auto current = frontier.front();
+	//		frontier.pop();
 
-			cout << "Visiting " << current->getIndex() << endl;
-			for (std::list<edge *>::iterator listIterator = current->getEdgeList()->begin();
-			listIterator != current->getEdgeList()->end();
-				++listIterator)
-			{
-			//	frontier.push(;
-				((edge*)*listIterator)->displayEdgeInfo();
-			}
-		}
-	}
+	//		cout << "Visiting " << current->getIndex() << endl;
+	//		for (std::list<edge *>::iterator listIterator = current->getEdgeList()->begin();
+	//		listIterator != current->getEdgeList()->end();
+	//			++listIterator)
+	//		{
+	//		//	frontier.push(;
+	//			((edge*)*listIterator)->displayEdgeInfo();
+	//		}
+	//	}
+	//}
 
 	double heuristic(pair<int, int> coord_A, pair<int, int> coord_B) {
 		return abs(coord_A.first - coord_B.first) + abs(coord_A.second - coord_B.second); // simple ? not good?
