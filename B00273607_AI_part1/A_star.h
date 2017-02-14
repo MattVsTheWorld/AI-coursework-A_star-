@@ -87,6 +87,55 @@ Aight so we have a frontier = unexplored nodes
 
 */
 /// *** 2 ***
+/*
+image test
+frontier = prio queue;
+frontier.add(start, 0);
+[came_from] = {};
+[cost_so_far[ = {};
+-- START = 0 --
+came_from[0] = null;
+cost_so_far[0] = 0;
+
+while (!frontier.isEmpty())
+{
+	vertex current = frontier.get() ((( gets start ))))
+	if (current == goal)
+		break;
+	for(iterate [edges] of [current]; get [next_vertex] that isn't [current]; until list of [edges[ is end())
+		[new_cost] = cost_so_far[current] + [current to [next_vertex]->edge->weight];
+		if [next_vertex] not in [cost_so_far] (first considered) (aka if cost_so_far[i++])
+			||
+		[new_cost] < cost_so_far[next] (this particular neighbor is seemingly more efficent than previous)
+			{
+				cost_so_far[next] = new_cost (replace)
+				priority = [new_cost]+ heuristic (goal, next (current neighbor)
+				frontier.put(next, priority) (current neighbor w/ priority);
+				came_from[next] = current (parent of neighbor) (POINT WHERE YOU CAME FROM
+			}
+}
+// ****
+int INDEX = 0;
+current = 0;
+not goal
+iterate edges
+	// EDGE 0-6 (assume h = 6)
+	new cost = 0 + 147 = 147
+	cost so far empty, hence add
+		cost_so_far[++INDEX] = 147;
+		priority = 147 + 6 = 153;
+		push to frontier [6, 153];
+		came_from[INDEX] = 0; (start)
+
+	// EDGE 0-7 (assume h = 5)
+	new cost = 0 + 106 = 106
+	cost < than 147, hence
+		cost_so_far[What index?] 
+	// EDGE 0-13 (assume h = 3)
+	// EDGE 0-3 (assume h = 9)
+// ***
+
+*/
 /// -----------
 class A_star {
 private:
