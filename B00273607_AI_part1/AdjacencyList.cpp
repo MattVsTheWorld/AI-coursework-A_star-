@@ -16,6 +16,13 @@ vertex** edge::getEndPoints() {
 	return this->adjacent;
 }
 
+//vertex* edge::getOtherEnd(vertex* startingVert) {
+//	if (startingVert->getIndex() == this->adjacent[0]->getIndex())
+//		return this->adjacent[1];
+//	else if (startingVert->getIndex() == this->adjacent[1]->getIndex())
+//		return this->adjacent[0];
+//}
+
 int edge::getWeight() {
 	return this->weight;
 }
@@ -36,10 +43,10 @@ void edge::displayEdgeInfo() {
 ////////////////////////////
 //// Vertex class start ////
 ///////////////////////////
-vertex::vertex(int index, std::pair<int, int> coords) {
+vertex::vertex(int index, pair<int, int> coords) {
 	this->vertexIndex = index;
 	this->vertexCoords = coords;
-	edgeList = new std::list<edge *>; // :thinking:
+	edgeList = new list<edge *>; // :thinking:
 	//	cout << "Coords of added: " <<  this->vertexCoords.first << " - " << this->vertexCoords.second << endl;
 }
 
@@ -52,7 +59,7 @@ int vertex::getIndex() {
 	return this->vertexIndex;
 }
 bool vertex::addEdge(edge *e) {
-	for (std::list<edge *>::iterator listIterator = this->edgeList->begin();
+	for (list<edge *>::iterator listIterator = this->edgeList->begin();
 	listIterator != this->edgeList->end();
 		++listIterator) {
 
@@ -66,10 +73,22 @@ bool vertex::addEdge(edge *e) {
 	//cout << "Edge added\n";
 	return true;
 }
+//
+//list<edge *>* vertex::getEdgeList() {
+//	return this->edgeList;
+//}
+
+//int vertex::getNeighours() {
+//	for (list<edge *>::iterator listIterator = this->edgeList->begin();
+//	listIterator != this->edgeList->end();
+//		++listIterator)
+//		((edge*)*listIterator)->getOtherEnd(this);
+//
+//}
 
 void vertex::displayEdgeList() {
 	cout << ">Vertex [" << this->vertexIndex << "] has edges:\n";
-	for (std::list<edge *>::iterator listIterator = this->edgeList->begin();
+	for (list<edge *>::iterator listIterator = this->edgeList->begin();
 	listIterator != this->edgeList->end();
 		++listIterator)
 		((edge*)*listIterator)->displayEdgeInfo();
@@ -83,7 +102,7 @@ void vertex::displayEdgeList() {
 //////////////////////////////////
 AdjacencyList::AdjacencyList() {
 	// initialize collection
-	vertices = new std::vector<vertex *>;
+	vertices = new vector<vertex *>;
 	vertexNo = 0;
 	edgeNo = 0;
 }
@@ -107,7 +126,7 @@ bool AdjacencyList::addEdge(edge *e) {
 		//return false; // ? 
 	}
 	// Assumes you won't try to enter the same edge twice
-	std::vector<vertex *>::iterator vectorIterator = this->vertices->begin();
+	vector<vertex *>::iterator vectorIterator = this->vertices->begin();
 	int endPointsFound = 0;
 	while (vectorIterator != this->vertices->end() || endPointsFound < 2) {
 		if (((vertex*)*vectorIterator)->getIndex() == e->getEndPoints()[0]->getIndex()) {
@@ -123,6 +142,7 @@ bool AdjacencyList::addEdge(edge *e) {
 	}
 	return true;
 }
+
 //bool AdjacencyList::areAdjacent(vertex *v, vertex *w) {
 //	// if one of edges contains both vertices
 //	// needed?
@@ -132,7 +152,7 @@ bool AdjacencyList::addEdge(edge *e) {
 vertex* AdjacencyList::getVertex(int index) {
 	if (index >= this->vertexNo)
 		throw OUTOFBOUNDS;
-	std::vector<vertex *>::iterator vectorIterator = this->vertices->begin();
+	vector<vertex *>::iterator vectorIterator = this->vertices->begin();
 	while (vectorIterator != this->vertices->end()) {
 		if (((vertex*)*vectorIterator)->getIndex() == index)
 			return ((vertex*)*vectorIterator);
@@ -141,7 +161,7 @@ vertex* AdjacencyList::getVertex(int index) {
 	}
 }
 void AdjacencyList::displayVertices() {
-	for (std::vector<vertex *>::iterator vectorIterator = this->vertices->begin();
+	for (vector<vertex *>::iterator vectorIterator = this->vertices->begin();
 	vectorIterator != this->vertices->end();
 		++vectorIterator) {
 		cout << "|| Vertex info ||\n";

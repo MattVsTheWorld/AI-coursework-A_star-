@@ -54,6 +54,7 @@ protected:
 public:
 	edge(vertex *A, vertex *B, int w);
 	vertex** getEndPoints();
+	//vertex* getOtherEnd(vertex* startingVert);
 	int getWeight();
 	void displayEdgeInfo();
 };
@@ -61,14 +62,16 @@ public:
 class vertex {
 private:
 	int vertexIndex; // unnecessary, but supports change to name of vertex
-	std::pair <int, int> vertexCoords;
-	std::list<edge *> *edgeList; // std::forward_list instead? Is difference Noticeable?
-protected:
+	pair <int, int> vertexCoords;
+	list<edge *> *edgeList; // std::forward_list instead? Is difference Noticeable?
+protected:	
+//	list<edge *> *getEdgeList();
 public:
-	vertex(int index, std::pair<int, int> coords);
+	vertex(int index, pair<int, int> coords);
 	void displayVertexInfo();
 	int getIndex();
 	bool addEdge(edge *e);
+//	int getNeighours();
 	void displayEdgeList();
 };
 
@@ -77,12 +80,13 @@ class AdjacencyList {
 private:
 	int vertexNo;
 	int edgeNo;
-	std::vector<vertex *> *vertices;
+	vector<vertex *> *vertices;
 protected:
 public:
 	AdjacencyList();
 	bool addVertex(vertex *v);
 	bool addEdge(edge *e);
+	//list
 //	bool areAdjacent(vertex *v, vertex *w);
 	vertex* getVertex(int index);
 	void displayVertices();

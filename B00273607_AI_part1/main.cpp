@@ -137,7 +137,7 @@ int main(int argc, char **argv) {
 				}
 				catch (int e)
 				{
-					cout << "Exception occured. Exception Nr:" << e << '.\n';
+					cout << "Exception occured. Exception Nr:" << e << '.\n'; // Although... :THINKING: no nevermind it's good
 				}
 			}
 			//cout << line << "\n";
@@ -150,6 +150,9 @@ int main(int argc, char **argv) {
 	else if (!dotfile.is_open())
 		cout << "File not open.\n";
 
+	// start at - vertex 0
+	// finish at - vertex 60
+//	adjList->getVertex(1)->getEdgeList();
 //	adjList->displayVertices();
 
 	// +++ VIP
