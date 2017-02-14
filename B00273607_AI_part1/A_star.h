@@ -130,7 +130,9 @@ iterate edges
 	// EDGE 0-7 (assume h = 5)
 	new cost = 0 + 106 = 106
 	cost < than 147, hence
-		cost_so_far[What index?] 
+		cost_so_far[What index? same I think But maybe not. Maybe...] = new_cost (106) 
+		prio 106+ 5 = 111
+		frontier.put(next,prio)
 	// EDGE 0-13 (assume h = 3)
 	// EDGE 0-3 (assume h = 9)
 // ***
