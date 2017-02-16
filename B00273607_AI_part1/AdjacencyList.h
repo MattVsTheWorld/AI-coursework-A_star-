@@ -64,7 +64,7 @@ private:
 	int vertexIndex; // unnecessary, but supports change to name of vertex
 	//-- Pair
 	list<edge *> *edgeList; // std::forward_list instead? Is difference Noticeable?
-	
+	int gCost, hCost;
 protected:	
 	
 public:
@@ -82,7 +82,19 @@ public:
 	// ++++++++
 	// ++++++++
 	// ++++++++
-	int gCost, hCost;
+	int getgCost() {
+		return this->gCost;
+	}
+	int gethCost() {
+		return this->hCost;
+	}
+
+	void setgCost(int _g) {
+		this->gCost = _g;
+	}
+	void sethCost(int _h) {
+		this->hCost = _h;
+	}
 	pair <int, int> vertexCoords;
 	vertex* parent;
 	// ++++++++

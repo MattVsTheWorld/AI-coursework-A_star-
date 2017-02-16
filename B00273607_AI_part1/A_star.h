@@ -162,7 +162,7 @@ public:
 			for (int i = 1; i < openSet.size(); i++)
 			{
 				if (openSet[i]->getfCost() < currentVert->getfCost() || openSet[i]->getfCost() == currentVert->getfCost() )
-					if (openSet[i]->hCost < currentVert->hCost)
+					if (openSet[i]->gethCost() < currentVert->gethCost())
 						currentVert = openSet[i];
 			}
 		//	openSet.
@@ -193,17 +193,22 @@ public:
 				neighbourList.push_back(neighbour);
 			}
 
+			//cout << endl;
+				// GET NEIGHBORS
+					// for each neigbor of current
+					// if (closetSet.contains(neighbaaa)
+					// continue;
 
 			for (list<pair<vertex*, int>>::iterator listIterator = neighbourList.begin(); listIterator != neighbourList.end(); ++listIterator)
 			{
 				if (closedSet.find(((pair<vertex*, int>)*listIterator).first) != closedSet.end()) //should make sense
 					continue; // :thinking:
+				int newMovCostToVert = currentVert->getgCost() + ((pair<vertex*, int>)*listIterator).second; //weight
+				if (newMovCostToVert < (((pair<vertex*, int>)*listIterator).first)->getgCost())
+					continue;
 			}
-			//cout << endl;
-			// GET NEIGHBORS
-			// for each neigbor of current
-				// if (closetSet.contains(neighbaaa)
-				// continue;
+
+			 			
 			// HEURISTIC
 			// int newMovCostToVert = currentVert gCost + distance between node and neighbor (= weight)
 			// if newMovCostToVert < neighbor.GCost || !openSet.contains(neighbour)
