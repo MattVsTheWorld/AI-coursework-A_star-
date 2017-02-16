@@ -145,8 +145,8 @@ private:
 	//unordered_set<vertex*> visited;
 	//queue <vertex*> frontier;
 	//queue <vertex*> closed;
-	deque<vertex*> openSet;
-	queue<vertex*> closedSet;
+	vector<vertex*> openSet;
+	queue<vertex*> closedSet; //?
 	AdjacencyList* adjList;
 protected:
 public:
@@ -164,11 +164,56 @@ public:
 				if (openSet[i]->getfCost() < currentVert->getfCost() || openSet[i]->getfCost() == currentVert->getfCost() && openSet[i]->hCost < currentVert->hCost)
 					currentVert = openSet[i];
 			}
-			openSet.erase(currentVert);
+		//	openSet.
+			/*auto it = find(openSet.begin(), openSet.end(), currentVert);
+			if (it != openSet.end())
+				openSet.erase(it);*/
+			openSet.erase(remove(openSet.begin(), openSet.end(), currentVert), openSet.end()); // :thinking:
 			closedSet.push(currentVert);
+
+			if (currentVert == end) // point at the same??
+			{
+				list<vertex*> foundPath = retracePath(start, end);
+				cout << "Path is: ";
+				for (list<vertex*>::iterator listIterator = foundPath.begin(); listIterator != foundPath.end(); ++listIterator)
+					cout <<( (vertex*)*listIterator)->getIndex() << " ";
+				return;
+			}
+
+			// GET NEIGHBORS
+			// for each neigbor of current
+				// if (closetSet.contains(neighbaaa)
+				// continue;
+			// HEURISTIC
+			// int newMovCostToVert = currentVert gCost + distance between node and neighbor (= weight)
+			// if newMovCostToVert < neighbor.GCost || !openSet.contains(neighbour)
+				// neighbor.gCost = newMovCostToVert;
+				// hCost = HEUR
+				// neighbor.parent = currentVert;
+
+				// if (!openSet.contains(neighbor)
+					//add neighbor
 
 		}
 	}
+
+	
+	list<vertex*> retracePath(vertex* _start, vertex* _end)
+	{
+		list<vertex*> path;
+		vertex* currentVert = _end;
+		while (currentVert != _start)
+		{
+			path.push_front(currentVert);
+			currentVert = currentVert->parent;
+		}
+	return path;
+	//	path.reverse (no need, pushed front)
+	}
+
+
+
+	
 	//void breadthFirst(vertex* start) {
 	//	frontier.push(start);
 	//	visited.insert(start);

@@ -78,8 +78,14 @@ public:
 	int getfCost() {
 		return (this->gCost + this->hCost);
 	}
-	// +++
+	// ++++++++
+	// ++++++++
+	// ++++++++
 	int gCost, hCost;
+	vertex* parent;
+	// ++++++++
+	// ++++++++
+	// ++++++++
 };
 
 // I NEED DELETOS
