@@ -16,12 +16,12 @@ vertex** edge::getEndPoints() {
 	return this->adjacent;
 }
 
-//vertex* edge::getOtherEnd(vertex* startingVert) {
-//	if (startingVert->getIndex() == this->adjacent[0]->getIndex())
-//		return this->adjacent[1];
-//	else if (startingVert->getIndex() == this->adjacent[1]->getIndex())
-//		return this->adjacent[0];
-//}
+vertex* edge::getNeighbour(vertex* startingVert) {
+	if (startingVert->getIndex() == this->adjacent[0]->getIndex())
+		return this->adjacent[1];
+	else if (startingVert->getIndex() == this->adjacent[1]->getIndex())
+		return this->adjacent[0];
+}
 
 int edge::getWeight() {
 	return this->weight;
@@ -73,10 +73,10 @@ bool vertex::addEdge(edge *e) {
 	//cout << "Edge added\n";
 	return true;
 }
-//
-//list<edge *>* vertex::getEdgeList() {
-//	return this->edgeList;
-//}
+
+list<edge *>* vertex::getEdgeList() {
+	return this->edgeList;
+}
 
 //int vertex::getNeighours() {
 //	for (list<edge *>::iterator listIterator = this->edgeList->begin();

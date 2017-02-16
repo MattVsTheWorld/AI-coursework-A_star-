@@ -4,7 +4,7 @@
 #include <queue>
 #include "AdjacencyList.h"
 //#include <hash_set>
-
+#include <unordered_set>
 using namespace std;
 /// *** 1 ***
 /// That one sebastian on youtubez
@@ -146,7 +146,7 @@ private:
 	//queue <vertex*> frontier;
 	//queue <vertex*> closed;
 	vector<vertex*> openSet;
-	queue<vertex*> closedSet; //?
+	unordered_set<vertex*> closedSet; //?
 	AdjacencyList* adjList;
 protected:
 public:
@@ -170,7 +170,8 @@ public:
 			if (it != openSet.end())
 				openSet.erase(it);*/
 			openSet.erase(remove(openSet.begin(), openSet.end(), currentVert), openSet.end()); // :thinking:
-			closedSet.push(currentVert);
+			//closedSet.push(currentVert);
+			closedSet.insert(currentVert);
 
 			if (currentVert == end) // point at the same??
 			{
@@ -180,6 +181,25 @@ public:
 					cout <<( (vertex*)*listIterator)->getIndex() << " ";
 				return;
 			}
+			list<pair<vertex*, int>> neighbourList;
+			//list<edge*> *currentEdgeList = currentVert->getEdgeList();
+			//(list<edge*>*)*(currentVert->getEdgeList())->begin();
+			for (list<edge *>::iterator listIterator = ((list<edge*>*)(currentVert->getEdgeList()))->begin(); listIterator != ((list<edge*>*)(currentVert->getEdgeList()))->end(); ++listIterator)
+			{
+				//cout << "!";
+				//cout << ((edge*)*listIterator)->getNeighbour(currentVert)->getIndex();
+				auto neighbour = make_pair(((edge*)*listIterator)->getNeighbour(currentVert), ((edge*)*listIterator)->getWeight());
+				//cout << neighbour.first->getIndex() << "[" << neighbour.second << "] ";
+				neighbourList.push_back(neighbour);
+			}
+
+
+			for (list<pair<vertex*, int>>::iterator listIterator = neighbourList.begin(); listIterator != neighbourList.end(); ++listIterator)
+			{
+				if (closedSet.find(((pair<vertex*, int>)*listIterator).first) != closedSet.end()) //should make sense
+					continue; // :thinking:
+			}
+			//cout << endl;
 			// GET NEIGHBORS
 			// for each neigbor of current
 				// if (closetSet.contains(neighbaaa)
