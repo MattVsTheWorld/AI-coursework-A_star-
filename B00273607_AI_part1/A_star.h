@@ -161,8 +161,9 @@ public:
 			auto currentVert = openSet[0];
 			for (int i = 1; i < openSet.size(); i++)
 			{
-				if (openSet[i]->getfCost() < currentVert->getfCost() || openSet[i]->getfCost() == currentVert->getfCost() && openSet[i]->hCost < currentVert->hCost)
-					currentVert = openSet[i];
+				if (openSet[i]->getfCost() < currentVert->getfCost() || openSet[i]->getfCost() == currentVert->getfCost() )
+					if (openSet[i]->hCost < currentVert->hCost)
+						currentVert = openSet[i];
 			}
 		//	openSet.
 			/*auto it = find(openSet.begin(), openSet.end(), currentVert);
@@ -179,7 +180,6 @@ public:
 					cout <<( (vertex*)*listIterator)->getIndex() << " ";
 				return;
 			}
-
 			// GET NEIGHBORS
 			// for each neigbor of current
 				// if (closetSet.contains(neighbaaa)
@@ -210,7 +210,9 @@ public:
 	return path;
 	//	path.reverse (no need, pushed front)
 	}
-
+	double heuristic(pair<int, int> coord_A, pair<int, int> coord_B) {
+		return abs(coord_A.first - coord_B.first) + abs(coord_A.second - coord_B.second); // simple ? not good?
+	}
 
 
 	
@@ -233,9 +235,7 @@ public:
 	//	}
 	//}
 
-	double heuristic(pair<int, int> coord_A, pair<int, int> coord_B) {
-		return abs(coord_A.first - coord_B.first) + abs(coord_A.second - coord_B.second); // simple ? not good?
-	}
+
 	
 
 };

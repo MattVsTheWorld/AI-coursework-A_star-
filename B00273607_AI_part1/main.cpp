@@ -12,6 +12,7 @@
 #include <vector>
 #include "AdjacencyList.h"
 #include "AdjacencyMatrix.h"
+#include "A_star.h"
 
 using namespace std;
 //
@@ -150,10 +151,26 @@ int main(int argc, char **argv) {
 	else if (!dotfile.is_open())
 		cout << "File not open.\n";
 
+	A_star *pathfinder = new A_star(adjList);
+	pathfinder->algorithm(adjList->getVertex(0), adjList->getVertex(60));
 	// start at - vertex 0
 	// finish at - vertex 60
 //	adjList->getVertex(1)->getEdgeList();
 //	adjList->displayVertices();
+
+	//vector<int> openS;
+	//openS.push_back(3);
+	//openS.push_back(4);
+	//openS.push_back(5);
+	//for (int i = 0; i < openS.size(); i++)
+	//	cout << openS[i] << " ";
+	//cout << endl;
+	//int n = 3;
+	//openS.erase(remove(openS.begin(), openS.end(), n), openS.end());
+	//for (int i = 0; i < openS.size(); i++)
+	//	cout << openS[i] << " ";
+	//cout << endl << "size: " << openS.size();
+
 
 	// +++ VIP
 	//std::pair<int, int> pairTest;
