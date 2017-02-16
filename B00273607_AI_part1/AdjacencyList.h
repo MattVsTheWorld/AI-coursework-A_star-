@@ -64,6 +64,7 @@ private:
 	int vertexIndex; // unnecessary, but supports change to name of vertex
 	pair <int, int> vertexCoords;
 	list<edge *> *edgeList; // std::forward_list instead? Is difference Noticeable?
+	
 protected:	
 //	list<edge *> *getEdgeList();
 public:
@@ -73,6 +74,12 @@ public:
 	bool addEdge(edge *e);
 //	int getNeighours();
 	void displayEdgeList();
+
+	int getfCost() {
+		return (this->gCost + this->hCost);
+	}
+	// +++
+	int gCost, hCost;
 };
 
 // I NEED DELETOS

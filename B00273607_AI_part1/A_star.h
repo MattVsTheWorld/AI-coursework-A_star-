@@ -3,6 +3,7 @@
 #include <iostream>
 #include <queue>
 #include "AdjacencyList.h"
+//#include <hash_set>
 
 using namespace std;
 /// *** 1 ***
@@ -144,6 +145,8 @@ private:
 	//unordered_set<vertex*> visited;
 	//queue <vertex*> frontier;
 	//queue <vertex*> closed;
+	deque<vertex*> openSet;
+	queue<vertex*> closedSet;
 	AdjacencyList* adjList;
 protected:
 public:
@@ -152,6 +155,20 @@ public:
 		adjList = _adjList; // assigning pointers... right? right? :thinking:
 	}
 
+	void algorithm(vertex* start, vertex* end) {
+		openSet.push_back(start);
+		while (!openSet.empty()) {
+			auto currentVert = openSet[0];
+			for (int i = 1; i < openSet.size(); i++)
+			{
+				if (openSet[i]->getfCost() < currentVert->getfCost() || openSet[i]->getfCost() == currentVert->getfCost() && openSet[i]->hCost < currentVert->hCost)
+					currentVert = openSet[i];
+			}
+			openSet.erase(currentVert);
+			closedSet.push(currentVert);
+
+		}
+	}
 	//void breadthFirst(vertex* start) {
 	//	frontier.push(start);
 	//	visited.insert(start);
