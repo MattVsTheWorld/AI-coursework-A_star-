@@ -8,6 +8,8 @@
 using namespace std;
 /// *** 1 ***
 /// That one sebastian on youtubez
+// https://github.com/SebLague/Pathfinding/blob/master/Episode%2003%20-%20astar/Assets/Scripts/Pathfinding.cs
+// ty
 // OPEN // open nodes // to be evaluated
 // CLOSED // nodes already evaluated
 // add the start node to open
