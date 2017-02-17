@@ -78,38 +78,18 @@ public:
 //	int getNeighours();
 	list<edge *> *getEdgeList();
 	void displayEdgeList();
-
-	int getfCost() {
-		return (this->gCost + this->hCost);
-	}
 	// ++++++++
 	// ++++++++
 	// ++++++++
-	int getgCost() {
-		return this->gCost;
-	}
-	int gethCost() {
-		return this->hCost;
-	}
+	int getfCost();
 
-	void setgCost(int _g) {
-		this->gCost = _g;
-	}
-	void sethCost(int _h) {
-		this->hCost = _h;
-	}
-
-	pair<int, int> getCoords(){
-		return this->vertexCoords;
-	}
-
-	void setParent(vertex* _parent) {
-		this->parent = _parent;
-	}
-
-	vertex* getParent() {
-		return this->parent;
-	}
+	int getgCost();
+	int gethCost();
+	void setgCost(int _g);
+	void sethCost(int _h);
+	pair<int, int> getCoords();
+	void setParent(vertex* _parent);
+	vertex* getParent();
 	// ++++++++
 	// ++++++++
 	// ++++++++

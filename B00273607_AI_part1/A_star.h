@@ -184,34 +184,51 @@ public:
 			list<pair<vertex*, int>> neighbourList;
 			//list<edge*> *currentEdgeList = currentVert->getEdgeList();
 			//(list<edge*>*)*(currentVert->getEdgeList())->begin();
+			// DEBUG
+			int count = 0;
+			cout << "\nFinding neighbour of current vert: " << currentVert->getIndex();
+			cout << endl;
+			// DEBUG
 			for (list<edge *>::iterator listIterator = ((list<edge*>*)(currentVert->getEdgeList()))->begin(); listIterator != ((list<edge*>*)(currentVert->getEdgeList()))->end(); ++listIterator)
 			{
-				//cout << "!";
-				//cout << ((edge*)*listIterator)->getNeighbour(currentVert)->getIndex();
+				// DEBUG
+				count++;
+				
+				cout << "Neighbour " << count <<  " ID: ";
+				cout << ((edge*)*listIterator)->getNeighbour(currentVert)->getIndex();
+				cout << endl;
+				// DEBUG
 				auto neighbour = make_pair(((edge*)*listIterator)->getNeighbour(currentVert), ((edge*)*listIterator)->getWeight());
 				//cout << neighbour.first->getIndex() << "[" << neighbour.second << "] ";
 				neighbourList.push_back(neighbour);
 			}
-
+			cout << "Neighbour list size: " << neighbourList.size() << endl;
 			//cout << endl;
 				// GET NEIGHBORS
 					// for each neigbor of current
 					// if (closetSet.contains(neighbaaa)
 					// continue;
 
+			cout << "Iterating through neighbour list..." << endl;
+
 			for (list<pair<vertex*, int>>::iterator neighbourIterator = neighbourList.begin(); neighbourIterator != neighbourList.end(); ++neighbourIterator)
 			{
 				if (closedSet.find(((pair<vertex*, int>)*neighbourIterator).first) != closedSet.end()) //should make sense
-					continue; // :thinking:
-				int newMovCostToVert = currentVert->getgCost() + ((pair<vertex*, int>)*neighbourIterator).second; //weight
-				if (newMovCostToVert < (((pair<vertex*, int>)*neighbourIterator).first)->getgCost())
 				{
+					cout << "Found in closed set" << endl;
+					continue; // :thinking:
+				} else cout << "Not found in closed set" << endl;
+				int newMovCostToVert = currentVert->getgCost() + ((pair<vertex*, int>)*neighbourIterator).second; //weight
+				cout << "New movement cost to vertex: " << newMovCostToVert << endl;
+				if (newMovCostToVert < (((pair<vertex*, int>)*neighbourIterator).first)->getgCost() || (find(openSet.begin(), openSet.end(), ((pair<vertex*, int>)*neighbourIterator).first) == openSet.end()))
+				{
+					cout << "Found to be smaller..." << endl;
 					((pair<vertex*, int>)*neighbourIterator).first->setgCost(newMovCostToVert);
 					((pair<vertex*, int>)*neighbourIterator).first->sethCost(heuristic(currentVert->getCoords(), ((pair<vertex*, int>)*neighbourIterator).first->getCoords()));
 					((pair<vertex*, int>)*neighbourIterator).first->setParent(currentVert);
 
 					//
-					if (find(openSet.begin(), openSet.end(), ((pair<vertex*, int>)*neighbourIterator).first) != openSet.end())
+					if (find(openSet.begin(), openSet.end(), ((pair<vertex*, int>)*neighbourIterator).first) == openSet.end())
 						openSet.push_back(((pair<vertex*,int>)*neighbourIterator).first);
 				//	if(!openSet.)
 					//continue;

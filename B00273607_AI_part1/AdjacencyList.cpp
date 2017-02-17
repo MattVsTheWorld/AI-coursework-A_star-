@@ -93,6 +93,38 @@ void vertex::displayEdgeList() {
 		++listIterator)
 		((edge*)*listIterator)->displayEdgeInfo();
 }
+
+int vertex::getfCost() {
+	return (this->gCost + this->hCost);
+}
+// ++++++++
+// ++++++++
+// ++++++++
+int vertex::getgCost() {
+	return this->gCost;
+}
+int vertex::gethCost() {
+	return this->hCost;
+}
+
+void vertex::setgCost(int _g) {
+	this->gCost = _g;
+}
+void vertex::sethCost(int _h) {
+	this->hCost = _h;
+}
+
+pair<int, int> vertex::getCoords() {
+	return this->vertexCoords;
+}
+
+void vertex::setParent(vertex* _parent) {
+	this->parent = _parent;
+}
+
+vertex* vertex::getParent() {
+	return this->parent;
+}
 //////////////////////////
 //// Vertex class end ////
 /////////////////////////
