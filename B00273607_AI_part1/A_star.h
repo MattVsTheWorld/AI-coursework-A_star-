@@ -19,13 +19,12 @@ private:
 
 	list<vertex*> retracePath(vertex* _start, vertex* _end);
 	double heuristic(pair<int, int> coord_A, pair<int, int> coord_B);
-	// ++
-	int iterations;
+	//int iterations;
 protected:
 public:
 	A_star(AdjacencyList *_adjList);
 	void algorithm(vertex* start, vertex* end);
-	int getIterationCount();
-	void resetIterationCount();
+	//int getIterationCount();
+	//void resetIterationCount();
 };
 #endif

@@ -1,8 +1,8 @@
 #include "A_star.h"
 
 A_star::A_star(AdjacencyList *_adjList) {
-	adjList = _adjList; // assigning pointers... right? right? :thinking:
-	iterations = 0;
+	adjList = _adjList;
+//	iterations = 0;
 }
 
 // Convert to heap? prio queue?
@@ -14,13 +14,13 @@ void A_star::algorithm(vertex* start, vertex* end) {
 			if (openSet[i]->getfCost() < currentVert->getfCost() || openSet[i]->getfCost() == currentVert->getfCost())
 				if (openSet[i]->gethCost() < currentVert->gethCost())
 					currentVert = openSet[i];
-			iterations++;
+	//		iterations++;
 		}
 
 		openSet.erase(remove(openSet.begin(), openSet.end(), currentVert), openSet.end());
 		closedSet.insert(currentVert);
 
-		if (currentVert == end) { // point at the same, right? :thinking:
+		if (currentVert == end) { 
 			list<vertex*> foundPath = retracePath(start, end);
 			cout << "Path is: " << start->getIndex() << " ";
 			for (list<vertex*>::iterator pathIterator = foundPath.begin(); pathIterator != foundPath.end(); ++pathIterator)
@@ -43,10 +43,9 @@ void A_star::algorithm(vertex* start, vertex* end) {
 				continue;
 			}// else cout << "Not found in closed set" << endl;
 			int newMovCostToVert = currentVert->getgCost() + ((pair<vertex*, int>)*neighbourIterator).second; //weight
-																											  //cout << "New movement cost to vertex: " << newMovCostToVert << endl;
+																											  
 			if (newMovCostToVert < (((pair<vertex*, int>)*neighbourIterator).first)->getgCost() || (find(openSet.begin(), openSet.end(), ((pair<vertex*, int>)*neighbourIterator).first) == openSet.end()))
 			{
-				//cout << "Found to be smaller..." << endl;
 				((pair<vertex*, int>)*neighbourIterator).first->setgCost(newMovCostToVert);
 				((pair<vertex*, int>)*neighbourIterator).first->sethCost(heuristic(currentVert->getCoords(), ((pair<vertex*, int>)*neighbourIterator).first->getCoords()));
 				((pair<vertex*, int>)*neighbourIterator).first->setParent(currentVert);
@@ -75,9 +74,9 @@ double A_star::heuristic(pair<int, int> coord_A, pair<int, int> coord_B) {
 	return abs(coord_A.first - coord_B.first) + abs(coord_A.second - coord_B.second); // simple ? not good?
 }
 
-int A_star::getIterationCount() {
-	return this->iterations;
-}
-void A_star::resetIterationCount() {
-	this->iterations = 0;
-}
+//int A_star::getIterationCount() {
+//	return this->iterations;
+//}
+//void A_star::resetIterationCount() {
+//	this->iterations = 0;
+//}

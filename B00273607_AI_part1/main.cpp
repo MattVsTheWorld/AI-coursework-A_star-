@@ -17,7 +17,7 @@
 using namespace std;
 
 // http://www.redblobgames.com/pathfinding/a-star/implementation.html
-// meh didn't really use this
+// didn't really use this
 
 // rudimental parser, but works
 #define VERTICES_BEGIN 2
@@ -108,19 +108,19 @@ int main(int argc, char **argv) {
 	A_star *pathfinder = new A_star(adjList);
 	cout << "////////\n0 to 60\n";
 	pathfinder->algorithm(adjList->getVertex(0), adjList->getVertex(60));
-	cout << "Iterations: " << pathfinder->getIterationCount() << "\n";
+	/*cout << "Iterations: " << pathfinder->getIterationCount() << "\n";*/
 	delete pathfinder;
 
 	A_star *_pathfinder = new A_star(adjList);
 	cout << "////////\n1 to 61\n";
 	_pathfinder->algorithm(adjList->getVertex(1), adjList->getVertex(61));
-	cout << "Iterations: " << _pathfinder->getIterationCount() << "\n";
+	/*cout << "Iterations: " << _pathfinder->getIterationCount() << "\n";*/
 	delete _pathfinder;
 
 	A_star *__pathfinder = new A_star(adjList);
 	cout << "////////\n2 to 57\n";
 	__pathfinder->algorithm(adjList->getVertex(2), adjList->getVertex(57));
-	cout << "Iterations: " << __pathfinder->getIterationCount() << "\n";
+	/*cout << "Iterations: " << __pathfinder->getIterationCount() << "\n";*/
 	delete __pathfinder;
 
 	delete adjList;

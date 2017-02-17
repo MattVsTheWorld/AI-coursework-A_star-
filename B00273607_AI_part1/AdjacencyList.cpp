@@ -9,9 +9,7 @@ edge::edge(vertex *A, vertex *B, int w) {
 	adjacent[1] = B;
 	weight = w;
 }
-//	 JESUS CHRIST IT'S A POINTER TO POINTER
-//	 NO WAIT IT'S NOT
-//	 WHAT IS IT
+
 vertex** edge::getEndPoints() {
 	return this->adjacent;
 }
@@ -28,7 +26,6 @@ int edge::getWeight() {
 }
 
 void edge::displayEdgeInfo() {
-	//	 WORKS NOW!!!
 	cout << ">Edge with weight: " << this->weight << endl;
 	cout << "Edge connects vertex [" << this->adjacent[0]->getIndex() << "]\n";
 	this->adjacent[0]->displayVertexInfo();
@@ -46,8 +43,7 @@ void edge::displayEdgeInfo() {
 vertex::vertex(int index, pair<int, int> coords) {
 	this->vertexIndex = index;
 	this->vertexCoords = coords;
-	edgeList = new list<edge *>; // :thinking:
-	//	cout << "Coords of added: " <<  this->vertexCoords.first << " - " << this->vertexCoords.second << endl;
+	edgeList = new list<edge *>;
 }
 
 void vertex::displayVertexInfo() {
@@ -67,7 +63,6 @@ bool vertex::addEdge(edge *e) {
 			throw EDGEDUPLICATE;
 	}
 	this->edgeList->push_back(e);
-	//cout << "Edge added\n";
 	return true;
 }
 
