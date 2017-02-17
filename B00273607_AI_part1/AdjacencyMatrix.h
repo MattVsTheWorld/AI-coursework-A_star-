@@ -16,18 +16,8 @@ private:
 	//	int **adj;
 	bool *visited;
 public:
-	//AdjacencyMatrix(int n){
-	//	this->n = n;
-	//	visited = new bool[n];
-	//	adj = new int*[n];
-	//	for (int i = 0; i < n; i++){
-	//		adj[i] = new int[n];
-	//		for (int j = 0; j < n; j++)
-	//			adj[i][j] = 0;
-	//	}
-	//}
+
 	AdjacencyMatrix(int n);
-	/*
 	/*
 	* Adding Edge to Graph
 	*/

@@ -9,6 +9,8 @@ using namespace std;
 /// That one sebastian on youtubez
 // https://github.com/SebLague/Pathfinding/blob/master/Episode%2003%20-%20astar/Assets/Scripts/Pathfinding.cs
 /// -----------
+
+//A* search class; takes an adjacency list and process any start - end point
 class A_star {
 private:
 	vector<vertex*> openSet;
@@ -22,4 +24,4 @@ public:
 	A_star(AdjacencyList *_adjList);
 	void algorithm(vertex* start, vertex* end);
 };
-#endif A_STAR
+#endif

@@ -61,13 +61,10 @@ int vertex::getIndex() {
 bool vertex::addEdge(edge *e) {
 	for (list<edge *>::iterator listIterator = this->edgeList->begin();
 	listIterator != this->edgeList->end();
-		++listIterator) {
-
-		if (((edge*)*listIterator) == e) {
-			//cout << "Edge already in current vertex list\n";
+		++listIterator) 
+	{
+		if (((edge*)*listIterator) == e)
 			throw EDGEDUPLICATE;
-			//return false; // ?
-		}
 	}
 	this->edgeList->push_back(e);
 	//cout << "Edge added\n";
@@ -129,31 +126,24 @@ AdjacencyList::AdjacencyList() {
 	vertexNo = 0;
 	edgeNo = 0;
 }
-bool AdjacencyList::addVertex(vertex *v) {
+void AdjacencyList::addVertex(vertex *v) {
 	// add a vertex to vector
 	// we will assume vertices don't take the same position
 	if (v->getIndex() > this->vertexNo)
 		throw OUTOFBOUNDS;
 	vertices->push_back(v);
 	this->vertexNo++;
-	//cout << "Vertex added\n";
-	return true;
 }
-//	 returns
-bool AdjacencyList::addEdge(edge *e) {
+
+void AdjacencyList::addEdge(edge *e) {
 	if (e->getEndPoints()[0]->getIndex() >= this->vertexNo
 		|| e->getEndPoints()[1]->getIndex() >= this->vertexNo)
-	{
-		//cout << "Edge connects unexisting vertices\n"; // put these in main program
 		throw OUTOFBOUNDS;
-		//return false; // ? 
-	}
 	// Assumes you won't try to enter the same edge twice
 	vector<vertex *>::iterator vectorIterator = this->vertices->begin();
 	int endPointsFound = 0;
 	while (vectorIterator != this->vertices->end() || endPointsFound < 2) {
 		if (((vertex*)*vectorIterator)->getIndex() == e->getEndPoints()[0]->getIndex()) {
-			//	endPointA = ((vertex*)*vectorIterator);
 			((vertex*)*vectorIterator)->addEdge(e);
 			endPointsFound++;
 		}
@@ -164,14 +154,7 @@ bool AdjacencyList::addEdge(edge *e) {
 		vectorIterator++;
 	}
 	this->edgeNo++;
-	return true;
 }
-
-//bool AdjacencyList::areAdjacent(vertex *v, vertex *w) {
-//	// if one of edges contains both vertices
-//	// needed?
-//	return false;
-//}
 
 vertex* AdjacencyList::getVertex(int index) {
 	if (index >= this->vertexNo)
@@ -184,6 +167,7 @@ vertex* AdjacencyList::getVertex(int index) {
 			vectorIterator++;
 	}
 }
+
 void AdjacencyList::displayVertices() {
 	for (vector<vertex *>::iterator vectorIterator = this->vertices->begin();
 	vectorIterator != this->vertices->end();
