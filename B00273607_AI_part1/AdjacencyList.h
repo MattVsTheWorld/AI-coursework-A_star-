@@ -65,6 +65,9 @@ private:
 	//-- Pair
 	list<edge *> *edgeList; // std::forward_list instead? Is difference Noticeable?
 	int gCost, hCost;
+
+	pair <int, int> vertexCoords;
+	vertex* parent;
 protected:	
 	
 public:
@@ -95,8 +98,18 @@ public:
 	void sethCost(int _h) {
 		this->hCost = _h;
 	}
-	pair <int, int> vertexCoords;
-	vertex* parent;
+
+	pair<int, int> getCoords(){
+		return this->vertexCoords;
+	}
+
+	void setParent(vertex* _parent) {
+		this->parent = _parent;
+	}
+
+	vertex* getParent() {
+		return this->parent;
+	}
 	// ++++++++
 	// ++++++++
 	// ++++++++

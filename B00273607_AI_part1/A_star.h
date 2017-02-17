@@ -199,13 +199,23 @@ public:
 					// if (closetSet.contains(neighbaaa)
 					// continue;
 
-			for (list<pair<vertex*, int>>::iterator listIterator = neighbourList.begin(); listIterator != neighbourList.end(); ++listIterator)
+			for (list<pair<vertex*, int>>::iterator neighbourIterator = neighbourList.begin(); neighbourIterator != neighbourList.end(); ++neighbourIterator)
 			{
-				if (closedSet.find(((pair<vertex*, int>)*listIterator).first) != closedSet.end()) //should make sense
+				if (closedSet.find(((pair<vertex*, int>)*neighbourIterator).first) != closedSet.end()) //should make sense
 					continue; // :thinking:
-				int newMovCostToVert = currentVert->getgCost() + ((pair<vertex*, int>)*listIterator).second; //weight
-				if (newMovCostToVert < (((pair<vertex*, int>)*listIterator).first)->getgCost())
-					continue;
+				int newMovCostToVert = currentVert->getgCost() + ((pair<vertex*, int>)*neighbourIterator).second; //weight
+				if (newMovCostToVert < (((pair<vertex*, int>)*neighbourIterator).first)->getgCost())
+				{
+					((pair<vertex*, int>)*neighbourIterator).first->setgCost(newMovCostToVert);
+					((pair<vertex*, int>)*neighbourIterator).first->sethCost(heuristic(currentVert->getCoords(), ((pair<vertex*, int>)*neighbourIterator).first->getCoords()));
+					((pair<vertex*, int>)*neighbourIterator).first->setParent(currentVert);
+
+					//
+					if (find(openSet.begin(), openSet.end(), ((pair<vertex*, int>)*neighbourIterator).first) != openSet.end())
+						openSet.push_back(((pair<vertex*,int>)*neighbourIterator).first);
+				//	if(!openSet.)
+					//continue;
+				}
 			}
 
 			 			
@@ -230,8 +240,9 @@ public:
 		while (currentVert != _start)
 		{
 			path.push_front(currentVert);
-			currentVert = currentVert->parent;
+			currentVert = currentVert->getParent();
 		}
+		//cout << "THinking";
 	return path;
 	//	path.reverse (no need, pushed front)
 	}
