@@ -8,16 +8,16 @@ void A_star::algorithm(vertex* start, vertex* end) {
 	openSet.push_back(start);
 	while (!openSet.empty()) {
 		auto currentVert = openSet[0];
-		for (int i = 1; i < openSet.size(); i++){
+		for (int i = 1; i < openSet.size(); i++) {
 			if (openSet[i]->getfCost() < currentVert->getfCost() || openSet[i]->getfCost() == currentVert->getfCost())
 				if (openSet[i]->gethCost() < currentVert->gethCost())
 					currentVert = openSet[i];
 		}
 
-		openSet.erase(remove(openSet.begin(), openSet.end(), currentVert), openSet.end());																					
+		openSet.erase(remove(openSet.begin(), openSet.end(), currentVert), openSet.end());
 		closedSet.insert(currentVert);
 
-		if (currentVert == end){ // point at the same??
+		if (currentVert == end) { // point at the same??
 			list<vertex*> foundPath = retracePath(start, end);
 			cout << "Path is: " << start->getIndex() << " ";
 			for (list<vertex*>::iterator pathIterator = foundPath.begin(); pathIterator != foundPath.end(); ++pathIterator)
@@ -58,8 +58,7 @@ void A_star::algorithm(vertex* start, vertex* end) {
 
 		for (list<pair<vertex*, int>>::iterator neighbourIterator = neighbourList.begin(); neighbourIterator != neighbourList.end(); ++neighbourIterator)
 		{
-			if (closedSet.find(((pair<vertex*, int>)*neighbourIterator).first) != closedSet.end()) //should make sense
-			{
+			if (closedSet.find(((pair<vertex*, int>)*neighbourIterator).first) != closedSet.end()) { //should make sense
 				//	cout << "Found in closed set" << endl;
 				continue; // :thinking:
 			}// else cout << "Not found in closed set" << endl;
