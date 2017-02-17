@@ -152,7 +152,16 @@ int main(int argc, char **argv) {
 		cout << "File not open.\n";
 
 	A_star *pathfinder = new A_star(adjList);
+	cout << "0 to 60\n";
 	pathfinder->algorithm(adjList->getVertex(0), adjList->getVertex(60));
+	delete pathfinder;
+	
+	A_star *_pathfinder = new A_star(adjList);
+	cout << "1 to 61\n";
+	_pathfinder->algorithm(adjList->getVertex(1), adjList->getVertex(61));
+	
+	delete _pathfinder;
+	delete adjList;
 	// start at - vertex 0
 	// finish at - vertex 60
 //	adjList->getVertex(1)->getEdgeList();

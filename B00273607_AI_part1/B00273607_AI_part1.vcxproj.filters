@@ -16,16 +16,22 @@
     <Filter Include="Source Files\.dot">
       <UniqueIdentifier>{a48789e9-a760-4822-be2b-99181b064e13}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Unused">
+      <UniqueIdentifier>{8141dc9b-ede8-41d9-a12f-e68ce66160d2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="AdjacencyMatrix.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Unused</Filter>
+    </ClCompile>
     <ClCompile Include="AdjacencyList.cpp">
-      <Filter>Header Files</Filter>
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="A_star.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -34,14 +40,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AdjacencyMatrix.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="A_star.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AdjacencyList.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AdjacencyMatrix.h">
+      <Filter>Unused</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -78,14 +78,6 @@ list<edge *>* vertex::getEdgeList() {
 	return this->edgeList;
 }
 
-//int vertex::getNeighours() {
-//	for (list<edge *>::iterator listIterator = this->edgeList->begin();
-//	listIterator != this->edgeList->end();
-//		++listIterator)
-//		((edge*)*listIterator)->getOtherEnd(this);
-//
-//}
-
 void vertex::displayEdgeList() {
 	cout << ">Vertex [" << this->vertexIndex << "] has edges:\n";
 	for (list<edge *>::iterator listIterator = this->edgeList->begin();
@@ -97,9 +89,7 @@ void vertex::displayEdgeList() {
 int vertex::getfCost() {
 	return (this->gCost + this->hCost);
 }
-// ++++++++
-// ++++++++
-// ++++++++
+
 int vertex::getgCost() {
 	return this->gCost;
 }
@@ -125,6 +115,7 @@ void vertex::setParent(vertex* _parent) {
 vertex* vertex::getParent() {
 	return this->parent;
 }
+
 //////////////////////////
 //// Vertex class end ////
 /////////////////////////

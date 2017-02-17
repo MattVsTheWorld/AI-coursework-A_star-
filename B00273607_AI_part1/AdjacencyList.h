@@ -61,11 +61,9 @@ public:
 
 class vertex {
 private:
-	int vertexIndex; // unnecessary, but supports change to name of vertex
-	//-- Pair
+	int vertexIndex;
 	list<edge *> *edgeList; // std::forward_list instead? Is difference Noticeable?
 	int gCost, hCost;
-
 	pair <int, int> vertexCoords;
 	vertex* parent;
 protected:	
@@ -75,14 +73,9 @@ public:
 	void displayVertexInfo();
 	int getIndex();
 	bool addEdge(edge *e);
-//	int getNeighours();
 	list<edge *> *getEdgeList();
 	void displayEdgeList();
-	// ++++++++
-	// ++++++++
-	// ++++++++
 	int getfCost();
-
 	int getgCost();
 	int gethCost();
 	void setgCost(int _g);
@@ -90,9 +83,7 @@ public:
 	pair<int, int> getCoords();
 	void setParent(vertex* _parent);
 	vertex* getParent();
-	// ++++++++
-	// ++++++++
-	// ++++++++
+
 };
 
 // I NEED DELETOS
