@@ -95,7 +95,6 @@ void readGraph(AdjacencyList *adjList) {
 
 int main(int argc, char **argv) {
 
-	// idea 1
 	/*
 	* SPARSE GRAPH
 	* https://en.wikipedia.org/wiki/Adjacency_list
@@ -107,15 +106,23 @@ int main(int argc, char **argv) {
 	readGraph(adjList);
 
 	A_star *pathfinder = new A_star(adjList);
-	cout << "0 to 60\n";
+	cout << "////////\n0 to 60\n";
 	pathfinder->algorithm(adjList->getVertex(0), adjList->getVertex(60));
+	cout << "Iterations: " << pathfinder->getIterationCount() << "\n";
 	delete pathfinder;
 
 	A_star *_pathfinder = new A_star(adjList);
-	cout << "1 to 61\n";
+	cout << "////////\n1 to 61\n";
 	_pathfinder->algorithm(adjList->getVertex(1), adjList->getVertex(61));
-
+	cout << "Iterations: " << _pathfinder->getIterationCount() << "\n";
 	delete _pathfinder;
+
+	A_star *__pathfinder = new A_star(adjList);
+	cout << "////////\n2 to 57\n";
+	__pathfinder->algorithm(adjList->getVertex(2), adjList->getVertex(57));
+	cout << "Iterations: " << __pathfinder->getIterationCount() << "\n";
+	delete __pathfinder;
+
 	delete adjList;
 	return 0;
 }

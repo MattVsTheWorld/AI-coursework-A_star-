@@ -2,8 +2,10 @@
 
 A_star::A_star(AdjacencyList *_adjList) {
 	adjList = _adjList; // assigning pointers... right? right? :thinking:
+	iterations = 0;
 }
 
+// Convert to heap? prio queue?
 void A_star::algorithm(vertex* start, vertex* end) {
 	openSet.push_back(start);
 	while (!openSet.empty()) {
@@ -12,6 +14,7 @@ void A_star::algorithm(vertex* start, vertex* end) {
 			if (openSet[i]->getfCost() < currentVert->getfCost() || openSet[i]->getfCost() == currentVert->getfCost())
 				if (openSet[i]->gethCost() < currentVert->gethCost())
 					currentVert = openSet[i];
+			iterations++;
 		}
 
 		openSet.erase(remove(openSet.begin(), openSet.end(), currentVert), openSet.end());
@@ -70,4 +73,11 @@ list<vertex*> A_star::retracePath(vertex* _start, vertex* _end)
 
 double A_star::heuristic(pair<int, int> coord_A, pair<int, int> coord_B) {
 	return abs(coord_A.first - coord_B.first) + abs(coord_A.second - coord_B.second); // simple ? not good?
+}
+
+int A_star::getIterationCount() {
+	return this->iterations;
+}
+void A_star::resetIterationCount() {
+	this->iterations = 0;
 }
