@@ -2,7 +2,7 @@
 
 A_star::A_star(AdjacencyList *_adjList) {
 	adjList = _adjList;
-//	iterations = 0;
+	//	iterations = 0;
 }
 
 // Convert to heap? prio queue?
@@ -14,13 +14,12 @@ void A_star::algorithm(vertex* start, vertex* end) {
 			if (openSet[i]->getfCost() < currentVert->getfCost() || openSet[i]->getfCost() == currentVert->getfCost())
 				if (openSet[i]->gethCost() < currentVert->gethCost())
 					currentVert = openSet[i];
-	//		iterations++;
 		}
 
 		openSet.erase(remove(openSet.begin(), openSet.end(), currentVert), openSet.end());
 		closedSet.insert(currentVert);
 
-		if (currentVert == end) { 
+		if (currentVert == end) {
 			cout << "Cost to goal: " << currentVert->getgCost() << endl;
 			list<vertex*> foundPath = retracePath(start, end);
 			cout << "Path is: " << start->getIndex() << " ";
@@ -44,7 +43,7 @@ void A_star::algorithm(vertex* start, vertex* end) {
 				continue;
 			}// else cout << "Not found in closed set" << endl;
 			int newMovCostToVert = currentVert->getgCost() + ((pair<vertex*, int>)*neighbourIterator).second; //weight
-																											  
+
 			if (newMovCostToVert < (((pair<vertex*, int>)*neighbourIterator).first)->getgCost() || (find(openSet.begin(), openSet.end(), ((pair<vertex*, int>)*neighbourIterator).first) == openSet.end()))
 			{
 				((pair<vertex*, int>)*neighbourIterator).first->setgCost(newMovCostToVert);
@@ -55,6 +54,7 @@ void A_star::algorithm(vertex* start, vertex* end) {
 					openSet.push_back(((pair<vertex*, int>)*neighbourIterator).first);
 			}
 		}
+		iterations++;
 	}
 }
 
@@ -72,12 +72,12 @@ list<vertex*> A_star::retracePath(vertex* _start, vertex* _end)
 }
 
 double A_star::heuristic(pair<int, int> coord_A, pair<int, int> coord_B) {
-	return sqrt(pow((coord_A.first - coord_B.first),2) + pow((coord_A.second - coord_B.second),2)); // manhattan didn't work
+	return sqrt(pow((coord_A.first - coord_B.first), 2) + pow((coord_A.second - coord_B.second), 2)); // manhattan didn't work
 }
 
-//int A_star::getIterationCount() {
-//	return this->iterations;
-//}
-//void A_star::resetIterationCount() {
-//	this->iterations = 0;
-//}
+int A_star::getIterationCount() {
+	return this->iterations;
+}
+void A_star::resetIterationCount() {
+	this->iterations = 0;
+}

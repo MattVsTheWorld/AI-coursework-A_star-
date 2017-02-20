@@ -107,18 +107,19 @@ int main(int argc, char **argv) {
 	readGraph(adjList);
 
 	// !!
-	auto t1 = std::chrono::steady_clock::now();
+	auto t1 = chrono::steady_clock::now();
 	// !!
 	
 	A_star *pathfinder = new A_star(adjList);
 	cout << "////////\n0 to 60\n";
 	pathfinder->algorithm(adjList->getVertex(0), adjList->getVertex(60));
-	/*cout << "Iterations: " << pathfinder->getIterationCount() << "\n";*/
+	cout << "While iterations: " << pathfinder->getIterationCount() << "\n";
 	delete pathfinder;
 	
 	// !!
-	auto t2 = std::chrono::steady_clock::now();
-	std::cout << std::chrono::duration<double>(t2-t1).count() << " seconds.\n";
+	auto t2 = chrono::steady_clock::now();
+	cout << chrono::duration<double>(t2-t1).count() << " seconds.\n";
+
 	// !!
 
 	//A_star *_pathfinder = new A_star(adjList);
