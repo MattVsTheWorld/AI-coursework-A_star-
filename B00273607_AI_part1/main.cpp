@@ -113,12 +113,12 @@ int main(int argc, char **argv) {
 	A_star *pathfinder = new A_star(adjList);
 	cout << "////////\n0 to 60\n";
 	pathfinder->algorithm(adjList->getVertex(0), adjList->getVertex(60));
-	cout << "While iterations: " << pathfinder->getIterationCount() << "\n";
-	delete pathfinder;
-	
+
 	// !!
 	auto t2 = chrono::steady_clock::now();
 	cout << chrono::duration<double>(t2-t1).count() << " seconds.\n";
+	cout << "While iterations: " << pathfinder->getIterationCount() << "\n";
+	delete pathfinder;
 
 	// !!
 
