@@ -24,7 +24,7 @@ using namespace std;
 #define VERTICES_BEGIN 2
 #define VERTICES_END 67
 #define EDGES_END 194
-
+//TODO: improve to something more decent
 void readGraph(AdjacencyList *adjList) {
 	ifstream dotfile;
 	dotfile.open("graph.dot");
@@ -121,7 +121,7 @@ int main(int argc, char **argv) {
 	delete pathfinder;
 
 	// !!
-
+	//TODO: fix consecutive pathfinding?
 	//A_star *_pathfinder = new A_star(adjList);
 	//cout << "////////\n12 to 58\n";
 	//_pathfinder->algorithm(adjList->getVertex(12), adjList->getVertex(58));

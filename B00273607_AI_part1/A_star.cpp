@@ -2,10 +2,10 @@
 
 A_star::A_star(AdjacencyList *_adjList) {
 	adjList = _adjList;
-	//	iterations = 0;
+	iterations = 0;
 }
 
-// Convert to heap? prio queue?
+// TODO: Convert to heap? prio queue?
 void A_star::algorithm(vertex* start, vertex* end) {
 	openSet.push_back(start);
 	while (!openSet.empty()) {
@@ -54,7 +54,7 @@ void A_star::algorithm(vertex* start, vertex* end) {
 					openSet.push_back(((pair<vertex*, int>)*neighbourIterator).first);
 			}
 		}
-		iterations++;
+		this->iterations++;
 	}
 }
 

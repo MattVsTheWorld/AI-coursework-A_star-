@@ -5,7 +5,7 @@
 #include <iostream>
 using namespace std;
 
-
+//TODO: fix references
 //// http://softwareengineering.stackexchange.com/questions/148313/what-is-the-most-space-efficient-way-to-implement-a-graph-data-structure
 //// http://www.redblobgames.com/pathfinding/a-star/implementation.html
 //// http://www.cplusplus.com/articles/2LywvCM9/
