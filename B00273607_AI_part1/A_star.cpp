@@ -35,7 +35,7 @@ void A_star::algorithm(vertex* start, vertex* end) {
 	while (!openSet.empty()) {
 		auto currentVert = openSet[0];
 		for (int i = 1; i < openSet.size(); i++) {
-			if (openSet[i]->getfCost() < currentVert->getfCost() || openSet[i]->getfCost() == currentVert->getfCost())
+			if (openSet[i]->getfCost() <= currentVert->getfCost())// || openSet[i]->getfCost() == currentVert->getfCost())
 				if (openSet[i]->gethCost() < currentVert->gethCost())
 					currentVert = openSet[i];
 		}
@@ -48,18 +48,21 @@ void A_star::algorithm(vertex* start, vertex* end) {
 			list<vertex*> foundPath = retracePath(start, end);
 			cout << "Path is: " << start->getIndex() << " ";
 			for (list<vertex*>::iterator pathIterator = foundPath.begin(); pathIterator != foundPath.end(); ++pathIterator)
-				cout << ((vertex*)*pathIterator)->getIndex() << " ";
+			//for (const auto &pathIterator : foundPath)
+				//cout << ((vertex*)*pathIterator)->getIndex() << " ";
+				cout << (static_cast<vertex *>(*pathIterator))->getIndex() << " ";
+				//cout << (static_cast<vertex *>(pathIterator))->getIndex() << " ";
 			cout << endl;
 			return;
 		}
-		list<pair<vertex*, int>> neighbourList;
 
+		list<pair<vertex*, int>> neighbourList;
 		for (list<edge *>::iterator listIterator = ((list<edge*>*)(currentVert->getEdgeList()))->begin(); listIterator != ((list<edge*>*)(currentVert->getEdgeList()))->end(); ++listIterator) {
 			auto neighbour = make_pair(((edge*)*listIterator)->getNeighbour(currentVert), ((edge*)*listIterator)->getWeight());
 			//cout << neighbour.first->getIndex() << "[" << neighbour.second << "] ";
 			neighbourList.push_back(neighbour);
 		}
-
+		// using name type
 		for (list<pair<vertex*, int>>::iterator neighbourIterator = neighbourList.begin(); neighbourIterator != neighbourList.end(); ++neighbourIterator)
 		{
 			if (closedSet.find(((pair<vertex*, int>)*neighbourIterator).first) != closedSet.end()) { //should make sense
@@ -81,7 +84,6 @@ void A_star::algorithm(vertex* start, vertex* end) {
 		this->iterations++;
 	}
 }
-
 
 list<vertex*> A_star::retracePath(vertex* _start, vertex* _end)
 {
