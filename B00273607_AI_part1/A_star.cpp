@@ -42,7 +42,7 @@ void A_star::algorithm(vertex* start, vertex* end) {
 
 		openSet.erase(remove(openSet.begin(), openSet.end(), currentVert), openSet.end());
 		closedSet.insert(currentVert);
-
+		
 		if (currentVert == end) {
 			cout << "Cost to goal: " << currentVert->getgCost() << endl;
 			list<vertex*> foundPath = retracePath(start, end);
@@ -57,6 +57,7 @@ void A_star::algorithm(vertex* start, vertex* end) {
 		}
 		using neighbour = pair<vertex*, int>;
 		list<neighbour> neighbourList;
+		// how to auto a pointer
 		for (list<edge *>::iterator listIterator = ((list<edge*>*)(currentVert->getEdgeList()))->begin(); listIterator != ((list<edge*>*)(currentVert->getEdgeList()))->end(); ++listIterator) {
 			auto _neighbour = make_pair(((edge*)*listIterator)->getNeighbour(currentVert), ((edge*)*listIterator)->getWeight());
 			//cout << neighbour.first->getIndex() << "[" << neighbour.second << "] ";
