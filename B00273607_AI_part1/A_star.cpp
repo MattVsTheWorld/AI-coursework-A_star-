@@ -47,38 +47,39 @@ void A_star::algorithm(vertex* start, vertex* end) {
 			cout << "Cost to goal: " << currentVert->getgCost() << endl;
 			list<vertex*> foundPath = retracePath(start, end);
 			cout << "Path is: " << start->getIndex() << " ";
-			for (list<vertex*>::iterator pathIterator = foundPath.begin(); pathIterator != foundPath.end(); ++pathIterator)
-			//for (const auto &pathIterator : foundPath)
+			//for (list<vertex*>::iterator pathIterator = foundPath.begin(); pathIterator != foundPath.end(); ++pathIterator)
+			for (const auto &pathIterator : foundPath)
 				//cout << ((vertex*)*pathIterator)->getIndex() << " ";
-				cout << (static_cast<vertex *>(*pathIterator))->getIndex() << " ";
-				//cout << (static_cast<vertex *>(pathIterator))->getIndex() << " ";
+				//cout << (static_cast<vertex *>(*pathIterator))->getIndex() << " ";
+				cout << (static_cast<vertex *>(pathIterator))->getIndex() << " ";
 			cout << endl;
 			return;
 		}
-
-		list<pair<vertex*, int>> neighbourList;
+		using neighbour = pair<vertex*, int>;
+		list<neighbour> neighbourList;
 		for (list<edge *>::iterator listIterator = ((list<edge*>*)(currentVert->getEdgeList()))->begin(); listIterator != ((list<edge*>*)(currentVert->getEdgeList()))->end(); ++listIterator) {
-			auto neighbour = make_pair(((edge*)*listIterator)->getNeighbour(currentVert), ((edge*)*listIterator)->getWeight());
+			auto _neighbour = make_pair(((edge*)*listIterator)->getNeighbour(currentVert), ((edge*)*listIterator)->getWeight());
 			//cout << neighbour.first->getIndex() << "[" << neighbour.second << "] ";
-			neighbourList.push_back(neighbour);
+			neighbourList.push_back(_neighbour);
 		}
 		// using name type
-		for (list<pair<vertex*, int>>::iterator neighbourIterator = neighbourList.begin(); neighbourIterator != neighbourList.end(); ++neighbourIterator)
+		for (list<neighbour>::iterator neighbourIterator = neighbourList.begin(); neighbourIterator != neighbourList.end(); ++neighbourIterator)
 		{
-			if (closedSet.find(((pair<vertex*, int>)*neighbourIterator).first) != closedSet.end()) { //should make sense
-				//	cout << "Found in closed set" << endl;
+			if (closedSet.find((static_cast<neighbour>(*neighbourIterator)).first) != closedSet.end()) { //should make sense
+				// cout << "Found in closed set" << endl;
 				continue;
-			}// else cout << "Not found in closed set" << endl;
-			int newMovCostToVert = currentVert->getgCost() + ((pair<vertex*, int>)*neighbourIterator).second; //weight
+			} // else cout << "Not found in closed set" << endl;
+			int newMovCostToVert = currentVert->getgCost() + (static_cast<neighbour>(*neighbourIterator)).second; //weight
 
-			if (newMovCostToVert < (((pair<vertex*, int>)*neighbourIterator).first)->getgCost() || (find(openSet.begin(), openSet.end(), ((pair<vertex*, int>)*neighbourIterator).first) == openSet.end()))
+			if (newMovCostToVert < ((static_cast<neighbour>(*neighbourIterator)).first)->getgCost() || (find(openSet.begin(), openSet.end(), (static_cast<neighbour>(*neighbourIterator)).first) == openSet.end()))
 			{
-				((pair<vertex*, int>)*neighbourIterator).first->setgCost(newMovCostToVert);
-				((pair<vertex*, int>)*neighbourIterator).first->sethCost(heuristic(currentVert->getCoords(), ((pair<vertex*, int>)*neighbourIterator).first->getCoords()));
-				((pair<vertex*, int>)*neighbourIterator).first->setParent(currentVert);
+				
+				(static_cast<neighbour>(*neighbourIterator)).first->setgCost(newMovCostToVert);
+				(static_cast<neighbour>(*neighbourIterator)).first->sethCost(heuristic(currentVert->getCoords(), (static_cast<neighbour>(*neighbourIterator)).first->getCoords()));
+				(static_cast<neighbour>(*neighbourIterator)).first->setParent(currentVert);
 
-				if (find(openSet.begin(), openSet.end(), ((pair<vertex*, int>)*neighbourIterator).first) == openSet.end())
-					openSet.push_back(((pair<vertex*, int>)*neighbourIterator).first);
+				if (find(openSet.begin(), openSet.end(), (static_cast<neighbour>(*neighbourIterator)).first) == openSet.end())
+					openSet.push_back((static_cast<neighbour>(*neighbourIterator)).first);
 			}
 		}
 		this->iterations++;
