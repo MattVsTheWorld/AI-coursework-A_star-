@@ -1,3 +1,4 @@
+#pragma once
 #ifndef A_STAR
 #define A_STAR
 #include <iostream>

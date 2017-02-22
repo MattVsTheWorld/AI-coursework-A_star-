@@ -1,3 +1,4 @@
+#pragma once
 #ifndef ADJACENCYLIST
 #define ADJACENCYLIST
 #include <list>
