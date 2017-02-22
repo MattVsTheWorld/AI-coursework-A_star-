@@ -111,8 +111,8 @@ int main(int argc, char **argv) {
 	// !!
 	
 	A_star *pathfinder = new A_star(adjList);
-	cout << "////////\n0 to 60\n";
-	pathfinder->algorithm(adjList->getVertex(0), adjList->getVertex(60));
+	//cout << "////////\n0 to 60\n";
+	pathfinder->algorithm(adjList->getVertex(1), adjList->getVertex(61));
 
 	// !!
 	auto t2 = chrono::steady_clock::now();
