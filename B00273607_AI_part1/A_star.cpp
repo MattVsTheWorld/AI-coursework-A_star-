@@ -95,8 +95,7 @@ list<vertex*> A_star::retracePath(vertex* _start, vertex* _end)
 {
 	list<vertex*> path;
 	vertex* currentVert = _end;
-	while (currentVert != _start)
-	{
+	while (currentVert != _start) {
 		path.push_front(currentVert);
 		currentVert = currentVert->getParent();
 	}
