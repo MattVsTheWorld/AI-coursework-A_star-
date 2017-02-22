@@ -9,7 +9,6 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <vector>
 #include "AdjacencyList.h"
 //#include "AdjacencyMatrix.h"
 #include "A_star.h"
@@ -33,8 +32,7 @@ void readGraph(AdjacencyList *adjList) {
 	if (dotfile.is_open()) {
 		if (dotfile.is_open())
 			cout << "File opened.\n";
-		while (getline(dotfile, line))
-		{
+		while (getline(dotfile, line)) {
 			lineNo++;
 			if (lineNo > VERTICES_BEGIN && lineNo < VERTICES_END) {
 				string index;
@@ -55,8 +53,7 @@ void readGraph(AdjacencyList *adjList) {
 				try {
 					adjList->addVertex(newVertex);
 				}
-				catch (int e)
-				{
+				catch (int e) {
 					cout << "Exception occured. Exception Nr:" << e << '.\n';
 				}
 			}
@@ -72,27 +69,36 @@ void readGraph(AdjacencyList *adjList) {
 				getline(dotfile, temp, '"');
 				getline(dotfile, temp, '"');
 				getline(dotfile, weight, '"');
-
 				try {
-					edge *newEdge = new edge(((vertex*)adjList->getVertex(stoi(path_beginning))),
-						(vertex*)adjList->getVertex(stoi(path_end)),
+					edge *newEdge = new edge((static_cast<vertex*>(adjList->getVertex(stoi(path_beginning)))),
+						static_cast<vertex*>(adjList->getVertex(stoi(path_end))),
 						stoi(weight));
 					adjList->addEdge(newEdge);
 				}
-				catch (int e)
-				{
+				catch (int e){
 					cout << "Exception occured. Exception Nr:" << e << '.\n';
 				}
 			}
 
 		}
-
 		dotfile.close();
 		cout << "File closed.\n";
 	}
 	else if (!dotfile.is_open())
 		cout << "File not open.\n";
-}
+} // readGraph function
+
+void findPath(AdjacencyList *adjList, int startId, int endId) {
+	auto t1 = chrono::steady_clock::now();
+	A_star *pathfinder = new A_star(adjList);
+	cout << "////////\n"<< startId <<" to "<< endId << endl;
+	pathfinder->algorithm(adjList->getVertex(startId), adjList->getVertex(endId));
+	auto t2 = chrono::steady_clock::now();
+	cout << chrono::duration<double>(t2 - t1).count() << " seconds elapsed to find and print path.\n";
+	cout << "While iterations: " << pathfinder->getIterationCount() << "\n";
+	adjList->resetCosts();
+	delete pathfinder;
+} // findPath function
 
 int main(int argc, char **argv) {
 
@@ -103,43 +109,14 @@ int main(int argc, char **argv) {
 	*/
 
 	AdjacencyList *adjList = new AdjacencyList();
-
 	readGraph(adjList);
-
-	// !!
-	auto t1 = chrono::steady_clock::now();
-	// !!
-	
-	A_star *pathfinder = new A_star(adjList);
-	//cout << "////////\n0 to 60\n";
-	pathfinder->algorithm(adjList->getVertex(1), adjList->getVertex(61));
-
-	// !!
-	auto t2 = chrono::steady_clock::now();
-	cout << chrono::duration<double>(t2-t1).count() << " seconds.\n";
-	cout << "While iterations: " << pathfinder->getIterationCount() << "\n";
-	delete pathfinder;
-
-	// !!
-	//TODO: fix consecutive pathfinding?
-	//A_star *_pathfinder = new A_star(adjList);
-	//cout << "////////\n12 to 58\n";
-	//_pathfinder->algorithm(adjList->getVertex(12), adjList->getVertex(58));
-	///*cout << "Iterations: " << pathfinder->getIterationCount() << "\n";*/
-	//delete _pathfinder;
-
-	//A_star *_pathfinder = new A_star(adjList);
-	//cout << "////////\n1 to 61\n";
-	//_pathfinder->algorithm(adjList->getVertex(1), adjList->getVertex(61));
-	///*cout << "Iterations: " << _pathfinder->getIterationCount() << "\n";*/
-	//delete _pathfinder;
-
-	//A_star *__pathfinder = new A_star(adjList);
-	//cout << "////////\n2 to 57\n";
-	//__pathfinder->algorithm(adjList->getVertex(2), adjList->getVertex(57));
-	///*cout << "Iterations: " << __pathfinder->getIterationCount() << "\n";*/
-	//delete __pathfinder;
+	findPath(adjList, 0, 60);
+	findPath(adjList, 1, 61);
+	findPath(adjList, 0, 60);
+	//findPath(adjList, 3, 57);
+	//findPath(adjList, 1, 61);
+	//findPath(adjList, 3, 57);
 
 	delete adjList;
 	return 0;
-}
+} // main

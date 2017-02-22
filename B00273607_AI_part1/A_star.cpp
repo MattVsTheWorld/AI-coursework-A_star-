@@ -44,7 +44,6 @@ void A_star::algorithm(vertex* start, vertex* end) {
 		closedSet.insert(currentVert);
 		
 		if (currentVert == end) {
-			//TODO: Fix goal cost
 			cout << "Cost to goal: " << currentVert->getgCost() << endl;
 			list<vertex*> foundPath = retracePath(start, end);
 			cout << "Path is: " << start->getIndex() << " ";

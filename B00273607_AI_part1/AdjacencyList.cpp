@@ -6,7 +6,7 @@
 //////////////////////////
 
 edge::edge(vertex *A, vertex *B, int w) {
-	adjacent[0] = A; // assign pointers to vertex
+	adjacent[0] = A; // assign pointers to connecting vertices
 	adjacent[1] = B;
 	weight = w;
 }
@@ -32,7 +32,7 @@ void edge::displayEdgeInfo() {
 	this->adjacent[0]->displayVertexInfo();
 	cout << "And vertex [" << this->adjacent[1]->getIndex() << "]\n";
 	this->adjacent[1]->displayVertexInfo();
-}
+} 
 
 ////////////////////////
 //// Edge class end ////
@@ -56,11 +56,13 @@ int vertex::getIndex() {
 	return this->vertexIndex;
 }
 bool vertex::addEdge(edge *e) {
-	for (list<edge *>::iterator listIterator = this->edgeList->begin();
-	listIterator != this->edgeList->end();
-		++listIterator) 
+	
+	//for (list<edge *>::iterator listIterator = this->edgeList->begin();
+	//listIterator != this->edgeList->end();
+	//	++listIterator) 
+	for (const auto edgeIterator : *(this->edgeList))
 	{
-		if (((edge*)*listIterator) == e)
+		if ((static_cast<edge*>(edgeIterator)) == e)
 			throw EDGEDUPLICATE;
 	}
 	this->edgeList->push_back(e);
@@ -73,10 +75,11 @@ list<edge *>* vertex::getEdgeList() {
 
 void vertex::displayEdgeList() {
 	cout << ">Vertex [" << this->vertexIndex << "] has edges:\n";
-	for (list<edge *>::iterator listIterator = this->edgeList->begin();
-	listIterator != this->edgeList->end();
-		++listIterator)
-		((edge*)*listIterator)->displayEdgeInfo();
+	//for (list<edge *>::iterator listIterator = this->edgeList->begin();
+	//listIterator != this->edgeList->end();
+	//	++listIterator)
+	for (const auto edgeIterator : *(this->edgeList))
+		(static_cast<edge*>(edgeIterator))->displayEdgeInfo();
 }
 
 int vertex::getfCost() {
@@ -139,12 +142,12 @@ void AdjacencyList::addEdge(edge *e) {
 	vector<vertex *>::iterator vectorIterator = this->vertices->begin();
 	int endPointsFound = 0;
 	while (vectorIterator != this->vertices->end() || endPointsFound < 2) {
-		if (((vertex*)*vectorIterator)->getIndex() == e->getEndPoints()[0]->getIndex()) {
-			((vertex*)*vectorIterator)->addEdge(e);
+		if ((static_cast<vertex*>(*vectorIterator))->getIndex() == e->getEndPoints()[0]->getIndex()) {
+			(static_cast<vertex*>(*vectorIterator))->addEdge(e);
 			endPointsFound++;
 		}
-		else if (((vertex*)*vectorIterator)->getIndex() == e->getEndPoints()[1]->getIndex()) {
-			((vertex*)*vectorIterator)->addEdge(e);
+		else if ((static_cast<vertex*>(*vectorIterator))->getIndex() == e->getEndPoints()[1]->getIndex()) {
+			(static_cast<vertex*>(*vectorIterator))->addEdge(e);
 			endPointsFound++;
 		}
 		vectorIterator++;
@@ -157,22 +160,30 @@ vertex* AdjacencyList::getVertex(int index) {
 		throw OUTOFBOUNDS;
 	vector<vertex *>::iterator vectorIterator = this->vertices->begin();
 	while (vectorIterator != this->vertices->end()) {
-		if (((vertex*)*vectorIterator)->getIndex() == index)
-			return ((vertex*)*vectorIterator);
+		if ((static_cast<vertex*>(*vectorIterator))->getIndex() == index)
+			return (static_cast<vertex*>(*vectorIterator));
 		else
 			vectorIterator++;
 	}
 }
 
 void AdjacencyList::displayVertices() {
-	for (vector<vertex *>::iterator vectorIterator = this->vertices->begin();
-	vectorIterator != this->vertices->end();
-		++vectorIterator) {
+	//for (vector<vertex *>::iterator vectorIterator = this->vertices->begin();
+	//vectorIterator != this->vertices->end();
+	//	++vectorIterator) {
+	for(const auto verticesIterator : *(this->vertices)){
 		cout << "|| Vertex info ||\n";
-		((vertex*)*vectorIterator)->displayVertexInfo();
+		(static_cast<vertex*>(verticesIterator))->displayVertexInfo();
 		cout << "|| Edge list ||\n";
-		((vertex*)*vectorIterator)->displayEdgeList();
+		(static_cast<vertex*>(verticesIterator))->displayEdgeList();
 		cout << endl;
+	}
+}
+
+void AdjacencyList::resetCosts() {
+	for (const auto &vectorIterator : *(vertices)) {
+		vectorIterator->sethCost(0);
+		vectorIterator->setgCost(0);
 	}
 }
 /////////////////////////////////

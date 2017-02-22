@@ -29,7 +29,7 @@ class vertex; // class declaration
 class edge {
 private:
 	vertex *adjacent[2];
-	int		weight;
+	int	weight;
 protected:
 public:
 	edge(vertex *A, vertex *B, int w);
@@ -76,6 +76,7 @@ public:
 	void addEdge(edge *e);
 	vertex* getVertex(int index);
 	void displayVertices();
+	void resetCosts();
 };
 
 #endif
