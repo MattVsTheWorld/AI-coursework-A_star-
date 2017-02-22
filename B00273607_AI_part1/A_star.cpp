@@ -76,7 +76,8 @@ void A_star::algorithm(vertex* start, vertex* end) {
 			} // else cout << "Not found in closed set" << endl;
 			int newMovCostToVert = currentVert->getgCost() + (static_cast<neighbour>(neighbourIterator)).second; //weight
 			// Uncertain - but am I
-			if (newMovCostToVert < ((static_cast<neighbour>(neighbourIterator)).first)->getgCost() || (find(openSet.begin(), openSet.end(), (static_cast<neighbour>(neighbourIterator)).first) == openSet.end()))
+			if (newMovCostToVert < ((static_cast<neighbour>(neighbourIterator)).first)->getgCost() 
+				|| (find(openSet.begin(), openSet.end(), (static_cast<neighbour>(neighbourIterator)).first) == openSet.end()))
 			{
 				(static_cast<neighbour>(neighbourIterator)).first->setgCost(newMovCostToVert);
 				(static_cast<neighbour>(neighbourIterator)).first->sethCost(heuristic(currentVert->getCoords(), (static_cast<neighbour>(neighbourIterator)).first->getCoords()));
