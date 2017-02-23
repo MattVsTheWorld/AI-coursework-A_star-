@@ -10,11 +10,8 @@
 #include <fstream>
 #include <string>
 #include "AdjacencyList.h"
-//#include "AdjacencyMatrix.h"
 #include "A_star.h"
 #include <chrono>
-//#include <queue>
-//#include <functional>
 
 using namespace std;
 
@@ -25,7 +22,7 @@ using namespace std;
 #define VERTICES_BEGIN 2
 #define VERTICES_END 67
 #define EDGES_END 194
-//TODO: improve to something more decent
+
 void readGraph(AdjacencyList *adjList) {
 	ifstream dotfile;
 	dotfile.open("graph.dot");
@@ -102,16 +99,6 @@ void findPath(AdjacencyList *adjList, int startId, int endId) {
 	delete pathfinder;
 } // findPath function
 
-//++++
-struct comp
-{
-	bool operator()(pair<int, char>& pair1, pair<int, char>& pair2)
-	{
-		return pair1.first > pair2.first;
-	}
-};
-//++++
-
 int main(int argc, char **argv) {
 
 	/*
@@ -123,63 +110,6 @@ int main(int argc, char **argv) {
 	AdjacencyList *adjList = new AdjacencyList();
 	readGraph(adjList);
 
-	//cout << "Priority queue testing..." << endl;
-	//priority_queue<int, vector<int>, greater<int>> q;
-	//for (int n : {1, 8, 5, 6, 3, 4, 0, 9, 7, 2})
-	//	q.push(n);
-
-	//while (!q.empty()) {
-	//	cout << q.top() << " ";
-	//	q.pop();
-	//}
-	//cout << '\n';
-	//cout << "Done testing..." << endl;
-	//cout << "\\\\\\\\\\\\\\\\ \n";
-	vector < pair<int, char> > v;
-	v.push_back(make_pair(0, 'a'));
-	v.push_back(make_pair(2, 'b'));
-	v.push_back(make_pair(6, 'c'));
-	v.push_back(make_pair(4, 'd'));
-	v.push_back(make_pair(3, 'e'));
-	v.push_back(make_pair(1, 'f'));
-
-	make_heap(v.begin(), v.end(), comp());
-
-	//cout << "Max:" << v.front().first << endl;
-	sort_heap(v.begin(), v.end(), comp());
-
-	//for (const auto it : v)
-	//	cout << it.first << "-" << it.second << " ";
-
-	//cout << endl;
-	make_heap(v.begin(), v.end(), comp());
-	v.push_back(make_pair(5, 'g')); push_heap(v.begin(), v.end(), comp());
-	sort_heap(v.begin(), v.end(), comp());
-
-	//for (const auto it : v)
-	//	cout << it.first << "-" << it.second << " ";
-	//cout << endl;
-
-	make_heap(v.begin(), v.end(), comp());
-	pop_heap(v.begin(), v.end(), comp()); v.pop_back();
-	sort_heap(v.begin(), v.end(), comp());
-
-
-	//make_heap(v.begin(), v.end(), comp());
-	//pop_heap(v.begin(), v.end(), comp()); v.pop_back();
-	//sort_heap(v.begin(), v.end(), comp());
-
-	//make_heap(v.begin(), v.end(), comp());
-	//pop_heap(v.begin(), v.end(), comp()); v.pop_back();
-	//sort_heap(v.begin(), v.end(), comp());
-
-	//
-	//
-	//for (const auto it : v)
-	//	cout << it.first << "-" << it.second << " ";
-	//cout << endl;
-
-	//cout << "smallest: " << v.back().first << endl;
 	findPath(adjList, 0, 60);
 	findPath(adjList, 1, 61);
 	findPath(adjList, 0, 60);
