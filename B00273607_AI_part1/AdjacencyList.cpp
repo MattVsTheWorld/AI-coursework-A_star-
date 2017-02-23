@@ -128,7 +128,7 @@ AdjacencyList::AdjacencyList() {
 void AdjacencyList::addVertex(vertex *v) {
 	// add a vertex to vector
 	// we will assume vertices don't take the same position
-	if (v->getIndex() > this->vertexNo)
+	if (v->getIndex() > this->vertexNo || v->getIndex() < 0)
 		throw OUTOFBOUNDS;
 	vertices->push_back(v);
 	this->vertexNo++;
@@ -156,7 +156,7 @@ void AdjacencyList::addEdge(edge *e) {
 }
 
 vertex* AdjacencyList::getVertex(int index) {
-	if (index >= this->vertexNo)
+	if (index >= this->vertexNo || index < 0)
 		throw OUTOFBOUNDS;
 	vector<vertex *>::iterator vectorIterator = this->vertices->begin();
 	while (vectorIterator != this->vertices->end()) {

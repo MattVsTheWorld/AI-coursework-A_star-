@@ -32,8 +32,12 @@ A_star::A_star(AdjacencyList *_adjList) {
 // TODO: Convert to heap? prio queue?
 void A_star::algorithm(vertex* start, vertex* end) {
 	openSet.push_back(start);
+	///open_Set.put(start, 0);
+	///while (!open_Set.empty())
 	while (!openSet.empty()) {
 		auto currentVert = openSet[0];
+		///auto currentVert = open_Set.get();
+		/// skip rest
 		for (int i = 1; i < openSet.size(); i++) {
 			if (openSet[i]->getfCost() <= currentVert->getfCost())// || openSet[i]->getfCost() == currentVert->getfCost())
 				if (openSet[i]->gethCost() < currentVert->gethCost())
@@ -42,8 +46,8 @@ void A_star::algorithm(vertex* start, vertex* end) {
 		//make_heap(openSet.begin(),openSet.end());
 		//reverse(openSet.begin(), openSet.end());
 		//auto currentVert = openSet[0];
-
-		openSet.erase(remove(openSet.begin(), openSet.end(), currentVert), openSet.end());
+		// not necessary?
+		openSet.erase(remove(openSet.begin(), openSet.end(), currentVert), openSet.end()); // done by get
 		closedSet.insert(currentVert);
 		
 		if (currentVert == end) {

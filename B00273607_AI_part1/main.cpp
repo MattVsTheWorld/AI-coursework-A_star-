@@ -13,6 +13,8 @@
 //#include "AdjacencyMatrix.h"
 #include "A_star.h"
 #include <chrono>
+//#include <queue>
+//#include <functional>
 
 using namespace std;
 
@@ -110,6 +112,20 @@ int main(int argc, char **argv) {
 
 	AdjacencyList *adjList = new AdjacencyList();
 	readGraph(adjList);
+
+	//cout << "Priority queue testing..." << endl;
+	//priority_queue<int, vector<int>, greater<int>> q;
+	//for (int n : {1, 8, 5, 6, 3, 4, 0, 9, 7, 2})
+	//	q.push(n);
+
+	//while (!q.empty()) {
+	//	cout << q.top() << " ";
+	//	q.pop();
+	//}
+	//cout << '\n';
+	//cout << "Done testing..." << endl;
+	//cout << "\\\\\\\\\\\\\\\\ \n";
+
 	findPath(adjList, 0, 60);
 	findPath(adjList, 1, 61);
 	findPath(adjList, 0, 60);
