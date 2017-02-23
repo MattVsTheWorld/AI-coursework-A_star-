@@ -30,24 +30,31 @@ A_star::A_star(AdjacencyList *_adjList) {
 //add neighbour to OPEN
 
 // TODO: Convert to heap? prio queue?
+
+struct vertexComparator {
+	bool operator()(vertex*& v1, vertex*v2)
+	{
+		return v1->getfCost() > v2->getfCost();
+	}
+};
 void A_star::algorithm(vertex* start, vertex* end) {
 	openSet.push_back(start);
-	///open_Set.put(start, 0);
-	///while (!open_Set.empty())
 	while (!openSet.empty()) {
-		auto currentVert = openSet[0];
-		///auto currentVert = open_Set.get();
-		/// skip rest
-		for (int i = 1; i < openSet.size(); i++) {
-			if (openSet[i]->getfCost() <= currentVert->getfCost())// || openSet[i]->getfCost() == currentVert->getfCost())
-				if (openSet[i]->gethCost() < currentVert->gethCost())
-					currentVert = openSet[i];
-		}
-		//make_heap(openSet.begin(),openSet.end());
-		//reverse(openSet.begin(), openSet.end());
 		//auto currentVert = openSet[0];
-		// not necessary?
-		openSet.erase(remove(openSet.begin(), openSet.end(), currentVert), openSet.end()); // done by get
+		//++
+		make_heap(openSet.begin(), openSet.end(), vertexComparator());
+		sort_heap(openSet.begin(), openSet.end(), vertexComparator());
+		//++
+		//for (int i = 1; i < openSet.size(); i++) {
+		//	if (openSet[i]->getfCost() <= currentVert->getfCost())// || openSet[i]->getfCost() == currentVert->getfCost())
+		//		if (openSet[i]->gethCost() < currentVert->gethCost())
+		//			currentVert = openSet[i];
+		//}
+		auto currentVert = openSet.back();
+		make_heap(openSet.begin(), openSet.end(), vertexComparator());
+		pop_heap(openSet.begin(), openSet.end(), vertexComparator()); openSet.pop_back();
+
+		//openSet.erase(remove(openSet.begin(), openSet.end(), currentVert), openSet.end()); 
 		closedSet.insert(currentVert);
 		
 		if (currentVert == end) {

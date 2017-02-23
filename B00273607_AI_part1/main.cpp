@@ -102,14 +102,15 @@ void findPath(AdjacencyList *adjList, int startId, int endId) {
 	delete pathfinder;
 } // findPath function
 
+//++++
 struct comp
 {
-	bool operator()(const pair<int, char>& pair1, const pair<int, char>& pair2)
+	bool operator()(pair<int, char>& pair1, pair<int, char>& pair2)
 	{
-		return pair1.first < pair2.first;
+		return pair1.first > pair2.first;
 	}
 };
-
+//++++
 
 int main(int argc, char **argv) {
 
@@ -142,28 +143,46 @@ int main(int argc, char **argv) {
 	v.push_back(make_pair(3, 'e'));
 	v.push_back(make_pair(1, 'f'));
 
-
 	make_heap(v.begin(), v.end(), comp());
 
 	//cout << "Max:" << v.front().first << endl;
 	sort_heap(v.begin(), v.end(), comp());
 
-	for (const auto it : v)
-		cout << it.first << "-" << it.second << " ";
+	//for (const auto it : v)
+	//	cout << it.first << "-" << it.second << " ";
 
-	cout << endl;
-	//pop_heap(v.begin(), v.end(), comp()); v.pop_back();
-	v.push_back(make_pair(5, 'g')); //push_heap(v.begin(), v.end(), comp());
+	//cout << endl;
 	make_heap(v.begin(), v.end(), comp());
+	v.push_back(make_pair(5, 'g')); push_heap(v.begin(), v.end(), comp());
 	sort_heap(v.begin(), v.end(), comp());
-	
-	for (const auto it : v)
-		cout << it.first << "-" << it.second << " ";
-	cout << endl;
 
-	//findPath(adjList, 0, 60);
-	//findPath(adjList, 1, 61);
-	//findPath(adjList, 0, 60);
+	//for (const auto it : v)
+	//	cout << it.first << "-" << it.second << " ";
+	//cout << endl;
+
+	make_heap(v.begin(), v.end(), comp());
+	pop_heap(v.begin(), v.end(), comp()); v.pop_back();
+	sort_heap(v.begin(), v.end(), comp());
+
+
+	//make_heap(v.begin(), v.end(), comp());
+	//pop_heap(v.begin(), v.end(), comp()); v.pop_back();
+	//sort_heap(v.begin(), v.end(), comp());
+
+	//make_heap(v.begin(), v.end(), comp());
+	//pop_heap(v.begin(), v.end(), comp()); v.pop_back();
+	//sort_heap(v.begin(), v.end(), comp());
+
+	//
+	//
+	//for (const auto it : v)
+	//	cout << it.first << "-" << it.second << " ";
+	//cout << endl;
+
+	//cout << "smallest: " << v.back().first << endl;
+	findPath(adjList, 0, 60);
+	findPath(adjList, 1, 61);
+	findPath(adjList, 0, 60);
 	//findPath(adjList, 3, 57);
 	//findPath(adjList, 1, 61);
 	//findPath(adjList, 3, 57);
