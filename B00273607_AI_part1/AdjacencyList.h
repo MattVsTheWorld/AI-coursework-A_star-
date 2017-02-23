@@ -7,13 +7,12 @@
 using namespace std;
 
 //TODO: fix references
-//// http://softwareengineering.stackexchange.com/questions/148313/what-is-the-most-space-efficient-way-to-implement-a-graph-data-structure
-//// http://www.redblobgames.com/pathfinding/a-star/implementation.html
-//// http://www.cplusplus.com/articles/2LywvCM9/
-//// http://www.cplusplus.com/forum/beginner/118340/
-//// http://www.cplusplus.com/forum/general/41244/
-//// http://www.sanfoundry.com/cpp-program-implement-adjacency-matrix/
-//// http://stackoverflow.com/questions/2893129/what-does-mean-in-c
+//// http://softwareengineering.stackexchange.com/questions/148313/what-is-the-most-space-efficient-way-to-implement-a-graph-data-structure // how to represent a graph
+//// https://en.wikipedia.org/wiki/Graph_(abstract_data_type) // Why choose and Adj List
+// http://stackoverflow.com/questions/12599143/what-is-the-distinction-between-sparse-and-dense-graphs // Sparse, as O(~2n) = O(n) hence sparse
+/// http://www.redblobgames.com/pathfinding/a-star/implementation.html
+// Useful for general idea, a* (although used differently
+//// http://www.cplusplus.com/forum/beginner/118340/ // Weighted graphs intro
 ///
 //* -- https://en.wikipedia.org/wiki/Adjacency_list --
 // * The object oriented incidence list structure suggested by Goodrich and Tamassia has special classes of vertex objects and edge objects. 

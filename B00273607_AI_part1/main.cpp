@@ -16,13 +16,12 @@
 using namespace std;
 
 // http://www.redblobgames.com/pathfinding/a-star/implementation.html
-// didn't really use this
 
-// rudimental parser, but works
 #define VERTICES_BEGIN 2
 #define VERTICES_END 67
 #define EDGES_END 194
-
+// A rather rudimental and case specific parser
+// With more time could be improved to instead recognise the two patterns of vertices and edges
 void readGraph(AdjacencyList *adjList) {
 	ifstream dotfile;
 	dotfile.open("graph.dot");
@@ -78,7 +77,6 @@ void readGraph(AdjacencyList *adjList) {
 					cout << "Exception occured. Exception Nr:" << e << '.\n';
 				}
 			}
-
 		}
 		dotfile.close();
 		cout << "File closed.\n";
