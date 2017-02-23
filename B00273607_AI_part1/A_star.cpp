@@ -5,8 +5,10 @@ A_star::A_star(AdjacencyList *_adjList) {
 	iterations = 0;
 }
 
-// Pseudocode by Sebastian Lague
-// https://github.com/SebLague/Pathfinding/blob/master/Episode%2001%20-%20pseudocode/Pseudocode#L3
+// Credits to algorithm and tutorial to Sebastian Lague
+// https://github.com/SebLague/Pathfinding - Repository
+// https://www.youtube.com/watch?v=-L-WgKMFuhE - First video tutorial
+// Pseudocode
 //OPEN //the set of nodes to be evaluated
 //CLOSED //the set of nodes already evaluated
 //add the start node to OPEN
