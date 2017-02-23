@@ -45,7 +45,8 @@ private:
 protected:
 public:
 	A_star(AdjacencyList *_adjList);
-	void algorithm(vertex* start, vertex* end);
+	void algorithm_standard(vertex* start, vertex* end);
+	void algorithm_heap(vertex* start, vertex* end);
 	int getIterationCount();
 	void resetIterationCount();
 };

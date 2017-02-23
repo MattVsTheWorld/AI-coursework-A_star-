@@ -37,43 +37,32 @@ struct vertexComparator {
 		return v1->getfCost() > v2->getfCost();
 	}
 };
-void A_star::algorithm(vertex* start, vertex* end) {
+void A_star::algorithm_standard(vertex* start, vertex* end) {
 	openSet.push_back(start);
 	while (!openSet.empty()) {
-		//auto currentVert = openSet[0];
-		//++
-		make_heap(openSet.begin(), openSet.end(), vertexComparator());
-		sort_heap(openSet.begin(), openSet.end(), vertexComparator());
-		//++
-		//for (int i = 1; i < openSet.size(); i++) {
-		//	if (openSet[i]->getfCost() <= currentVert->getfCost())// || openSet[i]->getfCost() == currentVert->getfCost())
-		//		if (openSet[i]->gethCost() < currentVert->gethCost())
-		//			currentVert = openSet[i];
-		//}
-		auto currentVert = openSet.back();
-		make_heap(openSet.begin(), openSet.end(), vertexComparator());
-		pop_heap(openSet.begin(), openSet.end(), vertexComparator()); openSet.pop_back();
+		auto currentVert = openSet[0];
 
-		//openSet.erase(remove(openSet.begin(), openSet.end(), currentVert), openSet.end()); 
+		for (int i = 1; i < openSet.size(); i++) {
+			if (openSet[i]->getfCost() <= currentVert->getfCost())
+				if (openSet[i]->gethCost() < currentVert->gethCost())
+					currentVert = openSet[i];
+		}
+
+		openSet.erase(remove(openSet.begin(), openSet.end(), currentVert), openSet.end()); 
 		closedSet.insert(currentVert);
 		
 		if (currentVert == end) {
 			cout << "Cost to goal: " << currentVert->getgCost() << endl;
-			// cout << "Open: " << openSet.size() << " Closed: " << closedSet.size() << endl;
 			list<vertex*> foundPath = retracePath(start, end);
 			cout << "Path is: " << start->getIndex() << " ";
-			//for (list<vertex*>::iterator pathIterator = foundPath.begin(); pathIterator != foundPath.end(); ++pathIterator)
 			for (const auto &pathIterator : foundPath)
-				//cout << ((vertex*)*pathIterator)->getIndex() << " ";
-				//cout << (static_cast<vertex *>(*pathIterator))->getIndex() << " ";
 				cout << (static_cast<vertex *>(pathIterator))->getIndex() << " ";
 			cout << endl;
 			return;
 		}
 		using neighbour = pair<vertex*, int>;
 		list<neighbour> neighbourList;
-		// how to auto a pointer // DONE
-		//static_cast<list<edge*>*>(currentVert->getEdgeList())->begin()
+		
 		//for (list<edge *>::iterator listIterator = (static_cast<list<edge*>*>(currentVert->getEdgeList()))->begin(); listIterator != (static_cast<list<edge*>*>(currentVert->getEdgeList()))->end(); ++listIterator) {
 		for(const auto &listIterator : *(static_cast<list<edge*>*>(currentVert->getEdgeList()))) {
 			// You don't need to cast but it's more understandable I feel
@@ -92,6 +81,65 @@ void A_star::algorithm(vertex* start, vertex* end) {
 			double newMovCostToVert = currentVert->getgCost() + (static_cast<neighbour>(neighbourIterator)).second; //weight
 			// Uncertain - but am I
 			if (newMovCostToVert < ((static_cast<neighbour>(neighbourIterator)).first)->getgCost() 
+				|| (find(openSet.begin(), openSet.end(), (static_cast<neighbour>(neighbourIterator)).first) == openSet.end()))
+			{
+				(static_cast<neighbour>(neighbourIterator)).first->setgCost(newMovCostToVert);
+				(static_cast<neighbour>(neighbourIterator)).first->sethCost(heuristic(currentVert->getCoords(), (static_cast<neighbour>(neighbourIterator)).first->getCoords()));
+				(static_cast<neighbour>(neighbourIterator)).first->setParent(currentVert);
+
+				if (find(openSet.begin(), openSet.end(), (static_cast<neighbour>(neighbourIterator)).first) == openSet.end()) {
+					openSet.push_back((static_cast<neighbour>(neighbourIterator)).first);
+				}
+			}
+		}
+		this->iterations++;
+	}
+}
+
+void A_star::algorithm_heap(vertex* start, vertex* end) {
+	openSet.push_back(start);
+	while (!openSet.empty()) {
+
+		make_heap(openSet.begin(), openSet.end(), vertexComparator());
+		sort_heap(openSet.begin(), openSet.end(), vertexComparator());
+
+		auto currentVert = openSet.back();
+		make_heap(openSet.begin(), openSet.end(), vertexComparator());
+		pop_heap(openSet.begin(), openSet.end(), vertexComparator()); openSet.pop_back();
+
+		closedSet.insert(currentVert);
+
+		if (currentVert == end) {
+			cout << "Cost to goal: " << currentVert->getgCost() << endl;
+			list<vertex*> foundPath = retracePath(start, end);
+			cout << "Path is: " << start->getIndex() << " ";
+			for (const auto &pathIterator : foundPath)
+				cout << (static_cast<vertex *>(pathIterator))->getIndex() << " ";
+			cout << endl;
+			return;
+		}
+		using neighbour = pair<vertex*, int>;
+		list<neighbour> neighbourList;
+		// how to auto a pointer // DONE
+		// static_cast<list<edge*>*>(currentVert->getEdgeList())->begin()
+		// for (list<edge *>::iterator listIterator = (static_cast<list<edge*>*>(currentVert->getEdgeList()))->begin(); listIterator != (static_cast<list<edge*>*>(currentVert->getEdgeList()))->end(); ++listIterator) {
+		for (const auto &listIterator : *(static_cast<list<edge*>*>(currentVert->getEdgeList()))) {
+			// You don't need to cast but it's more understandable I feel
+			auto _neighbour = make_pair((static_cast<edge*>(listIterator))->getNeighbour(currentVert), (static_cast<edge*>(listIterator))->getWeight());
+			//cout << neighbour.first->getIndex() << "[" << neighbour.second << "] ";
+			neighbourList.push_back(_neighbour);
+		}
+		// using name type
+		for (const auto &neighbourIterator : neighbourList) {
+			//for (list<neighbour>::iterator neighbourIterator = neighbourList.begin(); neighbourIterator != neighbourList.end(); ++neighbourIterator)
+			//{
+			if (closedSet.find((static_cast<neighbour>(neighbourIterator)).first) != closedSet.end()) { //should make sense
+																										// cout << "Found in closed set" << endl;
+				continue;
+			} // else cout << "Not found in closed set" << endl;
+			double newMovCostToVert = currentVert->getgCost() + (static_cast<neighbour>(neighbourIterator)).second; //weight
+																													// Uncertain - but am I
+			if (newMovCostToVert < ((static_cast<neighbour>(neighbourIterator)).first)->getgCost()
 				|| (find(openSet.begin(), openSet.end(), (static_cast<neighbour>(neighbourIterator)).first) == openSet.end()))
 			{
 				(static_cast<neighbour>(neighbourIterator)).first->setgCost(newMovCostToVert);

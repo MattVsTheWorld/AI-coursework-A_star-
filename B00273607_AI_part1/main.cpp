@@ -94,7 +94,7 @@ void findPath(AdjacencyList *adjList, int startId, int endId) {
 	auto t1 = chrono::steady_clock::now();
 	A_star *pathfinder = new A_star(adjList);
 	cout << "////////\n" << startId << " to " << endId << endl;
-	pathfinder->algorithm(adjList->getVertex(startId), adjList->getVertex(endId));
+	pathfinder->algorithm_standard(adjList->getVertex(startId), adjList->getVertex(endId));
 	auto t2 = chrono::steady_clock::now();
 	cout << chrono::duration<double>(t2 - t1).count() << " seconds elapsed to find and print path.\n";
 	cout << "While iterations: " << pathfinder->getIterationCount() << "\n";
