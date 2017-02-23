@@ -45,6 +45,7 @@ void A_star::algorithm(vertex* start, vertex* end) {
 		
 		if (currentVert == end) {
 			cout << "Cost to goal: " << currentVert->getgCost() << endl;
+			cout << "Open: " << openSet.size() << " Closed: " << closedSet.size() << endl;
 			list<vertex*> foundPath = retracePath(start, end);
 			cout << "Path is: " << start->getIndex() << " ";
 			//for (list<vertex*>::iterator pathIterator = foundPath.begin(); pathIterator != foundPath.end(); ++pathIterator)
@@ -104,6 +105,7 @@ list<vertex*> A_star::retracePath(vertex* _start, vertex* _end)
 
 double A_star::heuristic(pair<int, int> coord_A, pair<int, int> coord_B) {
 	return sqrt(pow((coord_A.first - coord_B.first), 2) + pow((coord_A.second - coord_B.second), 2)); // manhattan didn't work
+	//return abs(coord_A.first - coord_B.first) + abs(coord_A.second - coord_B.second); // simple ? not good?
 }
 
 int A_star::getIterationCount() {
