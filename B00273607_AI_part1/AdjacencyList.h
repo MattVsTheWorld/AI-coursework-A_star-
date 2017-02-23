@@ -44,7 +44,7 @@ class vertex {
 private:
 	int vertexIndex;
 	list<edge *> *edgeList; // std::forward_list instead? Is difference Noticeable?
-	int gCost, hCost;
+	double gCost, hCost;
 	pair <int, int> vertexCoords;
 	vertex* parent;
 protected:
@@ -55,11 +55,11 @@ public:
 	bool addEdge(edge *e);
 	list<edge *> *getEdgeList();
 	void displayEdgeList();
-	int getfCost();
-	int getgCost();
-	int gethCost();
-	void setgCost(int _g);
-	void sethCost(int _h);
+	double getfCost();
+	double getgCost();
+	double gethCost();
+	void setgCost(double _g);
+	void sethCost(double _h);
 	pair<int, int> getCoords();
 	void setParent(vertex* _parent);
 	vertex* getParent();

@@ -82,21 +82,21 @@ void vertex::displayEdgeList() {
 		(static_cast<edge*>(edgeIterator))->displayEdgeInfo();
 }
 
-int vertex::getfCost() {
+double vertex::getfCost() {
 	return (this->gCost + this->hCost);
 }
 
-int vertex::getgCost() {
+double vertex::getgCost() {
 	return this->gCost;
 }
-int vertex::gethCost() {
+double vertex::gethCost() {
 	return this->hCost;
 }
 
-void vertex::setgCost(int _g) {
+void vertex::setgCost(double _g) {
 	this->gCost = _g;
 }
-void vertex::sethCost(int _h) {
+void vertex::sethCost(double _h) {
 	this->hCost = _h;
 }
 

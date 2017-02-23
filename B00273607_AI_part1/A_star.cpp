@@ -39,13 +39,16 @@ void A_star::algorithm(vertex* start, vertex* end) {
 				if (openSet[i]->gethCost() < currentVert->gethCost())
 					currentVert = openSet[i];
 		}
+		//make_heap(openSet.begin(),openSet.end());
+		//reverse(openSet.begin(), openSet.end());
+		//auto currentVert = openSet[0];
 
 		openSet.erase(remove(openSet.begin(), openSet.end(), currentVert), openSet.end());
 		closedSet.insert(currentVert);
 		
 		if (currentVert == end) {
 			cout << "Cost to goal: " << currentVert->getgCost() << endl;
-			cout << "Open: " << openSet.size() << " Closed: " << closedSet.size() << endl;
+			// cout << "Open: " << openSet.size() << " Closed: " << closedSet.size() << endl;
 			list<vertex*> foundPath = retracePath(start, end);
 			cout << "Path is: " << start->getIndex() << " ";
 			//for (list<vertex*>::iterator pathIterator = foundPath.begin(); pathIterator != foundPath.end(); ++pathIterator)
@@ -75,7 +78,7 @@ void A_star::algorithm(vertex* start, vertex* end) {
 				// cout << "Found in closed set" << endl;
 				continue;
 			} // else cout << "Not found in closed set" << endl;
-			int newMovCostToVert = currentVert->getgCost() + (static_cast<neighbour>(neighbourIterator)).second; //weight
+			double newMovCostToVert = currentVert->getgCost() + (static_cast<neighbour>(neighbourIterator)).second; //weight
 			// Uncertain - but am I
 			if (newMovCostToVert < ((static_cast<neighbour>(neighbourIterator)).first)->getgCost() 
 				|| (find(openSet.begin(), openSet.end(), (static_cast<neighbour>(neighbourIterator)).first) == openSet.end()))
@@ -84,8 +87,9 @@ void A_star::algorithm(vertex* start, vertex* end) {
 				(static_cast<neighbour>(neighbourIterator)).first->sethCost(heuristic(currentVert->getCoords(), (static_cast<neighbour>(neighbourIterator)).first->getCoords()));
 				(static_cast<neighbour>(neighbourIterator)).first->setParent(currentVert);
 
-				if (find(openSet.begin(), openSet.end(), (static_cast<neighbour>(neighbourIterator)).first) == openSet.end())
+				if (find(openSet.begin(), openSet.end(), (static_cast<neighbour>(neighbourIterator)).first) == openSet.end()) {
 					openSet.push_back((static_cast<neighbour>(neighbourIterator)).first);
+				}
 			}
 		}
 		this->iterations++;
