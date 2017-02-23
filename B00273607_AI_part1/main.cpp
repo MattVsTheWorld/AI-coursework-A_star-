@@ -77,7 +77,7 @@ void readGraph(AdjacencyList *adjList) {
 						stoi(weight));
 					adjList->addEdge(newEdge);
 				}
-				catch (int e){
+				catch (int e) {
 					cout << "Exception occured. Exception Nr:" << e << '.\n';
 				}
 			}
@@ -93,7 +93,7 @@ void readGraph(AdjacencyList *adjList) {
 void findPath(AdjacencyList *adjList, int startId, int endId) {
 	auto t1 = chrono::steady_clock::now();
 	A_star *pathfinder = new A_star(adjList);
-	cout << "////////\n"<< startId <<" to "<< endId << endl;
+	cout << "////////\n" << startId << " to " << endId << endl;
 	pathfinder->algorithm(adjList->getVertex(startId), adjList->getVertex(endId));
 	auto t2 = chrono::steady_clock::now();
 	cout << chrono::duration<double>(t2 - t1).count() << " seconds elapsed to find and print path.\n";
@@ -101,6 +101,15 @@ void findPath(AdjacencyList *adjList, int startId, int endId) {
 	adjList->resetCosts();
 	delete pathfinder;
 } // findPath function
+
+struct comp
+{
+	bool operator()(const pair<int, char>& pair1, const pair<int, char>& pair2)
+	{
+		return pair1.first < pair2.first;
+	}
+};
+
 
 int main(int argc, char **argv) {
 
@@ -125,10 +134,36 @@ int main(int argc, char **argv) {
 	//cout << '\n';
 	//cout << "Done testing..." << endl;
 	//cout << "\\\\\\\\\\\\\\\\ \n";
+	vector < pair<int, char> > v;
+	v.push_back(make_pair(0, 'a'));
+	v.push_back(make_pair(2, 'b'));
+	v.push_back(make_pair(6, 'c'));
+	v.push_back(make_pair(4, 'd'));
+	v.push_back(make_pair(3, 'e'));
+	v.push_back(make_pair(1, 'f'));
 
-	findPath(adjList, 0, 60);
-	findPath(adjList, 1, 61);
-	findPath(adjList, 0, 60);
+
+	make_heap(v.begin(), v.end(), comp());
+
+	//cout << "Max:" << v.front().first << endl;
+	sort_heap(v.begin(), v.end(), comp());
+
+	for (const auto it : v)
+		cout << it.first << "-" << it.second << " ";
+
+	cout << endl;
+	//pop_heap(v.begin(), v.end(), comp()); v.pop_back();
+	v.push_back(make_pair(5, 'g')); //push_heap(v.begin(), v.end(), comp());
+	make_heap(v.begin(), v.end(), comp());
+	sort_heap(v.begin(), v.end(), comp());
+	
+	for (const auto it : v)
+		cout << it.first << "-" << it.second << " ";
+	cout << endl;
+
+	//findPath(adjList, 0, 60);
+	//findPath(adjList, 1, 61);
+	//findPath(adjList, 0, 60);
 	//findPath(adjList, 3, 57);
 	//findPath(adjList, 1, 61);
 	//findPath(adjList, 3, 57);
