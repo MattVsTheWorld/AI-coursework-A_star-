@@ -120,14 +120,8 @@ void findPath(AdjacencyList *adjList, int startId, int endId) {
 int main(int argc, char **argv) {
 	AdjacencyList *adjList = new AdjacencyList();
 	readGraph(adjList);
-
 	findPath(adjList, 0, 60);
 	findPath(adjList, 1, 61);
-	findPath(adjList, 0, 60);
-	/*findPath(adjList, 3, 57);
-	findPath(adjList, 1, 61);
-	findPath(adjList, 3, 57); */
-
 	delete adjList;
 	return 0;
 } // main

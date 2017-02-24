@@ -75,7 +75,7 @@ void A_star::algorithm_standard(vertex* start, vertex* end) {
 				|| (find(openSet.begin(), openSet.end(), (static_cast<neighbour>(neighbourIterator)).first) == openSet.end()))
 			{
 				(static_cast<neighbour>(neighbourIterator)).first->setgCost(newMovCostToVert);
-				(static_cast<neighbour>(neighbourIterator)).first->sethCost(heuristic(currentVert->getCoords(), (static_cast<neighbour>(neighbourIterator)).first->getCoords()));
+				(static_cast<neighbour>(neighbourIterator)).first->sethCost(heuristic(static_cast<neighbour>(neighbourIterator).first->getCoords(), end->getCoords()));
 				(static_cast<neighbour>(neighbourIterator)).first->setParent(currentVert);
 
 				if (find(openSet.begin(), openSet.end(), (static_cast<neighbour>(neighbourIterator)).first) == openSet.end()) {
@@ -101,13 +101,13 @@ void A_star::algorithm_heap(vertex* start, vertex* end) {
 
 		make_heap(openSet.begin(), openSet.end(), vertexComparator());
 		sort_heap(openSet.begin(), openSet.end(), vertexComparator());									
-
+		// Find vertex in open list with lowest f cost
 		auto currentVert = openSet.back();
 		make_heap(openSet.begin(), openSet.end(), vertexComparator());
 		pop_heap(openSet.begin(), openSet.end(), vertexComparator()); openSet.pop_back();
 
 		closedSet.insert(currentVert);
-
+		// if current vertex is goal, path found
 		if (currentVert == end) {
 			cout << "Cost to goal: " << currentVert->getgCost() << endl;
 			list<vertex*> foundPath = retracePath(start, end);
@@ -119,21 +119,22 @@ void A_star::algorithm_heap(vertex* start, vertex* end) {
 		}
 		using neighbour = pair<vertex*, int>;
 		list<neighbour> neighbourList;
+		// construct list of neighbours from edges of the vertex
 		for (const auto &listIterator : *(static_cast<list<edge*>*>(currentVert->getEdgeList()))) {
 			auto _neighbour = make_pair((static_cast<edge*>(listIterator))->getNeighbour(currentVert), (static_cast<edge*>(listIterator))->getWeight());
 			neighbourList.push_back(_neighbour);
 		}
-
+		// iterate over neighbours and pick best alternative
 		for (const auto &neighbourIterator : neighbourList) {
 			if (closedSet.find((static_cast<neighbour>(neighbourIterator)).first) != closedSet.end())
 				continue;
-
+			// New overall cost is equal to cost of current path + cost of edge traversal (weight)
 			double newMovCostToVert = currentVert->getgCost() + (static_cast<neighbour>(neighbourIterator)).second;
 			if (newMovCostToVert < ((static_cast<neighbour>(neighbourIterator)).first)->getgCost()
 				|| (find(openSet.begin(), openSet.end(), (static_cast<neighbour>(neighbourIterator)).first) == openSet.end()))
 			{
 				(static_cast<neighbour>(neighbourIterator)).first->setgCost(newMovCostToVert);
-				(static_cast<neighbour>(neighbourIterator)).first->sethCost(heuristic(currentVert->getCoords(), (static_cast<neighbour>(neighbourIterator)).first->getCoords()));
+				(static_cast<neighbour>(neighbourIterator)).first->sethCost(heuristic(static_cast<neighbour>(neighbourIterator).first->getCoords(), end->getCoords()));
 				(static_cast<neighbour>(neighbourIterator)).first->setParent(currentVert);
 
 				if (find(openSet.begin(), openSet.end(), (static_cast<neighbour>(neighbourIterator)).first) == openSet.end())
