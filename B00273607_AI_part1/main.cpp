@@ -19,7 +19,8 @@
 * www.utdallas.edu/~daescu/Graph.ppt 
 // Justification of why the graph might be considered sparse
 * http://stackoverflow.com/questions/12599143/what-is-the-distinction-between-sparse-and-dense-graphs 
-// General idea of A* (although different version was implemented)
+// General idea of A*, and reference for choice of algorithm
+* http://www.redblobgames.com/pathfinding/a-star/introduction.html
 * http://www.redblobgames.com/pathfinding/a-star/implementation.html
 // Tutorial and pseudocode for A* inspired by Sebastian Lague's implementation for pathfinding in Unity
 * https://github.com/SebLague/Pathfinding	  - Repository
