@@ -8,16 +8,17 @@
 #include <unordered_set>
 using namespace std;
 
-class A_star {																// A* search class: attempts to find best path between two points of a given graph
+// A* search class: attempts to find best path between two points of a given graph
+class A_star {																
 private:
-	vector<vertex*> openSet;												// vertices still being considered
+	vector<vertex*> openSet;												// vertices being considered as possible part of best path
 	unordered_set<vertex*> closedSet;										// vertices determined to be unoptimal for the route
 	AdjacencyList* adjList;													// graph structure to traverse
-	// Methods
+	int iterations;															// number of while iterations (roughly translates to vertices visited) before the goal is found
+	// Methods used by other class instances
 	list<vertex*> retracePath(vertex* _start, vertex* _end);				// retrace the path through the use of parent references
 	double heuristic(pair<int, int> coord_A, pair<int, int> coord_B);		// calculate heuristic (in this case, euclidean distance)
-	int iterations;															// number of while iterations before the goal is found
-protected:
+	protected:
 public:
 	A_star(AdjacencyList *_adjList);										// Create base object by copying the graph
 	void algorithm_standard(vertex* start, vertex* end);					// "standard" version of the algorithm (every iteration explores the entire open set)

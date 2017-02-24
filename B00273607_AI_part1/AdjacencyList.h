@@ -6,6 +6,12 @@
 #include <iostream>
 using namespace std;
 
+/* 
+* Adjacency list class
+* Constains the vertex and edge supporting classes, which create instances of vertices (nodes) and edges
+* Vertices don't have direct knowledge of neighbours but instead contain a list of edges which point to the neighbours
+*/
+
 class vertex;										// class declaration
 
 #define OUTOFBOUNDS	  1								// Attempt to access index out of bounds (unexisting vertex; edge connecting one or two unexsting vertex; etc.)	
@@ -65,19 +71,3 @@ public:
 	void resetCosts();								// reset g and h costs for (e.g. for a second search)
 };
 #endif
-
-//TODO: fix references
-//// http://softwareengineering.stackexchange.com/questions/148313/what-is-the-most-space-efficient-way-to-implement-a-graph-data-structure // how to represent a graph
-//// https://en.wikipedia.org/wiki/Graph_(abstract_data_type) // Why choose and Adj List
-// http://stackoverflow.com/questions/12599143/what-is-the-distinction-between-sparse-and-dense-graphs // Sparse, as O(~2n) = O(n) hence sparse
-/// http://www.redblobgames.com/pathfinding/a-star/implementation.html
-// Useful for general idea, a* (although used differently
-//// http://www.cplusplus.com/forum/beginner/118340/ // Weighted graphs intro
-///
-//* -- https://en.wikipedia.org/wiki/Adjacency_list --
-
-/*
-* SPARSE GRAPH
-* https://en.wikipedia.org/wiki/Adjacency_list
-* Goodrich and tamassia adjacency list
-*/

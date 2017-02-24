@@ -1,6 +1,5 @@
 #include "AdjacencyList.h"
 
-//TODO: separate classes?
 //////////////////////////
 //// Edge class start ////
 //////////////////////////

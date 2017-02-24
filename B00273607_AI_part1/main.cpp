@@ -1,10 +1,32 @@
 //
-//=======================================================================
+//==============================================================================================================================================
 // B00273607
 // AI coursework - part 1
 // A* pathfinding
-//=======================================================================
+//==============================================================================================================================================
 //
+
+/*
+* ==============================================================================================================================================
+//// References - All website last accessed February 2017
+// Guides on how to represent a graph
+* http://softwareengineering.stackexchange.com/questions/148313/what-is-the-most-space-efficient-way-to-implement-a-graph-data-structure
+* http://www.cplusplus.com/forum/beginner/118340/
+* https://en.wikipedia.org/wiki/Adjacency_list
+// Further information on graph representation, and statistics on performance to decide which data structure to use
+* https://en.wikipedia.org/wiki/Graph_(abstract_data_type) 
+// Goodrich and Tamassia's adjacency list and more (in a power point representation)
+* www.utdallas.edu/~daescu/Graph.ppt 
+// Justification of why the graph might be considered sparse
+* http://stackoverflow.com/questions/12599143/what-is-the-distinction-between-sparse-and-dense-graphs 
+// General idea of A* (although different version was implemented)
+* http://www.redblobgames.com/pathfinding/a-star/implementation.html
+// Tutorial and pseudocode for A* inspired by Sebastian Lague's implementation for pathfinding in Unity
+* https://github.com/SebLague/Pathfinding	  - Repository
+* https://www.youtube.com/watch?v=-L-WgKMFuhE - First video tutorial
+* ==============================================================================================================================================
+*/
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -18,7 +40,7 @@ using namespace std;
 #define VERTICES_END 67
 #define EDGES_END 194
 
-// A rather rudimental and case specific parser
+// A rather rudimentary and case specific parser
 // With more time could be improved to instead recognise the two patterns of vertices and edges
 void readGraph(AdjacencyList *adjList) {
 	ifstream dotfile;
@@ -104,8 +126,8 @@ int main(int argc, char **argv) {
 	findPath(adjList, 0, 60);
 	/*findPath(adjList, 3, 57);
 	findPath(adjList, 1, 61);
-	findPath(adjList, 3, 57);
-*/
+	findPath(adjList, 3, 57); */
+
 	delete adjList;
 	return 0;
 } // main
