@@ -95,6 +95,7 @@ struct vertexComparator {
 };
 
 // Either the heap implementation is flawed or the sorting takes too much time to justify the use of it in a restricted graph like this
+// It's not used by the program, but provides an alternative to going through the entire open set
 void A_star::algorithm_heap(vertex* start, vertex* end) {
 	openSet.push_back(start);
 	while (!openSet.empty()) {
@@ -132,11 +133,11 @@ void A_star::algorithm_heap(vertex* start, vertex* end) {
 			double newMovCostToVert = currentVert->getgCost() + (static_cast<neighbour>(neighbourIterator)).second;
 			if (newMovCostToVert < ((static_cast<neighbour>(neighbourIterator)).first)->getgCost()
 				|| (find(openSet.begin(), openSet.end(), (static_cast<neighbour>(neighbourIterator)).first) == openSet.end()))
-			{
+			{	// set f_cost (through g and h costs) and set new parent
 				(static_cast<neighbour>(neighbourIterator)).first->setgCost(newMovCostToVert);
 				(static_cast<neighbour>(neighbourIterator)).first->sethCost(heuristic(static_cast<neighbour>(neighbourIterator).first->getCoords(), end->getCoords()));
 				(static_cast<neighbour>(neighbourIterator)).first->setParent(currentVert);
-
+				// add to open set if not already present
 				if (find(openSet.begin(), openSet.end(), (static_cast<neighbour>(neighbourIterator)).first) == openSet.end())
 					openSet.push_back((static_cast<neighbour>(neighbourIterator)).first);
 			}
@@ -157,7 +158,7 @@ list<vertex*> A_star::retracePath(vertex* _start, vertex* _end) {
 
 double A_star::heuristic(pair<int, int> coord_A, pair<int, int> coord_B) {
 	return sqrt(pow((coord_A.first - coord_B.first), 2) + pow((coord_A.second - coord_B.second), 2));	// Euclidean distance
-	//return abs(coord_A.first - coord_B.first) + abs(coord_A.second - coord_B.second);					// manhattan distance; gives longer paths
+	//return abs(coord_A.first - coord_B.first) + abs(coord_A.second - coord_B.second);					// Manhattan distance; often overestimates
 }
 
 int A_star::getIterationCount() {
