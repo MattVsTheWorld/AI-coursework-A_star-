@@ -4,16 +4,16 @@
 // See references in main.cpp
 // A* pseudocode
 // -------------
-// OPEN // the set of nodes to be evaluated
-// CLOSED // the set of nodes already evaluated
+// OPEN											// the set of nodes to be evaluated
+// CLOSED										// the set of nodes already evaluated
 // add the start node to OPEN
 //
 // loop
-//		current = node in OPEN with the lowest f_cost
-//		remove current from OPEN
-//		add current to CLOSED
+//		current = node in OPEN set with the lowest f_cost
+//		remove current from OPEN set
+//		add current to CLOSED set
 // 
-//		if current is the target node //path has been found
+//		if current is the target node			//path has been found
 //			return
 //
 //		foreach neighbour of the current node
@@ -21,7 +21,7 @@
 //				skip to the next neighbour
 //
 //			if new path to neighbour is shorter OR neighbour is not in OPEN
-//				set f_cost of neighbour
+//				set f_cost of neighbour (set g and h costs)
 //				set parent of neighbour to current
 //				if neighbour is not in OPEN
 //					add neighbour to OPEN
@@ -73,11 +73,11 @@ void A_star::algorithm_standard(vertex* start, vertex* end) {
 			double newMovCostToVert = currentVert->getgCost() + (static_cast<neighbour>(neighbourIterator)).second; 
 			if (newMovCostToVert < ((static_cast<neighbour>(neighbourIterator)).first)->getgCost()
 				|| (find(openSet.begin(), openSet.end(), (static_cast<neighbour>(neighbourIterator)).first) == openSet.end()))
-			{
+			{	// set f_cost (through g and h costs) and set new parent
 				(static_cast<neighbour>(neighbourIterator)).first->setgCost(newMovCostToVert);
 				(static_cast<neighbour>(neighbourIterator)).first->sethCost(heuristic(static_cast<neighbour>(neighbourIterator).first->getCoords(), end->getCoords()));
 				(static_cast<neighbour>(neighbourIterator)).first->setParent(currentVert);
-
+				// add to open set if not already present
 				if (find(openSet.begin(), openSet.end(), (static_cast<neighbour>(neighbourIterator)).first) == openSet.end()) {
 					openSet.push_back((static_cast<neighbour>(neighbourIterator)).first);
 				}

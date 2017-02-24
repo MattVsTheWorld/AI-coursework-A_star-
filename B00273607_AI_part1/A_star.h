@@ -12,7 +12,7 @@ using namespace std;
 class A_star {																
 private:
 	vector<vertex*> openSet;												// vertices being considered as possible part of best path
-	unordered_set<vertex*> closedSet;										// vertices determined to be unoptimal for the route
+	unordered_set<vertex*> closedSet;										// vertices determined to be either nonoptimal for the route or certainly part of it
 	AdjacencyList* adjList;													// graph structure to traverse
 	int iterations;															// number of while iterations (roughly translates to vertices visited) before the goal is found
 	// Methods used by other class instances
