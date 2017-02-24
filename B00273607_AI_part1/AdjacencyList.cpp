@@ -6,7 +6,7 @@
 //////////////////////////
 
 edge::edge(vertex *A, vertex *B, int w) {
-	adjacent[0] = A; // assign pointers to connecting vertices
+	adjacent[0] = A;
 	adjacent[1] = B;
 	weight = w;
 }
@@ -32,7 +32,7 @@ void edge::displayEdgeInfo() {
 	this->adjacent[0]->displayVertexInfo();
 	cout << "And vertex [" << this->adjacent[1]->getIndex() << "]\n";
 	this->adjacent[1]->displayVertexInfo();
-} 
+}
 
 ////////////////////////
 //// Edge class end ////
@@ -56,10 +56,6 @@ int vertex::getIndex() {
 	return this->vertexIndex;
 }
 bool vertex::addEdge(edge *e) {
-	
-	//for (list<edge *>::iterator listIterator = this->edgeList->begin();
-	//listIterator != this->edgeList->end();
-	//	++listIterator) 
 	for (const auto edgeIterator : *(this->edgeList))
 	{
 		if ((static_cast<edge*>(edgeIterator)) == e)
@@ -75,9 +71,6 @@ list<edge *>* vertex::getEdgeList() {
 
 void vertex::displayEdgeList() {
 	cout << ">Vertex [" << this->vertexIndex << "] has edges:\n";
-	//for (list<edge *>::iterator listIterator = this->edgeList->begin();
-	//listIterator != this->edgeList->end();
-	//	++listIterator)
 	for (const auto edgeIterator : *(this->edgeList))
 		(static_cast<edge*>(edgeIterator))->displayEdgeInfo();
 }
@@ -120,27 +113,24 @@ vertex* vertex::getParent() {
 //// AdjacencyList class start ////
 //////////////////////////////////
 AdjacencyList::AdjacencyList() {
-	// initialize collection
 	vertices = new vector<vertex *>;
 	vertexNo = 0;
 	edgeNo = 0;
 }
-void AdjacencyList::addVertex(vertex *v) {
-	// add a vertex to vector
-	// we will assume vertices don't take the same position
+void AdjacencyList::addVertex(vertex *v) {									// Case specific assumption that added vertices won't take the same position
 	if (v->getIndex() > this->vertexNo || v->getIndex() < 0)
 		throw OUTOFBOUNDS;
 	vertices->push_back(v);
 	this->vertexNo++;
 }
 
-void AdjacencyList::addEdge(edge *e) {
+void AdjacencyList::addEdge(edge *e) {										// Case specific assumption the user won't attempt to enter the same edge twice
 	if (e->getEndPoints()[0]->getIndex() >= this->vertexNo
 		|| e->getEndPoints()[1]->getIndex() >= this->vertexNo)
 		throw OUTOFBOUNDS;
-	// Assumes you won't try to enter the same edge twice
+
+	int endPointsFound = 0;													// counter to be certain edge reference is passed to both vertices it connects
 	vector<vertex *>::iterator vectorIterator = this->vertices->begin();
-	int endPointsFound = 0;
 	while (vectorIterator != this->vertices->end() || endPointsFound < 2) {
 		if ((static_cast<vertex*>(*vectorIterator))->getIndex() == e->getEndPoints()[0]->getIndex()) {
 			(static_cast<vertex*>(*vectorIterator))->addEdge(e);
@@ -168,10 +158,7 @@ vertex* AdjacencyList::getVertex(int index) {
 }
 
 void AdjacencyList::displayVertices() {
-	//for (vector<vertex *>::iterator vectorIterator = this->vertices->begin();
-	//vectorIterator != this->vertices->end();
-	//	++vectorIterator) {
-	for(const auto verticesIterator : *(this->vertices)){
+	for (const auto verticesIterator : *(this->vertices)) {
 		cout << "|| Vertex info ||\n";
 		(static_cast<vertex*>(verticesIterator))->displayVertexInfo();
 		cout << "|| Edge list ||\n";

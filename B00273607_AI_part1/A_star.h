@@ -7,47 +7,22 @@
 #include "AdjacencyList.h"
 #include <unordered_set>
 using namespace std;
-/// *** 1 ***
-/// That one sebastian on youtubez
-// https://github.com/SebLague/Pathfinding/blob/master/Episode%2003%20-%20astar/Assets/Scripts/Pathfinding.cs
-/// -----------
 
-// http://www.redblobgames.com/pathfinding/a-star/implementation.html
-//struct PriorityQueue {
-//	typedef pair<double, vertex*> queue_Element;
-//	priority_queue < queue_Element, vector<queue_Element>, greater<queue_Element>> elements;
-//
-//	inline bool empty() const { return elements.empty(); }
-//
-//	inline void put(vertex* item, double priority) {
-//		elements.emplace(priority, item);
-//	}
-//
-//	inline vertex* get() {
-//		vertex* best_item = elements.top().second;
-//		elements.pop();
-//		return best_item;
-//	}
-//};
-
-//A* search class; takes an adjacency list and process any start - end point
-class A_star {
+class A_star {																// A* search class: attempts to find best path between two points of a given graph
 private:
-	vector<vertex*> openSet;
-	/*PriorityQueue open_Set;*/
-	//	priority_queue<vertex*, vector<int>, greater<int>> openSet;
-	unordered_set<vertex*> closedSet;
-	AdjacencyList* adjList;
-
-	list<vertex*> retracePath(vertex* _start, vertex* _end);
-	double heuristic(pair<int, int> coord_A, pair<int, int> coord_B);
-	int iterations;
+	vector<vertex*> openSet;												// vertices still being considered
+	unordered_set<vertex*> closedSet;										// vertices determined to be unoptimal for the route
+	AdjacencyList* adjList;													// graph structure to traverse
+	// Methods
+	list<vertex*> retracePath(vertex* _start, vertex* _end);				// retrace the path through the use of parent references
+	double heuristic(pair<int, int> coord_A, pair<int, int> coord_B);		// calculate heuristic (in this case, euclidean distance)
+	int iterations;															// number of while iterations before the goal is found
 protected:
 public:
-	A_star(AdjacencyList *_adjList);
-	void algorithm_standard(vertex* start, vertex* end);
-	void algorithm_heap(vertex* start, vertex* end);
-	int getIterationCount();
-	void resetIterationCount();
+	A_star(AdjacencyList *_adjList);										// Create base object by copying the graph
+	void algorithm_standard(vertex* start, vertex* end);					// "standard" version of the algorithm (every iteration explores the entire open set)
+	void algorithm_heap(vertex* start, vertex* end);						// Heap implementation of the open set (same result)
+	int getIterationCount();												// return iteration count
+	void resetIterationCount();												// set iteration count to 0
 };
 #endif

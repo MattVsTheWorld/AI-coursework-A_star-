@@ -5,7 +5,6 @@
 // A* pathfinding
 //=======================================================================
 //
-
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -15,11 +14,10 @@
 
 using namespace std;
 
-// http://www.redblobgames.com/pathfinding/a-star/implementation.html
-
 #define VERTICES_BEGIN 2
 #define VERTICES_END 67
 #define EDGES_END 194
+
 // A rather rudimental and case specific parser
 // With more time could be improved to instead recognise the two patterns of vertices and edges
 void readGraph(AdjacencyList *adjList) {
@@ -98,23 +96,16 @@ void findPath(AdjacencyList *adjList, int startId, int endId) {
 } // findPath function
 
 int main(int argc, char **argv) {
-
-	/*
-	* SPARSE GRAPH
-	* https://en.wikipedia.org/wiki/Adjacency_list
-	* Goodrich and tamassia adjacency list
-	*/
-
 	AdjacencyList *adjList = new AdjacencyList();
 	readGraph(adjList);
 
 	findPath(adjList, 0, 60);
 	findPath(adjList, 1, 61);
 	findPath(adjList, 0, 60);
-	//findPath(adjList, 3, 57);
-	//findPath(adjList, 1, 61);
-	//findPath(adjList, 3, 57);
-
+	/*findPath(adjList, 3, 57);
+	findPath(adjList, 1, 61);
+	findPath(adjList, 3, 57);
+*/
 	delete adjList;
 	return 0;
 } // main
