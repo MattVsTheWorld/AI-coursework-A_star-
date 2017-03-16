@@ -28,6 +28,7 @@ public:
 	vertex* getNeighbour(vertex* startingVert);		// return neighbour (given one of the end points, return the other of this edge)
 	int getWeight();								// return weight of current edge
 	void displayEdgeInfo();							// display edge information (weight, index of two connected vertices)
+
 };
 
 class vertex {										// VERTEX CLASS: represents a position (often called node) in the graph
@@ -56,6 +57,9 @@ public:
 	pair<int, int> getCoords();						// return coordinates of current vertex
 	void setParent(vertex* _parent);				// set parent of current vertex
 	vertex* getParent();							// return the parent of current vertex
+	bool isWalkable() {
+		return this->walkable;
+	}
 };
 
 class AdjacencyList {								// ADJACENCY LIST: data structure to contain graph data
@@ -72,5 +76,8 @@ public:
 	vertex* getVertex(pair<int, int> coords);	// return vertex at given position
 	void displayVertices();							// display elements of the adjacency list (vertices and edges)
 	void resetCosts();								// reset g and h costs for (e.g. for a second search)
+	/*int getVertexNo() {
+		return this->vertexNo;
+	}*/
 };
 #endif

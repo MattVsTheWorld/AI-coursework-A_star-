@@ -163,7 +163,6 @@
     <ClInclude Include="AdjacencyList.h" />
     <ClInclude Include="A_star.h" />
     <ClInclude Include="Grid.h" />
-    <ClInclude Include="Node.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

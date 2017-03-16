@@ -66,7 +66,7 @@ void A_star::algorithm_standard(vertex* start, vertex* end) {
 		}
 		// iterate over neighbours and pick best alternative
 		for (const auto &neighbourIterator : neighbourList) {														
-			if (closedSet.find((static_cast<neighbour>(neighbourIterator)).first) != closedSet.end()) {
+			if (!((static_cast<neighbour>(neighbourIterator)).first)->isWalkable() || closedSet.find((static_cast<neighbour>(neighbourIterator)).first) != closedSet.end()) {
 				continue;
 			}
 			// New overall cost is equal to cost of current path + cost of edge traversal (weight)

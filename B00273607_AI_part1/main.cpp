@@ -4,6 +4,7 @@
 #include "AdjacencyList.h"
 #include "A_star.h"
 #include <chrono>
+#include "Grid.h"
 
 using namespace std;
 
@@ -89,10 +90,13 @@ void findPath(AdjacencyList *adjList, int startId, int endId) {
 } // findPath function
 
 int main(int argc, char **argv) {
-	AdjacencyList *adjList = new AdjacencyList();
-	readGraph(adjList);
-	findPath(adjList, 0, 60);
-	findPath(adjList, 1, 61);
-	delete adjList;
+	////AdjacencyList *adjList = new AdjacencyList();
+	//readGraph(adjList);
+	//findPath(adjList, 0, 60);
+	//findPath(adjList, 1, 61);
+	//delete adjList;
+	Grid* _g = new Grid();
+
+	findPath(_g->getAdjList(), 0, 127);
 	return 0;
 } // main
