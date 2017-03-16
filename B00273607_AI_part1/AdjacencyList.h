@@ -38,9 +38,11 @@ private:
 	double hCost;									// A* supporting variable; h contains the value of the heuristic
 	pair <int, int> vertexCoords;					// Coordinates of vertex in the graph
 	vertex* parent;									// A* supporting variable; points to previous vertex visited in the current path
+	//!!
+	bool walkable;
 protected:
 public:
-	vertex(int index, pair<int, int> coords);		// create vertex object
+	vertex(int index, pair<int, int> coords, bool _walkable);		// create vertex object
 	void displayVertexInfo();						// display vertex information
 	int getIndex();									// return index number of the current vertex
 	bool addEdge(edge *e);							// add edge to current vertex's edge list
@@ -67,6 +69,7 @@ public:
 	void addVertex(vertex *v);						// add vertex to adjacency list
 	void addEdge(edge *e);							// add edge to edge list of BOTH vertices it connects
 	vertex* getVertex(int index);					// return vertex at given index
+//	vertex* getVertex(pair<int, int> coords);	// return vertex at given position
 	void displayVertices();							// display elements of the adjacency list (vertices and edges)
 	void resetCosts();								// reset g and h costs for (e.g. for a second search)
 };

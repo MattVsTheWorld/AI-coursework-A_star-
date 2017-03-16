@@ -87,65 +87,6 @@ void A_star::algorithm_standard(vertex* start, vertex* end) {
 	}
 }
 
-struct vertexComparator {
-	bool operator()(vertex*& v1, vertex*v2)
-	{
-		return v1->getfCost() > v2->getfCost();
-	}
-};
-
-// Either the heap implementation is flawed or the sorting takes too much time to justify the use of it in a restricted graph like this
-// It's not used by the program, but provides an alternative to going through the entire open set
-void A_star::algorithm_heap(vertex* start, vertex* end) {
-	openSet.push_back(start);
-	while (!openSet.empty()) {
-
-		make_heap(openSet.begin(), openSet.end(), vertexComparator());
-		sort_heap(openSet.begin(), openSet.end(), vertexComparator());									
-		// Find vertex in open list with lowest f cost
-		auto currentVert = openSet.back();
-		make_heap(openSet.begin(), openSet.end(), vertexComparator());
-		pop_heap(openSet.begin(), openSet.end(), vertexComparator()); openSet.pop_back();
-
-		closedSet.insert(currentVert);
-		// if current vertex is goal, path found
-		if (currentVert == end) {
-			cout << "Cost to goal: " << currentVert->getgCost() << endl;
-			list<vertex*> foundPath = retracePath(start, end);
-			cout << "Path is: " << start->getIndex() << " ";
-			for (const auto &pathIterator : foundPath)
-				cout << (static_cast<vertex *>(pathIterator))->getIndex() << " ";
-			cout << endl;
-			return;
-		}
-		using neighbour = pair<vertex*, int>;
-		list<neighbour> neighbourList;
-		// construct list of neighbours from edges of the vertex
-		for (const auto &listIterator : *(static_cast<list<edge*>*>(currentVert->getEdgeList()))) {
-			auto _neighbour = make_pair((static_cast<edge*>(listIterator))->getNeighbour(currentVert), (static_cast<edge*>(listIterator))->getWeight());
-			neighbourList.push_back(_neighbour);
-		}
-		// iterate over neighbours and pick best alternative
-		for (const auto &neighbourIterator : neighbourList) {
-			if (closedSet.find((static_cast<neighbour>(neighbourIterator)).first) != closedSet.end())
-				continue;
-			// New overall cost is equal to cost of current path + cost of edge traversal (weight)
-			double newMovCostToVert = currentVert->getgCost() + (static_cast<neighbour>(neighbourIterator)).second;
-			if (newMovCostToVert < ((static_cast<neighbour>(neighbourIterator)).first)->getgCost()
-				|| (find(openSet.begin(), openSet.end(), (static_cast<neighbour>(neighbourIterator)).first) == openSet.end()))
-			{	// set f_cost (through g and h costs) and set new parent
-				(static_cast<neighbour>(neighbourIterator)).first->setgCost(newMovCostToVert);
-				(static_cast<neighbour>(neighbourIterator)).first->sethCost(heuristic(static_cast<neighbour>(neighbourIterator).first->getCoords(), end->getCoords()));
-				(static_cast<neighbour>(neighbourIterator)).first->setParent(currentVert);
-				// add to open set if not already present
-				if (find(openSet.begin(), openSet.end(), (static_cast<neighbour>(neighbourIterator)).first) == openSet.end())
-					openSet.push_back((static_cast<neighbour>(neighbourIterator)).first);
-			}
-		}
-		this->iterations++;
-	}
-}
-
 list<vertex*> A_star::retracePath(vertex* _start, vertex* _end) { 
 	list<vertex*> path;
 	vertex* currentVert = _end;

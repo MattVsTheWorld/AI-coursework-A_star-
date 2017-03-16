@@ -40,9 +40,10 @@ void edge::displayEdgeInfo() {
 ////////////////////////////
 //// Vertex class start ////
 ///////////////////////////
-vertex::vertex(int index, pair<int, int> coords) {
+vertex::vertex(int index, pair<int, int> coords, bool _walkable) {
 	this->vertexIndex = index;
 	this->vertexCoords = coords;
+	this->walkable = _walkable;
 	edgeList = new list<edge *>;
 }
 
