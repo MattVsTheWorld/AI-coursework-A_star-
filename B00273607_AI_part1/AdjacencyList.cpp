@@ -157,6 +157,19 @@ vertex* AdjacencyList::getVertex(int index) {
 	}
 }
 
+vertex* AdjacencyList::getVertex(pair<int, int> coords) {	
+	vector<vertex *>::iterator vectorIterator = this->vertices->begin();
+	while (vectorIterator != this->vertices->end()) {
+		if ((static_cast<vertex*>(*vectorIterator))->getCoords().first == coords.first 
+			&& (static_cast<vertex*>(*vectorIterator))->getCoords().second == coords.second)
+			return (static_cast<vertex*>(*vectorIterator));
+		else
+			vectorIterator++;
+	}
+	// return unwalkable
+	return new vertex(0, make_pair(-999, -999), false);
+}
+
 void AdjacencyList::displayVertices() {
 	for (const auto verticesIterator : *(this->vertices)) {
 		cout << "|| Vertex info ||\n";

@@ -69,7 +69,7 @@ public:
 	void addVertex(vertex *v);						// add vertex to adjacency list
 	void addEdge(edge *e);							// add edge to edge list of BOTH vertices it connects
 	vertex* getVertex(int index);					// return vertex at given index
-//	vertex* getVertex(pair<int, int> coords);	// return vertex at given position
+	vertex* getVertex(pair<int, int> coords);	// return vertex at given position
 	void displayVertices();							// display elements of the adjacency list (vertices and edges)
 	void resetCosts();								// reset g and h costs for (e.g. for a second search)
 };
